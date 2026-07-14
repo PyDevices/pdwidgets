@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+.venv-docs/
+site/
+dist/
+wheels/
+.mypy_cache/
+.ruff_cache/
+.cursor/example_test_results.json

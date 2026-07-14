@@ -1,0 +1,53 @@
+site_name: pdwidgets
+site_url: https://pdwidgets.readthedocs.io
+repo_url: https://github.com/PyDevices/pdwidgets/
+edit_uri: edit/main/docs/
+copyright: "Copyright 2024, Brad Barnett"
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+
+plugins:
+  - search
+  - gen-files:
+      scripts:
+        - scripts/mkdocs_gen_ref_pages.py
+  - literate-nav:
+      nav_file: SUMMARY.md
+  - section-index
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: false
+            docstring_style: google
+            merge_init_into_class: true
+            filters:
+              - "!^_"
+
+nav:
+  - Home: index.md
+  - Getting started: getting-started.md
+  - Installation: installation.md
+  - Publishing: publishing.md
