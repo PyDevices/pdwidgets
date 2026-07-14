@@ -8,10 +8,11 @@ Cross-platform widget toolkit in the **pdwidgets** package — buttons, lists, s
 import lib.path   # dev clone: puts lib/, add_ons/, examples/ on sys.path
 ```
 
-Install add_ons:
+Install from [micropython-lib MIP](installation.md) or [TestPyPI](installation.md):
 
 ```python
-mip.install("github:PyDevices/pydisplay/packages/add_ons.json", target="./add_ons")
+import mip
+mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
 ```
 
 ## Event loop
