@@ -1,9 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Brad Barnett
 # SPDX-License-Identifier: MIT
-"""Basic import and lazy attribute tests for pdwidgets.
-
-Exercises ``pdwidgets`` imports with pydisplay deps on ``PYTHONPATH`` (see CI).
-"""
+"""Basic import and lazy attribute tests for pdwidgets."""
 
 import unittest
 
