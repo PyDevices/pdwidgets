@@ -5,7 +5,7 @@ Cross-platform widget toolkit in the **pdwidgets** package — buttons, lists, s
 ## Setup
 
 ```python
-import lib.path   # dev clone: puts lib/, add_ons/, examples/ on sys.path
+import lib.path   # pydisplay dev clone: puts lib/, add_ons/, examples/ on sys.path
 ```
 
 Install from [micropython-lib MIP](installation.md) or [TestPyPI](installation.md):
@@ -15,41 +15,39 @@ import mip
 mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
 ```
 
+Requires a pydisplay `board_config` that exports `display_drv` and `runtime`.
+
 ## Event loop
 
-Widget apps need a periodic `tick()` to poll events, run tasks, and flush dirty regions to the display.
-
-**Timer mode** (default in most examples) — call before creating the display:
+`Display` wires into `eventsys.Runtime` at construction (input dispatch and
+periodic render ticks). Build the UI, then keep the app alive with
+`runtime.run_forever()`:
 
 ```python
+import board_config
 import pdwidgets as pd
 
-pd.init_timer(10)  # tick every 10 ms via multimer
-display = pd.Display(board_config.display_drv, board_config.broker)
+display = pd.Display(board_config.display_drv, board_config.runtime)
+screen = pd.Screen(display)
 # ... build UI ...
-pd.run_forever()
+board_config.runtime.run_forever()
 ```
 
-**Poll mode** — omit `init_timer()`; `run_forever()` calls `tick()` in a loop:
-
-```python
-# pd.init_timer(10)  # commented out
-display = pd.Display(...)
-pd.run_forever()
-```
-
-**Setup bursts** — during initialization writes before `run_forever()`, call `pd.tick()` each iteration so draws flush to the display:
+pdwidgets owns no timer of its own — frames are driven from the shared runtime
+selected by `runtime.timer_async`. During setup bursts before `run_forever()`,
+call `pd.tick()` each iteration so draws flush to the display:
 
 ```python
 while i < 60:
     console.write(f"{i}\n")
     pd.tick()
-pd.run_forever()
+board_config.runtime.run_forever()
 ```
 
-`run_forever()` already calls `tick()` each frame. pdwidgets owns no timer of its own — frames are driven cooperatively from the multimer loop selected by `runtime.timer_async`.
-
 ## Examples
+
+Demo scripts live in the **pydisplay** repo under `src/examples/` (not in this
+package):
 
 | Script | Description |
 |--------|-------------|
