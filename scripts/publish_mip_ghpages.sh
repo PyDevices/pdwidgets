@@ -48,7 +48,7 @@ git config user.name 'github-actions[bot]'
 git config user.email 'github-actions[bot]@users.noreply.github.com'
 
 NEW_BRANCH=0
-if git fetch --depth=1 origin gh-pages; then
+if git fetch --depth=1 origin gh-pages:gh-pages; then
     if git worktree list | grep -q "$PAGES_PATH"; then
         git worktree remove --force "$PAGES_PATH" || true
     fi
