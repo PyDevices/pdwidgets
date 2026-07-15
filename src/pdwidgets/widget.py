@@ -166,7 +166,7 @@ class Widget:
     def parent(self, parent):
         """
         Reparent this widget.
-        
+
         Args:
             parent (Widget): New parent, or ``None`` to detach.
         """

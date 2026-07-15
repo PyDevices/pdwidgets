@@ -34,6 +34,7 @@ Timer architecture:
 from eventsys import events
 from graphics import Area
 
+from . import pct
 from ._constants import (
     ALIGN,  #: Widget alignment flags (``ALIGN.TOP_LEFT``, ``ALIGN.CENTER``, …).
     DEFAULT_PADDING,  #: Default ``(PAD, PAD, PAD, PAD)`` inset for widgets.
@@ -47,7 +48,6 @@ from ._themes import ColorTheme, IconTheme, get_palette, icon_theme
 from .display import Display, tick
 from .screen import Screen
 from .task import Task
-from . import pct
 from .widget import Widget
 
 DEBUG = False  #: When ``True``, enable extra debug logging in pdwidgets.
