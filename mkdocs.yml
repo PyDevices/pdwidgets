@@ -41,13 +41,10 @@ plugins:
           paths: [src]
           options:
             show_source: false
+            show_root_heading: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
             docstring_style: google
             merge_init_into_class: true
             filters:
               - "!^_"
-
-nav:
-  - Home: index.md
-  - Getting started: getting-started.md
-  - Installation: installation.md
-  - Publishing: publishing.md
