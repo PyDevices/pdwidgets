@@ -1,10 +1,13 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
+"""Radio button group coordinator."""
+
 from ..widget import Widget
 
 
 class RadioGroup(Widget):
+    """Invisible coordinator that enforces single radio selection."""
     def __init__(self, parent: Widget):
         """
         Initialize a RadioGroup to manage a group of RadioButtons.

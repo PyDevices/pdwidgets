@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
+"""Busy spinner widget."""
+
 import contextlib
 
 from .._constants import ICON_SIZE
@@ -8,6 +10,7 @@ from ..widget import Widget
 
 
 class Spinner(Widget):
+    """Animated circular busy indicator."""
     def __init__(  # noqa: PLR0913
         self,
         parent: Widget,

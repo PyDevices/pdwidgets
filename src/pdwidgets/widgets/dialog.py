@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
+"""Modal dialog widget."""
+
 from eventsys import events
 
 from .._constants import ALIGN, ICON_SIZE, PAD
@@ -12,6 +14,7 @@ from .label import Label
 
 
 class Dialog(Widget):
+    """Modal message box with title, body, and action buttons."""
     def __init__(
         self,
         parent: Widget,

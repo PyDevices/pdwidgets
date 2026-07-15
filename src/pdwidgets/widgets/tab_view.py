@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
+"""Tab bar with per-tab content pages."""
+
 from eventsys import events
 
 from .._constants import ALIGN, ICON_SIZE, PAD, TEXT_SIZE, TEXT_WIDTH
@@ -10,6 +12,7 @@ from .page import Page
 
 
 class TabView(Widget):
+    """Tab bar plus content area with one :class:`Page` per tab."""
     def __init__(  # noqa: PLR0913
         self,
         parent: Widget,
@@ -149,14 +152,17 @@ class TabView(Widget):
 
     @property
     def index(self):
+        """Index of the currently selected tab."""
         return self._value
 
     @index.setter
     def index(self, value):
+        """Select the tab at ``index`` (alias for :meth:`set_index`)."""
         self.set_index(value)
 
     @property
     def pages(self):
+        """List of :class:`Page` widgets, one per tab."""
         return list(self._pages)
 
 

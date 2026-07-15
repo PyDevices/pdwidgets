@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
+"""Icon-only button."""
+
 from .._constants import ALIGN
 from ..widget import Widget
 from .button import Button
@@ -8,6 +10,7 @@ from .icon import Icon
 
 
 class IconButton(Button):
+    """Button whose content is a centered icon."""
     def __init__(
         self,
         parent: Widget,

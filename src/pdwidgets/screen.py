@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
+"""Full-screen widget container."""
+
 from graphics import Area
 
 from .display import Display
@@ -8,6 +10,7 @@ from .widget import Widget
 
 
 class Screen(Widget):
+    """Full-screen container for a page of widgets."""
     def __init__(self, parent: Display | Widget, fg=None, bg=None, visible=True):
         """
         Initialize a Screen object to contain widgets.
