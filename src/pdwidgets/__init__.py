@@ -34,7 +34,15 @@ Timer architecture:
 from eventsys import events
 from graphics import Area
 
-from ._constants import ALIGN, DEFAULT_PADDING, ICON_SIZE, PAD, POSITION, TEXT_SIZE, TEXT_WIDTH
+from ._constants import (
+    ALIGN,
+    DEFAULT_PADDING,
+    ICON_SIZE,
+    PAD,
+    POSITION,
+    TEXT_SIZE,
+    TEXT_WIDTH,
+)
 from ._themes import ColorTheme, IconTheme, get_palette, icon_theme
 from .display import Display, tick
 from .screen import Screen

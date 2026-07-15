@@ -33,11 +33,11 @@
 # python -m build /tmp/foo
 # python -m twine upload /tmp/foo/dist/*.whl
 
-from email.utils import parseaddr
 import os
 import re
 import shutil
 import sys
+from email.utils import parseaddr
 
 _scripts_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _scripts_dir)

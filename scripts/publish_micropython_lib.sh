@@ -155,7 +155,7 @@ if [[ "$INTERACTIVE_COMMIT" -eq 1 ]] || [[ -n "$COMMIT_MESSAGE" ]]; then
         read -r -p "Enter micropython-lib commit message: " COMMIT_MESSAGE
     fi
     if [[ -n "$COMMIT_MESSAGE" ]]; then
-        if git -C "$DEST_REPO" diff --quiet && git -C "$DEST_REPO" diff --cached --quiet; then
+        if [[ -z "$(git -C "$DEST_REPO" status --porcelain)" ]]; then
             echo "No changes to commit in $DEST_REPO"
         else
             git -C "$DEST_REPO" add .

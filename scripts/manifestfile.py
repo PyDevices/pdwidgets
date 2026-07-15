@@ -27,10 +27,10 @@
 
 from __future__ import print_function
 
-from collections import namedtuple
 import os
 import sys
 import tempfile
+from collections import namedtuple
 
 __all__ = ["ManifestFile", "ManifestFileError"]
 
