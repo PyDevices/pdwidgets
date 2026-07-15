@@ -97,7 +97,7 @@ class Widget:
         Register event callbacks for the widget.  Subclasses should override this method to register event callbacks.
         """
 
-    def add_event_cb(self, event_type: int, callback: callable, data: Widget | None = None):
+    def add_event_cb(self, event_type: int, callback: callable, data: "Widget | None" = None):
         """
         Register a callback for an event type on this widget.
 
@@ -166,7 +166,7 @@ class Widget:
     def parent(self, parent):
         """
         Reparent this widget.
-        
+
         Args:
             parent (Widget): New parent, or ``None`` to detach.
         """

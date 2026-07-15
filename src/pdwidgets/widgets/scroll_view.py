@@ -74,7 +74,7 @@ class ScrollView(Widget):
     def set_content_height(self, h):
         """
         Update total scrollable content height.
-        
+
         Args:
             h (int): Content height in pixels (at least viewport height).
         """

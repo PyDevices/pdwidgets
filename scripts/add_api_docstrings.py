@@ -294,12 +294,16 @@ def process_file(path: pathlib.Path) -> bool:
         pending.append((insert_at, format_docstring("", MODULE_DOCS[path.name]) + ["\n"]))
 
     for node in ast.walk(tree):
-        if isinstance(node, ast.ClassDef) and is_public(node.name):
-            if not ast.get_docstring(node) and node.name in CLASS_DOCS:
-                at = collect_insert_line(lines, node)
-                if at is not None:
-                    indent = "    "
-                    pending.append((at, format_docstring(indent, CLASS_DOCS[node.name])))
+        if (
+            isinstance(node, ast.ClassDef)
+            and is_public(node.name)
+            and not ast.get_docstring(node)
+            and node.name in CLASS_DOCS
+        ):
+            at = collect_insert_line(lines, node)
+            if at is not None:
+                indent = "    "
+                pending.append((at, format_docstring(indent, CLASS_DOCS[node.name])))
 
     for node in ast.walk(tree):
         if isinstance(node, ast.ClassDef) and is_public(node.name):
