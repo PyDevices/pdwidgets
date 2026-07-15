@@ -3,8 +3,6 @@
 # SPDX-License-Identifier: MIT
 """Busy spinner widget."""
 
-import contextlib
-
 from .._constants import ICON_SIZE
 from ..widget import Widget
 
@@ -55,8 +53,10 @@ class Spinner(Widget):
         self._running = False
         self.visible = False
         if self._task is not None:
-            with contextlib.suppress(ValueError):
+            try:
                 self.display.remove_task(self._task)
+            except ValueError:
+                pass
             self._task = None
 
     def _tick(self):

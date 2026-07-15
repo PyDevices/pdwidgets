@@ -33,7 +33,7 @@ class Drawer(Widget):
         bg = bg if bg is not None else parent.color_theme.surface
         fg = fg if fg is not None else parent.color_theme.on_surface
         super().__init__(
-            screen, 0, 0, display.width, display.height, fg=fg, bg=None, visible=False
+            screen, 0, 0, display.width, display.height, None, None, fg, None, False
         )
         panel_w = w or display.width // 2
         align = ALIGN.LEFT if side != "right" else ALIGN.RIGHT
