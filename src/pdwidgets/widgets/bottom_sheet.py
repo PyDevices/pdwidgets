@@ -12,6 +12,7 @@ from .card import Card
 
 
 class BottomSheet(Widget):
+    """Modal slide-up panel with scrim tap-to-dismiss."""
     def __init__(  # noqa: PLR0913
         self,
         parent: Widget,
@@ -58,16 +59,19 @@ class BottomSheet(Widget):
             self.hide_sheet()
 
     def show(self):
+        """Show the sheet, grab modal capture, and redraw."""
         self.visible = True
         self.set_modal(True)
         self.invalidate()
 
     def hide_sheet(self):
+        """Hide the sheet, release modal capture, and call ``on_dismiss``."""
         self.set_modal(False)
         self.visible = False
         if self.on_dismiss:
             self.on_dismiss()
 
     def draw(self, area=None):
+        """Fill the scrim behind the slide-up panel."""
         area = area or self.area
         self.display.framebuf.fill_rect(*area, self.scrim)

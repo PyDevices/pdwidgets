@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
+"""Dropdown selection widget."""
+
 from eventsys import events
 
 from .._constants import ALIGN, ICON_SIZE, PAD
@@ -14,6 +16,7 @@ from .label import Label
 
 
 class Dropdown(Widget):
+    """Header button that opens a modal list of options."""
     def __init__(  # noqa: PLR0913
         self,
         parent: Widget,

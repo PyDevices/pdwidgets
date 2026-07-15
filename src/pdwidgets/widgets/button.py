@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
+"""Button widget with optional icon and label."""
+
 from eventsys import events
 
 from .._constants import ALIGN, ICON_SIZE, PAD, TEXT_SIZE, TEXT_WIDTH
@@ -10,6 +12,7 @@ from .label import Label
 
 
 class Button(Widget):
+    """Clickable control with optional icon and text label."""
     def __init__(  # noqa: PLR0913
         self,
         parent: Widget,
@@ -119,11 +122,13 @@ class Button(Widget):
         self.display.framebuf.round_rect(*pa, self.radius, self.bg, f=True)
 
     def press(self, data=None, event=None):
+        """Draw pressed-state outline (mouse down handler)."""
         self._pressed = True
         self.display.framebuf.round_rect(*self.padded_area, self.radius, self.fg, f=False)
         self.display.refresh(self.area)
 
     def release(self, data=None, event=None):
+        """Restore normal outline (mouse up handler)."""
         self._pressed = False
         self.display.framebuf.round_rect(*self.padded_area, self.radius, self.bg, f=False)
         self.display.refresh(self.area)

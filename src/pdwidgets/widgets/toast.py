@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
+"""Transient toast notification."""
+
 import contextlib
 
 from .._constants import ALIGN, ICON_SIZE, PAD, TEXT_SIZE
@@ -15,6 +17,7 @@ except ImportError:
 
 
 class Toast(Widget):
+    """Transient bottom banner that auto-hides after a duration."""
     def __init__(  # noqa: PLR0913
         self,
         parent: Widget,

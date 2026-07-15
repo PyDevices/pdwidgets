@@ -11,6 +11,7 @@ from .scroll_bar import ScrollBar
 
 
 class ScrollView(Widget):
+    """Clipped scrollable viewport with drag, wheel, and scrollbar."""
     def __init__(  # noqa: PLR0913
         self,
         parent: Widget,
@@ -53,10 +54,12 @@ class ScrollView(Widget):
 
     @property
     def scroll_y(self):
+        """Current vertical scroll offset in pixels."""
         return self._scroll_y
 
     @scroll_y.setter
     def scroll_y(self, y):
+        """Set vertical scroll offset, clamped to content bounds."""
         max_y = max(0, self._content_h - self.height)
         y = max(0, min(int(y), max_y))
         if y == self._scroll_y:
@@ -69,10 +72,17 @@ class ScrollView(Widget):
         self.invalidate()
 
     def set_content_height(self, h):
+        """
+        Update total scrollable content height.
+        
+        Args:
+            h (int): Content height in pixels (at least viewport height).
+        """
         self._content_h = max(int(h), self.height)
         self._sync_scrollbar()
 
     def add_child(self, child):
+        """Add a child and expand content height if needed."""
         super().add_child(child)
         bottom = (child._y or 0) + child.height
         self._content_h = max(self._content_h, bottom)
@@ -113,5 +123,6 @@ class ScrollView(Widget):
         self.scroll_y = self._scroll_y - int(y) * 16
 
     def draw(self, area=None):
+        """Draw the viewport background."""
         if self.bg is not None:
             self.display.framebuf.fill_rect(*(area or self.area), self.bg)

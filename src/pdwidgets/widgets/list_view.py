@@ -1,12 +1,15 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
+"""Scrollable list container."""
+
 from .._constants import ALIGN
 from ..widget import Widget
 from .scroll_bar import ScrollBar
 
 
 class ListView(Widget):
+    """Vertically scrollable list container."""
     def __init__(
         self,
         parent: Widget,
