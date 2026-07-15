@@ -2,29 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>try{if(localStorage.getItem('pydevices-theme')==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>pdwidgets — PyDevices</title>
-  <link rel="stylesheet" href="vendor/pydevices-chrome/site.css">
-  <script>try{if(localStorage.getItem('pydevices-theme')==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}</script>
+  <meta name="description" content="Cross-platform widget toolkit for pydisplay on MicroPython and CPython.">
+  <link rel="icon" type="image/svg+xml" href="https://pydevices.github.io/assets/img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://pydevices.github.io/assets/css/site.css">
+  <script src="https://pydevices.github.io/assets/js/theme-toggle.js" defer></script>
 </head>
 <body>
   <header class="site-header">
-    <a class="logo" href="https://pydevices.github.io/">PyDevices</a>
-    <nav>
-      <a href="https://pydisplay.readthedocs.io">pydisplay</a>
-      <a href="https://pdwidgets.readthedocs.io">Docs</a>
-      <a href="https://github.com/PyDevices/pdwidgets">Source</a>
-    </nav>
+    <div class="wrap">
+      <a class="brand" href="https://pydevices.github.io/">
+        <span class="logo"><img src="https://pydevices.github.io/assets/img/logo.svg" alt="" width="30" height="30"></span>
+        PyDevices
+      </a>
+      <nav class="nav">
+        <a href="https://pydevices.github.io/pydisplay/">pydisplay</a>
+        <a href="https://pdwidgets.readthedocs.io">Docs</a>
+        <a href="https://github.com/PyDevices/pdwidgets">Source</a>
+      </nav>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme" title="Toggle color theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
   </header>
-  <main class="hero">
-    <p class="eyebrow">PyDevices / pdwidgets</p>
-    <h1>Cross-platform widget toolkit for pydisplay</h1>
-    <p class="lead">Buttons, lists, themes, and navigation — <code>import pdwidgets</code> on MicroPython and CPython.</p>
-    <div class="actions">
+
+  <section class="hero wrap">
+    <div class="logo-badge"><img src="https://pydevices.github.io/assets/img/logo.svg" alt="PyDevices logo" width="112" height="112"></div>
+    <span class="eyebrow">PyDevices / pdwidgets</span>
+    <h1>Cross-platform widgets for pydisplay</h1>
+    <p>pdwidgets is a lightweight widget toolkit for pydisplay: buttons, lists, forms, gauges, themes, and navigation patterns that run on MicroPython and CPython without adopting a full LVGL stack. It targets demos and apps that need interactive chrome on top of pydisplay&apos;s display and event layers.</p>
+    <p>Install from the PyDevices micropython-lib MIP index or TestPyPI, then <code>import pdwidgets</code> alongside <code>board_config</code>. The PyScript gallery pulls it at runtime for widget demos — the same packages you would MIP onto a board — so what you try in the browser stays honest to the device path.</p>
+    <div class="cta">
       <a class="btn primary" href="https://pdwidgets.readthedocs.io">Documentation</a>
       <a class="btn" href="https://github.com/PyDevices/pdwidgets">GitHub</a>
       <a class="btn" href="https://pydevices.github.io/pydisplay/pyscript/">Browser demos</a>
     </div>
+  </section>
+
+  <main class="cards wrap">
+    <div class="section-head">
+      <h2>Install</h2>
+    </div>
+    <div class="install-block">
+      <pre><code>import mip
+mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")</code></pre>
+    </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>pdwidgets &middot; <a href="https://github.com/PyDevices/pdwidgets">PyDevices/pdwidgets</a></span>
+      <span><a href="https://pydevices.github.io/">PyDevices</a></span>
+    </div>
+  </footer>
 </body>
 </html>
