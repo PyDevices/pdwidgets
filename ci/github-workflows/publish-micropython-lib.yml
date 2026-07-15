@@ -38,6 +38,11 @@ on:
 permissions:
   contents: read
 
+# Sibling repos also push to micropython-lib; scripts rebase-retry on conflict.
+concurrency:
+  group: publish-micropython-lib-${{ github.repository }}
+  cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -100,10 +105,12 @@ jobs:
             exit 1
           fi
 
-      - name: Clone micropython-lib
-        run: |
-          git clone --branch PyDevices --depth 1 \
-            https://github.com/PyDevices/micropython-lib.git micropython-lib
+      - uses: actions/checkout@v4
+        with:
+          repository: PyDevices/micropython-lib
+          ref: PyDevices
+          path: micropython-lib
+          token: ${{ secrets.MICROPYTHON_LIB_DEPLOY_TOKEN }}
 
       - uses: actions/setup-python@v5
         with:
@@ -130,7 +137,7 @@ jobs:
           VERSION="${{ steps.version.outputs.version }}"
           MSG="${{ inputs.commit_message }}"
           if [[ -z "$MSG" ]]; then
-            MSG="pdwidgets: Release v${VERSION} from PyDevices/pdwidgets ${GITHUB_SHA}."
+            MSG="pdwidgets: Release v${VERSION} (${GITHUB_SHA::7})."
           fi
           EXTRA=(--commit-message "$MSG" --push)
           if [[ "${{ github.event_name }}" != "push" && "${{ inputs.upload_testpypi }}" != "true" ]]; then
