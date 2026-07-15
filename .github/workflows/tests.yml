@@ -19,6 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: PyDevices/pydisplay
+          path: pydisplay
+          sparse-checkout: |
+            src/lib
+            src/add_ons/palettes
+            /src/add_ons/framebuf.py
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
@@ -27,4 +36,6 @@ jobs:
       - name: Ruff
         run: ruff check src tests scripts
       - name: Unit tests
+        env:
+          PYTHONPATH: src:tests/stubs:pydisplay/src/lib:pydisplay/src/add_ons
         run: python -m unittest discover -s tests
