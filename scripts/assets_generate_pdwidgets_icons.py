@@ -25,8 +25,8 @@ from __future__ import annotations
 
 import argparse
 import os
-from pathlib import Path
 import sys
+from pathlib import Path
 
 from PIL import Image
 

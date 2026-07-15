@@ -19,8 +19,8 @@ Run from the pdwidgets repo root (needs sibling pydisplay for ``graphics`` /
 from __future__ import annotations
 
 import os
-from pathlib import Path
 import sys
+from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 

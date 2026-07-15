@@ -37,7 +37,6 @@ def ensure_graphics(*, install: bool) -> None:
         sys.path.insert(0, str(PYDISPLAY_LIB))
     try:
         import graphics  # noqa: F401
-
         from graphics import FrameBuffer
 
         if not hasattr(FrameBuffer, "export"):

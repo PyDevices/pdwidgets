@@ -22,9 +22,9 @@ from __future__ import annotations
 import argparse
 import io
 import os
-from pathlib import Path
 import sys
 import urllib.request
+from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
