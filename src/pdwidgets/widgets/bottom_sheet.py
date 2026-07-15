@@ -31,7 +31,7 @@ class BottomSheet(Widget):
         bg = bg if bg is not None else parent.color_theme.surface
         fg = fg if fg is not None else parent.color_theme.on_surface
         super().__init__(
-            screen, 0, 0, display.width, display.height, fg=fg, bg=None, visible=False
+            screen, 0, 0, display.width, display.height, None, None, fg, None, False
         )
         sheet_h = h or display.height // 2
         self.panel = Card(

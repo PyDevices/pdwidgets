@@ -3,7 +3,9 @@ exclude = [
   "src/pdwidgets/icons/**",
 ]
 lint.select = ["E", "F", "I", "W", "B", "SIM", "PLC0415"]
-lint.ignore = ["E501", "F401", "F403", "F405", "ISC003", "PLC0415"]
+# SIM105 disabled: contextlib.suppress is not available on MicroPython (matches
+# the pydisplay ruff config), so try/except/pass is the portable pattern.
+lint.ignore = ["E501", "F401", "F403", "F405", "ISC003", "PLC0415", "SIM105"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["F401"]

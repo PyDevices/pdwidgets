@@ -26,7 +26,7 @@ class RadioGroup(Widget):
             RadioButton
         """
         self.radio_buttons = []
-        super().__init__(parent, x=0, y=0, w=0, h=0, visible=False)
+        super().__init__(parent, 0, 0, 0, 0, None, None, None, None, False)
         self._w = self._h = 0
 
     def invalidate(self):

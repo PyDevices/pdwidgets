@@ -34,6 +34,7 @@ Timer architecture:
 from eventsys import events
 from graphics import Area
 
+from . import pct
 from ._constants import (
     ALIGN,  #: Widget alignment flags (``ALIGN.TOP_LEFT``, ``ALIGN.CENTER``, …).
     DEFAULT_PADDING,  #: Default ``(PAD, PAD, PAD, PAD)`` inset for widgets.
@@ -118,6 +119,7 @@ __all__ = [
     "DEFAULT_PADDING",
     "ICON_SIZE",
     "MARK_UPDATES",
+    "pct",
     "PAD",
     "POSITION",
     "TEXT_SIZE",
