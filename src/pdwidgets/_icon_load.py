@@ -6,13 +6,24 @@
 from graphics import FrameBuffer
 
 
+def _from_module(mod):
+    """Prefer ``FrameBuffer.from_module``; fall back for native cmod builds."""
+    from_module = getattr(FrameBuffer, "from_module", None)
+    if from_module is not None:
+        return from_module(mod)
+    buf = mod.BITMAP
+    if not isinstance(buf, bytearray):
+        buf = bytearray(buf)
+    return FrameBuffer(buf, mod.WIDTH, mod.HEIGHT, mod.FORMAT)
+
+
 def load_framebuffer(value):
     """Load a framebuffer from a package module name or filesystem path.
 
     Package icons are plain Python modules under ``pdwidgets.icons`` (e.g.
     ``pdwidgets.icons.home_filled_36dp``) with ``WIDTH``, ``HEIGHT``,
-    ``FORMAT``, and ``BITMAP``. Filesystem ``.pbm`` / ``.bmp`` / ``.pgm`` paths
-    still use ``FrameBuffer.from_file`` for user assets.
+    ``FORMAT``, and ``BITMAP`` (prefer a writable ``bytearray``). Filesystem
+    ``.pbm`` / ``.bmp`` / ``.pgm`` paths still use ``FrameBuffer.from_file``.
     """
     if not isinstance(value, str):
         raise TypeError("icon value must be a module name or file path string")
@@ -22,7 +33,7 @@ def load_framebuffer(value):
         (".pbm", ".bmp", ".pgm", ".py")
     ):
         mod = __import__(value, None, None, ("BITMAP", "WIDTH", "HEIGHT", "FORMAT"))
-        return FrameBuffer(mod.BITMAP, mod.WIDTH, mod.HEIGHT, mod.FORMAT)
+        return _from_module(mod)
 
     if value.endswith(".py"):
         # Filesystem .py module (authoring / absolute path).
@@ -36,6 +47,6 @@ def load_framebuffer(value):
             raise ValueError(f"Cannot load icon module {value!r}")
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
-        return FrameBuffer(mod.BITMAP, mod.WIDTH, mod.HEIGHT, mod.FORMAT)
+        return _from_module(mod)
 
     return FrameBuffer.from_file(value)
