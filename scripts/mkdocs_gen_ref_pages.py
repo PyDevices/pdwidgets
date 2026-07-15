@@ -1,4 +1,4 @@
-"""Generate mkdocstrings API reference stubs for pdwidgets."""
+"""Generate mkdocstrings API reference stubs and navigation for pdwidgets."""
 
 from pathlib import Path
 
@@ -6,21 +6,32 @@ import mkdocs_gen_files
 
 nav = mkdocs_gen_files.Nav()
 root = Path(__file__).parent.parent
-src = root / "src" / "pdwidgets"
+src = root / "src"
+reference = Path("reference")
 
-for path in sorted(src.rglob("*.py")):
+for path in sorted((src / "pdwidgets").rglob("*.py")):
     if path.name.startswith("_") and path.name != "__init__.py":
         continue
-    rel = path.relative_to(src).with_suffix("")
-    parts = list(rel.parts)
+    module_path = path.relative_to(src).with_suffix("")
+    doc_path = module_path.with_suffix(".md")
+    full_doc_path = reference / doc_path
+
+    parts = tuple(module_path.parts)
+
     if parts[-1] == "__init__":
         parts = parts[:-1]
-    doc_path = Path("reference", *parts).with_suffix(".md")
+        doc_path = doc_path.with_name("index.md")
+        full_doc_path = full_doc_path.with_name("index.md")
+    elif parts[-1] == "__main__":
+        continue
+
     nav[parts] = doc_path.as_posix()
-    with mkdocs_gen_files.open(doc_path, "w") as fd:
-        ident = ".".join(["pdwidgets", *parts])
+
+    with mkdocs_gen_files.open(full_doc_path, "w") as fd:
+        ident = ".".join(parts)
         fd.write(f"::: {ident}\n")
-    mkdocs_gen_files.set_edit_path(doc_path, path.relative_to(root))
+
+    mkdocs_gen_files.set_edit_path(full_doc_path, path.relative_to(root))
 
 with mkdocs_gen_files.open("reference/SUMMARY.md", "w") as nav_file:
     nav_file.writelines(nav.build_literate_nav())
