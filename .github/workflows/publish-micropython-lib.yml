@@ -77,12 +77,33 @@ jobs:
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Publishing pdwidgets release $VERSION"
 
-      - uses: actions/checkout@v4
-        with:
-          repository: PyDevices/micropython-lib
-          ref: PyDevices
-          path: micropython-lib
-          token: ${{ secrets.MICROPYTHON_LIB_DEPLOY_TOKEN }}
+      - name: Verify publish secrets
+        env:
+          DEPLOY_TOKEN: ${{ secrets.MICROPYTHON_LIB_DEPLOY_TOKEN }}
+          TESTPYPI_TOKEN: ${{ secrets.TESTPYPI_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          missing=()
+          if [[ -z "${DEPLOY_TOKEN}" ]]; then
+            missing+=("MICROPYTHON_LIB_DEPLOY_TOKEN")
+          fi
+          if [[ "${{ github.event_name }}" == "push" || "${{ inputs.upload_testpypi }}" == "true" ]]; then
+            if [[ -z "${TESTPYPI_TOKEN}" ]]; then
+              missing+=("TESTPYPI_API_TOKEN")
+            fi
+          fi
+          if [[ ${#missing[@]} -gt 0 ]]; then
+            echo "::error::GitHub did not supply secrets to PyDevices/pdwidgets: ${missing[*]}"
+            echo "Org secrets named correctly still fail when this repository is not on the secret's access list."
+            echo "Org Settings → Secrets and variables → Actions → each secret → Repository access → include pdwidgets."
+            echo "Repo Settings → Secrets and variables → Actions: remove empty repo secrets that override org values."
+            exit 1
+          fi
+
+      - name: Clone micropython-lib
+        run: |
+          git clone --branch PyDevices --depth 1 \
+            https://github.com/PyDevices/micropython-lib.git micropython-lib
 
       - uses: actions/setup-python@v5
         with:
