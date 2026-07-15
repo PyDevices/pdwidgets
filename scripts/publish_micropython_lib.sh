@@ -146,7 +146,8 @@ push_micropython_lib() {
 echo
 echo "Processing $BASENAME"
 mkdir -p "$DEST_DIR/$BASENAME"
-rsync -a "${RSYNC_EXCLUDES[@]}" "$SOURCE_DIR/" "$DEST_DIR/$BASENAME/"
+# --delete drops removed assets (e.g. old .pbm/.bmp icons) so the sync matches src/
+rsync -a --delete "${RSYNC_EXCLUDES[@]}" "$SOURCE_DIR/" "$DEST_DIR/$BASENAME/"
 
 cat <<EOF > "$DEST_DIR/manifest.py"
 metadata(
