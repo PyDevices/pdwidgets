@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
+import contextlib
+
 from .._constants import ALIGN, ICON_SIZE, PAD, TEXT_SIZE
 from .._util import _root_screen
 from ..widget import Widget
@@ -90,10 +92,8 @@ class Toast(Widget):
         if ticks_ms() >= self._hide_at:
             self.visible = False
             if self._task is not None:
-                try:
+                with contextlib.suppress(ValueError):
                     self.display.remove_task(self._task)
-                except ValueError:
-                    pass
                 self._task = None
 
     def draw(self, area=None):
