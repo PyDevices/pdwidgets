@@ -23,7 +23,7 @@ Wheels are published to [TestPyPI](https://test.pypi.org/project/pdwidgets/) for
 pip install \
   -i https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ \
-  pdwidgets displaysys pydisplay-graphics eventsys multimer palettes
+  pdwidgets displaysys pydisplay-graphics eventsys multimer pydevices-palettes
 ```
 
 You also need a pydisplay `board_config` for your display backend. See [pydisplay desktop quick start](https://pydisplay.readthedocs.io/en/latest/guides/desktop-cpython/).
