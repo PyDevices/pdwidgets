@@ -34,3 +34,21 @@ Regenerate after editing widgets:
 ```bash
 .venv/bin/python scripts/pdwidgets_widget_deps.py
 ```
+
+## Cursor Cloud specific instructions
+
+The Cloud Agent update script creates the repo-root `.venv` (with `ruff`).
+`pdwidgets` is source-only and imports `palettes` plus pydisplay's
+`eventsys`/`graphics`/`multimer` — none are pip-installed, so the bare
+`unittest discover` / bench commands above fail without `PYTHONPATH`. In this
+multi-repo workspace `palettes` comes from the sibling `palettes` repo (not
+pydisplay's `add_ons`, unlike CI's sparse-checkout):
+
+```bash
+PYTHONPATH="src:tests/stubs:/agent/repos/palettes/src:/agent/repos/pydisplay/src/lib:/agent/repos/pydisplay/src/add_ons" \
+  .venv/bin/python -m unittest discover -s tests
+```
+
+The pydisplay repo's `.venv` also gets a `pydevices_siblings.pth` (added by the
+update script) listing `palettes/src` and `pdwidgets/src`, so pydisplay examples
+that import them run in the cross-runtime matrix.
