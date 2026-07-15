@@ -47,6 +47,7 @@ from ._themes import ColorTheme, IconTheme, get_palette, icon_theme
 from .display import Display, tick
 from .screen import Screen
 from .task import Task
+from . import pct
 from .widget import Widget
 
 DEBUG = False  #: When ``True``, enable extra debug logging in pdwidgets.
@@ -118,6 +119,7 @@ __all__ = [
     "DEFAULT_PADDING",
     "ICON_SIZE",
     "MARK_UPDATES",
+    "pct",
     "PAD",
     "POSITION",
     "TEXT_SIZE",

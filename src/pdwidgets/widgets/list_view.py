@@ -48,7 +48,7 @@ class ListView(Widget):
         fg = fg if fg is not None else parent.color_theme.on_primary
         bg = bg if bg is not None else parent.color_theme.primary
         super().__init__(
-            parent, x, y, w, h, align, align_to, fg, bg, visible, value=0, padding=padding
+            parent, x, y, w, h, align, align_to, fg, bg, visible, 0, padding
         )
         self.clip_content = True
         self.scrollbar = ScrollBar(

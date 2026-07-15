@@ -30,24 +30,40 @@ class Screen(Widget):
             0,
             parent.width,
             parent.height,
-            fg=fg,
-            bg=bg,
-            visible=visible,
-            padding=(0, 0, 0, 0),
+            None,
+            None,
+            fg,
+            bg,
+            visible,
+            None,
+            (0, 0, 0, 0),
         )
         self.partitioned = self.display.tfa > 0 or self.display.bfa > 0
 
         if self.partitioned:
+            tfa = Area(self.display.tfa_area)
             self.top = Widget(
                 self,
-                *Area(self.display.tfa_area),
-                fg=parent.color_theme.on_primary,
-                bg=parent.color_theme.primary,
+                tfa.x,
+                tfa.y,
+                tfa.w,
+                tfa.h,
+                None,
+                None,
+                parent.color_theme.on_primary,
+                parent.color_theme.primary,
             )
-            self.main = Widget(self, *Area(self.display.vsa_area))
+            vsa = Area(self.display.vsa_area)
+            self.main = Widget(self, vsa.x, vsa.y, vsa.w, vsa.h)
+            bfa = Area(self.display.bfa_area)
             self.bottom = Widget(
                 self,
-                *Area(self.display.bfa_area),
-                fg=parent.color_theme.on_primary,
-                bg=parent.color_theme.primary,
+                bfa.x,
+                bfa.y,
+                bfa.w,
+                bfa.h,
+                None,
+                None,
+                parent.color_theme.on_primary,
+                parent.color_theme.primary,
             )

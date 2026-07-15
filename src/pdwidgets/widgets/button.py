@@ -78,7 +78,9 @@ class Button(Widget):
         if icon_file:
             icon_align = ALIGN.CENTER if not label else ALIGN.LEFT
             icon_color = icon_color if icon_color is not None else parent.color_theme.on_primary
-            self.icon = Icon(self, align=icon_align, fg=icon_color, bg=self.bg, value=icon_file)
+            self.icon = Icon(
+                self, 0, 0, None, None, icon_align, None, icon_color, self.bg, True, icon_file
+            )
         if label:
             if text_height not in TEXT_SIZE:
                 raise ValueError("Text height must be 8, 14 or 16 pixels.")
@@ -87,12 +89,18 @@ class Button(Widget):
             text_color = text_color if text_color is not None else parent.color_theme.on_primary
             self.label = Label(
                 self,
-                value=label,
-                align=label_align,
-                align_to=label_align_to,
-                fg=text_color,
-                bg=self.bg,
-                text_height=text_height,
+                0,
+                0,
+                None,
+                None,
+                label_align,
+                label_align_to,
+                text_color,
+                self.bg,
+                True,
+                label,
+                None,
+                text_height,
             )
         else:
             self.label = None

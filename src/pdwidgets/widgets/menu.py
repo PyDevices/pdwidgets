@@ -39,7 +39,7 @@ class Menu(Widget):
         fg = fg if fg is not None else parent.color_theme.on_menu
         self._items = list(items or [])
         super().__init__(
-            screen, 0, 0, display.width, display.height, fg=fg, bg=None, visible=False
+            screen, 0, 0, display.width, display.height, None, None, fg, None, False
         )
         row_h = TEXT_SIZE.LARGE + 2 * PAD
         n = max(1, len(self._items))

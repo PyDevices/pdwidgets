@@ -63,7 +63,18 @@ class Display(Widget):
         """
         self.display_drv = display_drv
         super().__init__(
-            None, 0, 0, display_drv.width, display_drv.height, fg=-1, bg=0, padding=(0, 0, 0, 0)
+            None,
+            0,
+            0,
+            display_drv.width,
+            display_drv.height,
+            None,
+            None,
+            -1,
+            0,
+            True,
+            None,
+            (0, 0, 0, 0),
         )
         display_drv.set_vscroll(tfa, bfa)
         display_drv.vscroll = 0
@@ -170,7 +181,10 @@ class Display(Widget):
         if self._clip_stack:
             area = area.clip(self._clip_stack[-1])
         self._clip_stack.append(area)
-        from graphics._clip import ClippedCanvas
+        try:
+            from graphics import ClippedCanvas
+        except ImportError:
+            from graphics._clip import ClippedCanvas
 
         self.framebuf = ClippedCanvas(self._framebuf_real, area)
 
@@ -180,7 +194,10 @@ class Display(Widget):
             return
         self._clip_stack.pop()
         if self._clip_stack:
-            from graphics._clip import ClippedCanvas
+            try:
+                from graphics import ClippedCanvas
+            except ImportError:
+                from graphics._clip import ClippedCanvas
 
             self.framebuf = ClippedCanvas(self._framebuf_real, self._clip_stack[-1])
         else:
