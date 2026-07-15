@@ -11,3 +11,7 @@ wheels/
 .mypy_cache/
 .ruff_cache/
 .cursor/example_test_results.json
+
+# Cursor IDE throwaways (do not ignore the whole .cursor/ tree)
+.cursor/debug*
+.cursor/plans/
