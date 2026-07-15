@@ -63,7 +63,9 @@ pd.run_forever()
 
 ## Icons
 
-Material Design icons converted to `.pbm` in [`assets/icons/`](https://github.com/PyDevices/pydisplay/tree/main/assets/icons) — see [`assets/icons/README.md`](https://github.com/PyDevices/pydisplay/blob/main/assets/icons/README.md) for attribution. Runtime widget icons live under `src/add_ons/pdwidgets/icons/`.
+Runtime widget icons live under [`src/pdwidgets/icons/`](https://github.com/PyDevices/pdwidgets/tree/main/src/pdwidgets/icons)
+as importable ``.py`` modules. Regenerate with the Material Design scripts plus
+`scripts/assets_icons_to_py.py` (see the [repo README](https://github.com/PyDevices/pdwidgets#icon-assets)).
 
 ## PyScript note
 
