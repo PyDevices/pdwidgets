@@ -47,6 +47,8 @@ from build import ensure_path_exists, error_color  # noqa: E402
 DEFAULT_AUTHOR = "micropython-lib <contact@micropython.org>"
 DEFAULT_LICENSE = "MIT"
 HOME_PAGE = "https://github.com/PyDevices/pdwidgets"
+DOCS_PAGE = "https://pdwidgets.readthedocs.io"
+ISSUES_PAGE = "https://github.com/PyDevices/pdwidgets/issues"
 TESTPYPI = "https://test.pypi.org/simple/"
 
 
@@ -190,7 +192,7 @@ description = "{}"
 {}
 version = "{}"
 dependencies = [{}]
-urls = {{ Homepage = "{}" }}
+urls = {{ Homepage = "{}", Documentation = "{}", Issues = "{}" }}
 {}
 """.format(
                 quoted_escape(manifest.metadata().pypi_publish),
@@ -200,6 +202,8 @@ urls = {{ Homepage = "{}" }}
                 quoted_escape(manifest.metadata().version),
                 ", ".join('"{}"'.format(quoted_escape(r)) for r in manifest.pypi_dependencies()),
                 quoted_escape(HOME_PAGE),
+                quoted_escape(DOCS_PAGE),
+                quoted_escape(ISSUES_PAGE),
                 readme_toml,
             ),
             file=toml_file,

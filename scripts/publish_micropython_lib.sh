@@ -151,7 +151,7 @@ rsync -a --delete "${RSYNC_EXCLUDES[@]}" "$SOURCE_DIR/" "$DEST_DIR/$BASENAME/"
 
 cat <<EOF > "$DEST_DIR/manifest.py"
 metadata(
-    description="$DESCRIPTION_PREFIX widget toolkit for pydisplay",
+    description="Cross-platform widget toolkit for pydisplay",
     version="$VERSION",
     author="$AUTHOR",
     license="$LICENSE",
