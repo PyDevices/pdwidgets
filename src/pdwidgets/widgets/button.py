@@ -35,6 +35,7 @@ class Button(Widget):
         label=None,
         text_color=None,
         text_height=TEXT_SIZE.LARGE,
+        scale=1,
         icon_file=None,
         icon_color=None,
         shadow=0,
@@ -65,6 +66,7 @@ class Button(Widget):
             label (str): The text label of the widget.
             text_color (int): The color of the text label.
             text_height (int): The height of the text label (default is TEXT_SIZE.LARGE).
+            scale (int): Romfont scale factor passed to the label (default is 1).
             icon_file (str): The icon file to display on the widget.
             icon_color (int): The color of the icon.
             shadow (int): Fake drop-shadow offset in pixels drawn behind the
@@ -84,7 +86,7 @@ class Button(Widget):
         self._rim = rim
         self._pressed = pressed
         if w is None and label:
-            w = (len(label) + 1) * TEXT_WIDTH + 2 * PAD
+            w = (len(label) + 1) * TEXT_WIDTH * scale + 2 * PAD
         w = w or ICON_SIZE.LARGE + 2 * PAD
         h = h or ICON_SIZE.LARGE + 2 * PAD
         bg = bg if bg is not None else parent.color_theme.primary_variant
@@ -133,6 +135,7 @@ class Button(Widget):
                 label,
                 None,
                 text_height,
+                scale,
             )
         else:
             self.label = None
