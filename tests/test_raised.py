@@ -6,6 +6,7 @@
 import unittest
 
 from pdwidgets.widgets._raised import (
+    clear_raised_row_cache,
     fill_raised_round_rect,
     lerp,
     normalize_style,
@@ -66,6 +67,7 @@ class TestRaisedHelpers(unittest.TestCase):
         self.assertFalse(fb.rects[0][6])
 
     def test_fill_raised_pressed_inverts_gradient(self):
+        clear_raised_row_cache()
         fb_up = FakeFB()
         fb_dn = FakeFB()
         fill_raised_round_rect(
@@ -77,6 +79,23 @@ class TestRaisedHelpers(unittest.TestCase):
         up_colors = [row[4] for row in fb_up.fills]
         dn_colors = [row[4] for row in fb_dn.fills]
         self.assertEqual(up_colors, list(reversed(dn_colors)))
+
+    def test_row_cache_reuses_recipe(self):
+        clear_raised_row_cache()
+        fb_a = FakeFB()
+        fb_b = FakeFB()
+        fill_raised_round_rect(
+            fb_a, 0, 0, 16, 8, 3, 0xFFFF, 0x0000, 0x8410, pressed=False
+        )
+        fill_raised_round_rect(
+            fb_b, 4, 5, 16, 8, 3, 0xFFFF, 0x0000, 0x8410, pressed=False
+        )
+        self.assertEqual(len(fb_a.fills), len(fb_b.fills))
+        # Same relative insets/colors (absolute x/y shifted).
+        for a, b in zip(fb_a.fills, fb_b.fills):
+            self.assertEqual(a[0] + 4, b[0])
+            self.assertEqual(a[1] + 5, b[1])
+            self.assertEqual(a[2:], b[2:])
 
 
 if __name__ == "__main__":
