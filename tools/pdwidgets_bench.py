@@ -17,6 +17,7 @@ It builds a representative screen (a handful of each widget type) and times:
 * pointer event dispatch (a synthetic ``MOUSEMOTION`` through the tree)
 * ``pct.Width`` / ``pct.Height`` value computation
 """
+
 import os
 import sys
 
@@ -28,6 +29,7 @@ os.environ.setdefault("SDL_AUDIODRIVER", "dummy")
 from time import perf_counter
 
 import board_config
+
 import pdwidgets as pd
 from pdwidgets import pct
 
@@ -38,22 +40,36 @@ def build_screen():
 
     # A representative mix of widgets.
     for i in range(4):
-        b = pd.Button(screen, x=4, y=4 + i * 40, w=120, h=32, label=f"Btn {i}", radius=6)
+        b = pd.Button(
+            screen, x=4, y=4 + i * 40, w=120, h=32, label=f"Btn {i}", radius=6
+        )
         b.add_event_cb(pd.events.MOUSEBUTTONDOWN, lambda s, e: None)
+    # Flat vs raised strip (visual + press-path smoke).
+    pd.Label(screen, x=4, y=168, value="flat")
+    flat = pd.Button(
+        screen, x=40, y=160, w=88, h=28, label="Flat", radius=8, style="flat"
+    )
+    flat.add_event_cb(pd.events.MOUSEBUTTONDOWN, lambda s, e: None)
+    pd.Label(screen, x=140, y=168, value="raised")
+    raised = pd.Button(
+        screen, x=196, y=160, w=88, h=28, label="Raised", radius=8, style="raised"
+    )
+    raised.add_event_cb(pd.events.MOUSEBUTTONDOWN, lambda s, e: None)
+    pd.Chip(screen, x=4, y=196, label="Chip", value=True, style="raised")
     pd.CheckBox(screen, x=140, y=4)
     pd.ToggleButton(screen, x=140, y=44)
     grp = pd.RadioGroup(screen)
     pd.RadioButton(screen, group=grp, x=140, y=84, value=True)
     pd.RadioButton(screen, group=grp, x=140, y=124)
-    pd.Slider(screen, x=4, y=180, w=200, h=18, value=0.4)
-    pd.ProgressBar(screen, x=4, y=210, w=200, h=18, value=0.6)
-    pd.Label(screen, x=4, y=240, value="Hello pdwidgets")
-    pd.DigitalClock(screen, x=4, y=270)
+    pd.Slider(screen, x=4, y=230, w=200, h=18, value=0.4)
+    pd.ProgressBar(screen, x=4, y=260, w=200, h=18, value=0.6)
+    pd.Label(screen, x=4, y=290, value="Hello pdwidgets")
+    pd.DigitalClock(screen, x=4, y=320)
 
-    box = pd.Widget(screen, x=4, y=300, w=120, h=80, bg=screen.color_theme.primary)
+    box = pd.Widget(screen, x=4, y=350, w=120, h=80, bg=screen.color_theme.primary)
     pct_w = pct.Width(50, box)
     pct_h = pct.Height(50, box)
-    pd.Button(box, w=pct_w, h=pct_h, align=pd.ALIGN.CENTER)
+    pd.Button(box, w=pct_w, h=pct_h, align=pd.ALIGN.CENTER, style="raised", radius=6)
 
     screen.visible = True
     return display, screen, box, pct_w, pct_h
@@ -92,7 +108,9 @@ def main():
         screen.invalidate()
         display.tick()
 
-    motion = pd.events.Motion(pd.events.MOUSEMOTION, (60, 200), (1, 1), (0, 0, 0), False, 0)
+    motion = pd.events.Motion(
+        pd.events.MOUSEMOTION, (60, 200), (1, 1), (0, 0, 0), False, 0
+    )
 
     def dispatch():
         screen.handle_event(motion)
