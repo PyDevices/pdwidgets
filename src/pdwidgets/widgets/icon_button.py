@@ -34,6 +34,7 @@ class IconButton(Button):
         bg_hi=None,
         bg_lo=None,
         rim=None,
+        backdrop=None,
     ):
         """
         Initialize an IconButton widget to display an icon on a button.
@@ -58,6 +59,8 @@ class IconButton(Button):
             bg_hi (int): Optional raised highlight color.
             bg_lo (int): Optional raised shade color.
             rim (int): Optional raised rim stroke.
+            backdrop (int | None): Optional clear color under the face
+                (see :class:`Button`).
 
         Usage:
             icon_button = IconButton(screen, icon_file="pdwidgets.icons.home_filled_36dp")
@@ -90,5 +93,6 @@ class IconButton(Button):
             bg_hi=bg_hi,
             bg_lo=bg_lo,
             rim=rim,
+            backdrop=backdrop,
         )
         self.icon.parent = self

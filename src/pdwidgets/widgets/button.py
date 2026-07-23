@@ -43,6 +43,7 @@ class Button(Widget):
         bg_hi=None,
         bg_lo=None,
         rim=None,
+        backdrop=None,
     ):
         """
         Initialize a Button widget to display an icon and/or text.
@@ -76,6 +77,12 @@ class Button(Widget):
             bg_hi (int): Optional raised highlight color; default shade of ``bg``.
             bg_lo (int): Optional raised shade color; default shade of ``bg``.
             rim (int): Optional raised rim stroke; default shade of ``bg``.
+            backdrop (int | None): When set, fill this button's axis-aligned
+                ``area`` with ``backdrop`` before painting the face instead of
+                calling ``parent.draw(self.area)``. Use for raised round keys
+                that sit on a painted disc/chassis that is not the parent (same
+                role as filling a scratch buffer with the disc color before
+                blitting a circular key).
         """
         self.radius = radius
         self.pressed_offset = pressed_offset
@@ -84,6 +91,7 @@ class Button(Widget):
         self._bg_hi = bg_hi
         self._bg_lo = bg_lo
         self._rim = rim
+        self._backdrop = backdrop
         self._pressed = pressed
         if w is None and label:
             w = (len(label) + 1) * TEXT_WIDTH * scale + 2 * PAD
@@ -180,11 +188,26 @@ class Button(Widget):
                 child.draw()
         self.display.refresh(self.area)
 
+    @property
+    def backdrop(self):
+        """Clear color under the face, or ``None`` to erase via the parent."""
+        return self._backdrop
+
+    @backdrop.setter
+    def backdrop(self, value):
+        self._backdrop = value
+        self.invalidate()
+
     def draw(self, _=None):
         """
         Draw the button background and shape (with an optional drop shadow).
         """
-        self.parent.draw(self.area)
+        if self._backdrop is not None:
+            # Match offscreen "fill then circle" (roku_graphics): corners of the
+            # AABB keep the disc/chassis color instead of the parent's fill.
+            self.display.framebuf.fill_rect(*self.area, self._backdrop)
+        else:
+            self.parent.draw(self.area)
         pa = self.padded_area
         if self.shadow:
             # Cheap fake drop shadow: a shape-colored round_rect offset behind
