@@ -120,6 +120,16 @@ class Display(Widget):
             period=Display.tick_period,
             async_=getattr(runtime, "timer_async", False),
         )
+        # Launchers often call ``runtime.stop_timer()`` before building UI
+        # (clears display auto-refresh). That also drops ``_service_tick``, so
+        # touch/QUIT stop polling. LVGL's display_driver re-arms service; do the
+        # same here so widgets/graphics keep receiving MOUSEBUTTON* events.
+        arm = getattr(runtime, "_arm_service", None)
+        if callable(arm):
+            try:
+                arm()
+            except Exception:
+                pass
 
     def _render_tick(self, _=None):
         """Shared-timer callback: render one widget frame."""
