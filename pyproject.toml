@@ -1,6 +1,6 @@
 [tool.ruff]
 exclude = [
-  "src/pdwidgets/icons/**",
+  "lib/pdwidgets/icons/**",
 ]
 lint.select = ["E", "F", "I", "W", "B", "SIM", "PLC0415"]
 # SIM105 disabled: contextlib.suppress is not available on MicroPython (matches

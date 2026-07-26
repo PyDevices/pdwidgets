@@ -6,13 +6,13 @@ Cross-platform widget toolkit for pydisplay (`import pdwidgets`).
 
 - Python venv at `.venv` — `.venv/bin/python`, `.venv/bin/ruff`
 - Depends on pydisplay packages: `eventsys`, `graphics`, `multimer`, `palettes`
-- Source layout: `src/pdwidgets/` (import name `pdwidgets`)
+- Source layout: `lib/pdwidgets/` (import name `pdwidgets`)
 
 ## Tests and lint
 
 ```bash
 .venv/bin/python -m unittest discover -s tests
-.venv/bin/ruff check src tests scripts
+.venv/bin/ruff check lib tests scripts
 ```
 
 Headless bench (needs pydisplay `board_config` on path):
@@ -45,10 +45,10 @@ multi-repo workspace `palettes` comes from the sibling `palettes` repo (not
 pydisplay's `add_ons`, unlike CI's sparse-checkout):
 
 ```bash
-PYTHONPATH="src:tests/stubs:/agent/repos/palettes/src:/agent/repos/pydisplay/src/lib:/agent/repos/pydisplay/src/add_ons" \
+PYTHONPATH="lib:tests/stubs:/agent/repos/palettes/lib:/agent/repos/graphics/lib:/agent/repos/pydisplay/src/lib" \
   .venv/bin/python -m unittest discover -s tests
 ```
 
 The pydisplay repo's `.venv` also gets a `pydevices_siblings.pth` (added by the
-update script) listing `palettes/src` and `pdwidgets/src`, so pydisplay examples
-that import them run in the cross-runtime matrix.
+update script) listing `palettes/lib`, `pdwidgets/lib`, and `graphics/lib`, so
+pydisplay examples that import them run in the cross-runtime matrix.

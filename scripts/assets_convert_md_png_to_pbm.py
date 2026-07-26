@@ -7,7 +7,7 @@ Source path shape::
 
     <material-design-icons>/png/action/3d_rotation/materialicons/18dp/1x/baseline_3d_rotation_black_18dp.png
 
-For the curated runtime set under ``src/pdwidgets/icons/``, use
+For the curated runtime set under ``lib/pdwidgets/icons/``, use
 ``assets_generate_pdwidgets_icons.py`` instead.
 
 Run from the pdwidgets repo root (needs sibling pydisplay for ``graphics`` /

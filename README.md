@@ -10,7 +10,7 @@ Cross-platform widget toolkit for [pydisplay](https://github.com/PyDevices/pydis
 pip install \
   -i https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ \
-  pdwidgets displaysys pydisplay-graphics eventsys multimer palettes
+  pdwidgets displaysys graphics-py eventsys multimer palettes
 ```
 
 Requires a pydisplay `board_config` and display stack.
@@ -62,7 +62,7 @@ MIT — see [LICENSE](LICENSE).
 
 ## Icon assets (maintainers)
 
-Runtime icons are **importable Python modules** under [`src/pdwidgets/icons/`](src/pdwidgets/icons/)
+Runtime icons are **importable Python modules** under [`lib/pdwidgets/icons/`](lib/pdwidgets/icons/)
 (no binary mip). Authoring:
 
 ```bash
