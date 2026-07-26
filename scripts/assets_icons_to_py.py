@@ -2,7 +2,7 @@
 """
 Convert ``lib/pdwidgets/icons/*.{pbm,bmp}`` into importable ``.py`` modules.
 
-Installs ``graphics-py`` from TestPyPI (unless already importable), or
+Installs ``pydisplay-graphics`` from TestPyPI (unless already importable), or
 uses sibling ``pydisplay/src/lib`` when present. Loads each binary via
 ``FrameBuffer.from_file``, then writes modules via ``FrameBuffer.export``
 (``BITMAP = bytearray(...)`` for zero-copy MicroPython loads).
@@ -57,7 +57,7 @@ def ensure_graphics(*, install: bool) -> None:
         "https://test.pypi.org/simple/",
         "--extra-index-url",
         "https://pypi.org/simple/",
-        "graphics-py",
+        "pydisplay-graphics",
     ]
     print("Running:", " ".join(cmd))
     subprocess.check_call(cmd)
