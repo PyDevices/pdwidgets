@@ -13,7 +13,7 @@ that ``pdwidgets._themes.IconTheme`` actually expects, at every ``ICON_SIZE``
 For color BMP565 status icons, see ``assets_make_color_icons.py``.
 
 Run from the pdwidgets repo root (needs a sibling pydisplay checkout for
-``graphics``)::
+``pygraphics``)::
 
     .venv/bin/python scripts/assets_generate_pdwidgets_icons.py
 
@@ -48,11 +48,11 @@ def resolve_pydisplay_root(explicit: str | None = None) -> Path:
         )
     )
     for root in candidates:
-        if (root / "src" / "lib" / "graphics").is_dir():
+        if (root / "src" / "lib" / "pygraphics").is_dir():
             return root.resolve()
     tried = ", ".join(str(p) for p in candidates)
     raise SystemExit(
-        "pydisplay checkout not found (needed for graphics). Clone "
+        "pydisplay checkout not found (needed for pygraphics). Clone "
         f"https://github.com/PyDevices/pydisplay or pass --pydisplay-root. Tried: {tried}"
     )
 
@@ -95,7 +95,7 @@ def find_source_png(md_root: Path, category: str, short_name: str, size: int) ->
 
 
 def png_to_pbm(src: Path, dest_file: Path, threshold: int = THRESHOLD) -> None:
-    from graphics import MONO_HLSB, FrameBuffer
+    from pygraphics import MONO_HLSB, FrameBuffer
 
     img = Image.open(src).convert("LA")
     width, height = img.size
@@ -127,7 +127,7 @@ def main() -> int:
     parser.add_argument(
         "--pydisplay-root",
         default=None,
-        help="Local checkout of PyDevices/pydisplay (for graphics; default: PYDISPLAY_ROOT, ../pydisplay, …)",
+        help="Local checkout of PyDevices/pydisplay (for pygraphics; default: PYDISPLAY_ROOT, ../pydisplay, …)",
     )
     parser.add_argument("--force", action="store_true", help="Regenerate files that already exist")
     args = parser.parse_args()

@@ -2,7 +2,7 @@
 """
 Convert ``lib/pdwidgets/icons/*.{pbm,bmp}`` into importable ``.py`` modules.
 
-Installs ``pydisplay-graphics`` from TestPyPI (unless already importable), or
+Installs ``pygraphics`` from TestPyPI (unless already importable), or
 uses sibling ``pydisplay/src/lib`` when present. Loads each binary via
 ``FrameBuffer.from_file``, then writes modules via ``FrameBuffer.export``
 (``BITMAP = bytearray(...)`` for zero-copy MicroPython loads).
@@ -36,11 +36,11 @@ def ensure_graphics(*, install: bool) -> None:
     if PYDISPLAY_LIB.is_dir() and str(PYDISPLAY_LIB) not in sys.path:
         sys.path.insert(0, str(PYDISPLAY_LIB))
     try:
-        import graphics  # noqa: F401
-        from graphics import FrameBuffer
+        import pygraphics  # noqa: F401
+        from pygraphics import FrameBuffer
 
         if not hasattr(FrameBuffer, "export"):
-            raise ImportError("graphics.FrameBuffer.export missing (need newer pydisplay)")
+            raise ImportError("pygraphics.FrameBuffer.export missing (need newer pydisplay)")
         return
     except ImportError:
         if not install:
@@ -57,15 +57,15 @@ def ensure_graphics(*, install: bool) -> None:
         "https://test.pypi.org/simple/",
         "--extra-index-url",
         "https://pypi.org/simple/",
-        "pydisplay-graphics",
+        "pygraphics",
     ]
     print("Running:", " ".join(cmd))
     subprocess.check_call(cmd)
-    import graphics  # noqa: F401
+    import pygraphics  # noqa: F401
 
 
 def convert_one(path: Path) -> Path:
-    from graphics import FrameBuffer
+    from pygraphics import FrameBuffer
 
     fb = FrameBuffer.from_file(str(path))
     out = path.with_suffix(".py")
@@ -75,7 +75,7 @@ def convert_one(path: Path) -> Path:
 
 def convert_existing_py(py_path: Path) -> None:
     """Re-export an existing icon module into bytearray form."""
-    from graphics import FrameBuffer
+    from pygraphics import FrameBuffer
 
     spec = importlib.util.spec_from_file_location(py_path.stem, py_path)
     if spec is None or spec.loader is None:
@@ -87,7 +87,7 @@ def convert_existing_py(py_path: Path) -> None:
 
 
 def verify_one(src_bin: Path, py_path: Path) -> None:
-    from graphics import FrameBuffer
+    from pygraphics import FrameBuffer
 
     orig = FrameBuffer.from_file(str(src_bin))
     spec = importlib.util.spec_from_file_location(py_path.stem, py_path)

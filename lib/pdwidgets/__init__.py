@@ -33,7 +33,7 @@ Timer architecture:
 """
 
 from eventsys import events
-from graphics import Area
+from pygraphics import Area
 
 from . import pct
 from ._constants import (

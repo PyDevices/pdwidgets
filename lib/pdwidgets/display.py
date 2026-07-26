@@ -11,7 +11,7 @@ except ImportError:
     from multimer import ticks_ms
 
 from eventsys import events
-from graphics import RGB565, Area, FrameBuffer
+from pygraphics import RGB565, Area, FrameBuffer
 
 from ._constants import ALIGN
 from ._focus import FocusManager
@@ -191,7 +191,7 @@ class Display(Widget):
         if self._clip_stack:
             area = area.clip(self._clip_stack[-1])
         self._clip_stack.append(area)
-        from graphics import ClippedCanvas
+        from pygraphics import ClippedCanvas
 
         self.framebuf = ClippedCanvas(self._framebuf_real, area)
 
@@ -201,7 +201,7 @@ class Display(Widget):
             return
         self._clip_stack.pop()
         if self._clip_stack:
-            from graphics import ClippedCanvas
+            from pygraphics import ClippedCanvas
 
             self.framebuf = ClippedCanvas(self._framebuf_real, self._clip_stack[-1])
         else:

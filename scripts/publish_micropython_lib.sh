@@ -158,7 +158,7 @@ metadata(
     pypi_publish="$BASENAME",
 )
 require("eventsys")
-require("graphics", pypi="pydisplay-graphics")
+require("pygraphics", pypi="pygraphics")
 require("multimer")
 require("palettes")
 package("$BASENAME")

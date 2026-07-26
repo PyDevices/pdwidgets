@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 """Full-screen widget container."""
 
-from graphics import Area
+from pygraphics import Area
 
 from .display import Display
 from .widget import Widget

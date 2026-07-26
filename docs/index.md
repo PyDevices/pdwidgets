@@ -2,7 +2,7 @@
 
 Documentation for the **pdwidgets** widget toolkit — a pydisplay add-on for building GUIs on microcontrollers and desktop Python.
 
-pdwidgets depends on pydisplay core libraries (`eventsys`, `graphics`, `multimer`) and `palettes` for theming.
+pdwidgets depends on pydisplay core libraries (`eventsys`, `pygraphics`, `multimer`) and `palettes` for theming.
 
 ## Links
 

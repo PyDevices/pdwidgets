@@ -28,10 +28,10 @@ jobs:
           sparse-checkout-cone-mode: false
       - uses: actions/checkout@v4
         with:
-          repository: PyDevices/graphics
-          path: graphics
+          repository: PyDevices/pygraphics
+          path: pygraphics
           sparse-checkout: |
-            lib/graphics
+            lib/pygraphics
           sparse-checkout-cone-mode: false
       - uses: actions/checkout@v4
         with:
@@ -49,5 +49,5 @@ jobs:
         run: ruff check lib tests scripts
       - name: Unit tests
         env:
-          PYTHONPATH: lib:tests/stubs:pydisplay/src/lib:graphics/lib:palettes/lib
+          PYTHONPATH: lib:tests/stubs:pydisplay/src/lib:pygraphics/lib:palettes/lib
         run: python -m unittest discover -s tests

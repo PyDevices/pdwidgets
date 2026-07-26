@@ -9,7 +9,7 @@ writes a BMP565 file into ``lib/pdwidgets/icons/``. Non-glyph pixels are set to
 a magenta chroma key so ``pdwidgets.Icon(chroma=CHROMA_565)`` can render them
 with a transparent background. No PNG is shipped or decoded at runtime.
 
-Usage (from the pdwidgets repo root; needs sibling pydisplay for ``graphics``)::
+Usage (from the pdwidgets repo root; needs sibling pydisplay for ``pygraphics``)::
 
     .venv/bin/python scripts/assets_make_color_icons.py
 
@@ -56,11 +56,11 @@ def resolve_pydisplay_root(explicit: str | None = None) -> Path:
         )
     )
     for root in candidates:
-        if (root / "src" / "lib" / "graphics").is_dir():
+        if (root / "src" / "lib" / "pygraphics").is_dir():
             return root.resolve()
     tried = ", ".join(str(p) for p in candidates)
     raise SystemExit(
-        "pydisplay checkout not found (needed for graphics). Clone "
+        "pydisplay checkout not found (needed for pygraphics). Clone "
         f"https://github.com/PyDevices/pydisplay or pass --pydisplay-root. Tried: {tried}"
     )
 
@@ -93,7 +93,7 @@ def convert(png_bytes, accent, graphics):
     px = img.load()
     chroma = color565(*CHROMA_RGB)
     accent565 = color565(*accent)
-    fb = graphics.FrameBuffer(bytearray(w * h * 2), w, h, graphics.RGB565)
+    fb = pygraphics.FrameBuffer(bytearray(w * h * 2), w, h, pygraphics.RGB565)
     for y in range(h):
         for x in range(w):
             _, _, _, a = px[x, y]
@@ -106,13 +106,13 @@ def main():
     parser.add_argument(
         "--pydisplay-root",
         default=None,
-        help="Local checkout of PyDevices/pydisplay (for graphics; default: PYDISPLAY_ROOT, ../pydisplay, …)",
+        help="Local checkout of PyDevices/pydisplay (for pygraphics; default: PYDISPLAY_ROOT, ../pydisplay, …)",
     )
     args = parser.parse_args()
 
     pydisplay_root = resolve_pydisplay_root(args.pydisplay_root)
     sys.path.insert(0, str(pydisplay_root / "src" / "lib"))
-    import graphics  # noqa: E402
+    import pygraphics  # noqa: E402
 
     icon_dir = REPO_ROOT / "src" / "pdwidgets" / "icons"
 
@@ -123,7 +123,7 @@ def main():
         fb, w, h = convert(png, accent, graphics)
         out = icon_dir / f"{base}_{dp}dp.bmp"
         out.parent.mkdir(parents=True, exist_ok=True)
-        graphics.save_image(fb, str(out))
+        pygraphics.save_image(fb, str(out))
         print(f"wrote {out} ({w}x{h})")
 
 

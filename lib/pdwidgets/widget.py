@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 """Base widget class and geometry/event primitives."""
 
-from graphics import Area
+from pygraphics import Area
 
 from ._constants import ALIGN, DEFAULT_PADDING, POSITION
 from ._themes import ColorTheme
