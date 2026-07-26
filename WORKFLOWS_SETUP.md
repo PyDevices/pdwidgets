@@ -54,6 +54,6 @@ Target URL: https://pydevices.github.io/pdwidgets/
 
 ### CI tests workflow
 
-Copy `ci/github-workflows/tests.yml` → `.github/workflows/tests.yml` after PR #4
+(Workflows live only in `.github/workflows/` — do not keep a parallel `ci/` tree.)
 (checks out a shallow `pydisplay` dep tree for import tests). Requires `workflow`
 scope on the pushing PAT.
