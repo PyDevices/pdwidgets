@@ -92,7 +92,7 @@ class TestRaisedHelpers(unittest.TestCase):
         )
         self.assertEqual(len(fb_a.fills), len(fb_b.fills))
         # Same relative insets/colors (absolute x/y shifted).
-        for a, b in zip(fb_a.fills, fb_b.fills):
+        for a, b in zip(fb_a.fills, fb_b.fills, strict=True):
             self.assertEqual(a[0] + 4, b[0])
             self.assertEqual(a[1] + 5, b[1])
             self.assertEqual(a[2:], b[2:])
