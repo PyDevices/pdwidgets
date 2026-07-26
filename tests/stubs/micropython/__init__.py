@@ -3,7 +3,7 @@
 """Minimal CPython shim for ``from micropython import const`` in unit tests.
 
 pydisplay deps (``graphics``, ``palettes``, ``framebuf``) come from the CI
-sparse checkout; see ``ci/github-workflows/tests.yml``.
+sparse checkout; see ``.github/workflows/tests.yml``.
 """
 
 
