@@ -1,4 +1,7 @@
-"""Generate mkdocstrings API reference stubs and navigation for pdwidgets."""
+"""Generate mkdocstrings API reference stubs and navigation for pdwidgets.
+
+Walks ``lib/pdwidgets/``. Skips private modules and generated ``icons/`` pages.
+"""
 
 from pathlib import Path
 
@@ -6,13 +9,16 @@ import mkdocs_gen_files
 
 nav = mkdocs_gen_files.Nav()
 root = Path(__file__).parent.parent
-src = root / "src"
+lib = root / "lib"
 reference = Path("reference")
+SKIP_DIR_NAMES = {"icons", "__pycache__"}
 
-for path in sorted((src / "pdwidgets").rglob("*.py")):
+for path in sorted((lib / "pdwidgets").rglob("*.py")):
+    if any(part in SKIP_DIR_NAMES for part in path.parts):
+        continue
     if path.name.startswith("_") and path.name != "__init__.py":
         continue
-    module_path = path.relative_to(src).with_suffix("")
+    module_path = path.relative_to(lib).with_suffix("")
     doc_path = module_path.with_suffix(".md")
     full_doc_path = reference / doc_path
 

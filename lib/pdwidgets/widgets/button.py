@@ -194,6 +194,12 @@ class Button(Widget):
 
     @backdrop.setter
     def backdrop(self, value):
+        """Set the clear color under the face, or ``None`` for parent erase.
+
+        Args:
+            value: Fill color for ``area`` before the face is painted, or
+                ``None`` to call ``parent.draw(self.area)`` instead.
+        """
         self._backdrop = value
         self.invalidate()
 

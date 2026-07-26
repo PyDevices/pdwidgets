@@ -141,6 +141,17 @@ __all__ += list(_LAZY.keys())
 
 
 def __getattr__(name):
+    """Lazily import a widget class listed in ``_LAZY``.
+
+    Args:
+        name: Public widget or alias name (for example ``"Button"``).
+
+    Returns:
+        The resolved class or object.
+
+    Raises:
+        AttributeError: If ``name`` is not a known lazy export.
+    """
     spec = _LAZY.get(name)
     if spec is None:
         raise AttributeError(f"module 'pdwidgets' has no attribute {name!r}")
@@ -152,4 +163,5 @@ def __getattr__(name):
 
 
 def __dir__():
+    """Return sorted public names including lazy widget exports."""
     return sorted(set(__all__) | set(globals().keys()))

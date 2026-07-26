@@ -390,11 +390,29 @@ class Display(Widget):
                 stack.extend(reversed(self._dirty_children_z_order(widget)))
 
     def __getattr__(self, name):
+        """Forward unknown attributes to the underlying ``display_drv``.
+
+        Args:
+            name: Attribute name to look up on ``display_drv``.
+
+        Returns:
+            The value from ``display_drv``.
+
+        Raises:
+            AttributeError: If neither this object nor ``display_drv`` has
+                ``name``.
+        """
         if name in _display_drv_get_attrs:
             return getattr(self.display_drv, name)
         raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
 
     def __setattr__(self, name, value):
+        """Forward known driver attributes to ``display_drv``, else set locally.
+
+        Args:
+            name: Attribute name.
+            value: Value to assign.
+        """
         if name in _display_drv_set_attrs:
             return setattr(self.display_drv, name, value)
         super().__setattr__(name, value)

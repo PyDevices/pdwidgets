@@ -87,9 +87,15 @@ class Widget:
         self._register_callbacks()
 
     def __str__(self):
+        """Return a short ``ID <n> <ClassName>`` label for debugging."""
         return f"ID {self.id} {self.__class__.__name__}"
 
     def __format__(self, format_spec):
+        """Format like :meth:`__str__`, applying ``format_spec`` to the class name.
+
+        Args:
+            format_spec: Format specifier applied to the class name portion.
+        """
         return f"ID {self.id} {self.__class__.__name__:{format_spec}}"
 
     def _register_callbacks(self):
