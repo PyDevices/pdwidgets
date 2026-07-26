@@ -10,7 +10,7 @@ Cross-platform widget toolkit for [pydisplay](https://github.com/PyDevices/pydis
 pip install \
   -i https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ \
-  pdwidgets displaysys graphics-py eventsys multimer palettes
+  pdwidgets displaysys pydisplay-graphics eventsys multimer palettes
 ```
 
 Requires a pydisplay `board_config` and display stack.
