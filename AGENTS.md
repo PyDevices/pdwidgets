@@ -25,7 +25,7 @@ SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
 ## Publishing
 
 Tag `vX.Y.Z` triggers micropython-lib sync, MIP index rebuild, and TestPyPI upload.
-See `PUBLISHING.md`.
+See `docs/publishing.md`.
 
 ## Widget dependency graph
 
