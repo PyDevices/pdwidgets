@@ -5,7 +5,7 @@ Generate a small set of color RGB565 (BMP565) status icons for pdwidgets.
 Material Design icons are monochrome black glyphs on transparency. This tool
 fetches a few individual PNGs from ``google/material-design-icons`` (via the
 GitHub Contents API — no clone), colorizes each glyph with a chosen accent, and
-writes a BMP565 file into ``src/pdwidgets/icons/``. Non-glyph pixels are set to
+writes a BMP565 file into ``lib/pdwidgets/icons/``. Non-glyph pixels are set to
 a magenta chroma key so ``pdwidgets.Icon(chroma=CHROMA_565)`` can render them
 with a transparent background. No PNG is shipped or decoded at runtime.
 

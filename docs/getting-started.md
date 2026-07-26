@@ -61,7 +61,7 @@ package):
 
 ## Icons
 
-Runtime widget icons live under [`src/pdwidgets/icons/`](https://github.com/PyDevices/pdwidgets/tree/main/src/pdwidgets/icons)
+Runtime widget icons live under [`lib/pdwidgets/icons/`](https://github.com/PyDevices/pdwidgets/tree/main/lib/pdwidgets/icons)
 as importable ``.py`` modules. Regenerate with the Material Design scripts plus
 `scripts/assets_icons_to_py.py` (see the [repo README](https://github.com/PyDevices/pdwidgets#icon-assets)).
 

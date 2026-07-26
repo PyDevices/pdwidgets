@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate/complete the curated icon set used by ``pdwidgets.icon_theme``
-(``src/pdwidgets/icons/``) from a local checkout of
+(``lib/pdwidgets/icons/``) from a local checkout of
 https://github.com/google/material-design-icons (png/ tree), at
 ``~/material-design-icons`` by default.
 

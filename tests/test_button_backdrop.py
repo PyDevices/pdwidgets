@@ -7,7 +7,6 @@ from types import SimpleNamespace
 from unittest.mock import MagicMock, PropertyMock, patch
 
 from graphics import Area
-
 from pdwidgets.widgets.button import Button
 
 

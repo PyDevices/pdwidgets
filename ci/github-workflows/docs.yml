@@ -7,13 +7,13 @@ on:
       - 'docs/**'
       - 'mkdocs.yml'
       - 'scripts/mkdocs_gen_ref_pages.py'
-      - 'src/**'
+      - 'lib/**'
   pull_request:
     paths:
       - 'docs/**'
       - 'mkdocs.yml'
       - 'scripts/mkdocs_gen_ref_pages.py'
-      - 'src/**'
+      - 'lib/**'
   workflow_dispatch:
 
 jobs:
