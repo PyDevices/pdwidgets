@@ -10,7 +10,7 @@ Cross-platform widget toolkit for [pydisplay](https://github.com/PyDevices/pydis
 pip install \
   -i https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ \
-  pdwidgets displaysys pydisplay-graphics eventsys multimer palettes
+  pdwidgets displaysys pygraphics eventsys multimer palettes
 ```
 
 Requires a pydisplay `board_config` and display stack.
@@ -69,7 +69,7 @@ Runtime icons are **importable Python modules** under [`lib/pdwidgets/icons/`](l
 # 1) Optional: regenerate mono .pbm / color .bmp from Material Design
 .venv/bin/python scripts/assets_generate_pdwidgets_icons.py
 .venv/bin/python scripts/assets_make_color_icons.py
-# 2) Convert binaries → .py modules (BITMAP = bytearray; uses sibling or TestPyPI graphics)
+# 2) Convert binaries → .py modules (BITMAP = bytearray; uses sibling or TestPyPI pygraphics)
 .venv/bin/python scripts/assets_icons_to_py.py --delete-binaries
 # Optional bulk dump into assets/icons/
 .venv/bin/python scripts/assets_convert_md_png_to_pbm.py

@@ -13,7 +13,7 @@ import mip
 mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
 ```
 
-`pdwidgets` declares MIP dependencies on `eventsys`, `graphics`, `multimer`, and `palettes` — `mip` installs them from the same index when needed.
+`pdwidgets` declares MIP dependencies on `eventsys`, `pygraphics`, `multimer`, and `palettes` — `mip` installs them from the same index when needed.
 
 ## CPython — TestPyPI
 
@@ -23,7 +23,7 @@ Wheels are published to [TestPyPI](https://test.pypi.org/project/pdwidgets/) for
 pip install \
   -i https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ \
-  pdwidgets displaysys pydisplay-graphics eventsys multimer palettes
+  pdwidgets displaysys pygraphics eventsys multimer palettes
 ```
 
 You also need a pydisplay `board_config` for your display backend. See [pydisplay desktop quick start](https://pydisplay.readthedocs.io/en/latest/guides/desktop-cpython/).

@@ -10,7 +10,7 @@ Source path shape::
 For the curated runtime set under ``lib/pdwidgets/icons/``, use
 ``assets_generate_pdwidgets_icons.py`` instead.
 
-Run from the pdwidgets repo root (needs sibling pydisplay for ``graphics`` /
+Run from the pdwidgets repo root (needs sibling pydisplay for ``pygraphics`` /
 ``png``)::
 
     .venv/bin/python scripts/assets_convert_md_png_to_pbm.py
@@ -37,11 +37,11 @@ def resolve_pydisplay_root() -> Path:
         )
     )
     for root in candidates:
-        if (root / "src" / "lib" / "graphics").is_dir():
+        if (root / "src" / "lib" / "pygraphics").is_dir():
             return root.resolve()
     tried = ", ".join(str(p) for p in candidates)
     raise SystemExit(
-        "pydisplay checkout not found (needed for graphics/png). "
+        "pydisplay checkout not found (needed for pygraphics/png). "
         f"Set PYDISPLAY_ROOT or clone sibling pydisplay. Tried: {tried}"
     )
 
@@ -49,7 +49,7 @@ def resolve_pydisplay_root() -> Path:
 _pydisplay = resolve_pydisplay_root()
 sys.path.insert(0, str(_pydisplay / "src"))
 import lib.path  # noqa: E402, F401
-from graphics import MONO_HLSB, FrameBuffer  # noqa: E402
+from pygraphics import MONO_HLSB, FrameBuffer  # noqa: E402
 from png import Reader  # noqa: E402
 
 # f"{source}/{category}/{short_name}/{family}/{size}/{scale}"

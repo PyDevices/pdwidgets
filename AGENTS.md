@@ -5,7 +5,7 @@ Cross-platform widget toolkit for pydisplay (`import pdwidgets`).
 ## Environment
 
 - Python venv at `.venv` — `.venv/bin/python`, `.venv/bin/ruff`
-- Depends on pydisplay packages: `eventsys`, `graphics`, `multimer`, `palettes`
+- Depends on pydisplay packages: `eventsys`, `pygraphics`, `multimer`, `palettes`
 - Source layout: `lib/pdwidgets/` (import name `pdwidgets`)
 
 ## Tests and lint
@@ -39,13 +39,13 @@ Regenerate after editing widgets:
 
 The Cloud Agent update script creates the repo-root `.venv` (with `ruff`).
 `pdwidgets` is source-only and imports `palettes` plus pydisplay's
-`eventsys`/`graphics`/`multimer` — none are pip-installed, so the bare
+`eventsys`/`pygraphics`/`multimer` — none are pip-installed, so the bare
 `unittest discover` / bench commands above fail without `PYTHONPATH`. In this
 multi-repo workspace `palettes` comes from the sibling `palettes` repo (not
 pydisplay's `add_ons`, unlike CI's sparse-checkout):
 
 ```bash
-PYTHONPATH="lib:tests/stubs:/agent/repos/palettes/lib:/agent/repos/graphics/lib:/agent/repos/pydisplay/src/lib" \
+PYTHONPATH="lib:tests/stubs:/agent/repos/palettes/lib:/agent/repos/pygraphics/lib:/agent/repos/pydisplay/src/lib" \
   .venv/bin/python -m unittest discover -s tests
 ```
 
