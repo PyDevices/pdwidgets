@@ -36,7 +36,6 @@ class Widget:
         value=None,
         padding=None,
         radius=0,
-        text=None,
     ):
         """
         The base Widget class for creating widgets.  May be used as a base class for custom widgets or
@@ -58,13 +57,7 @@ class Widget:
             padding (tuple): The padding on each side of the widget (default is (2, 2, 2, 2)).
             radius (int): Corner radius stored on the widget (default 0). Drawing widgets that
                 round their face read :attr:`radius`; the base :meth:`draw` fill ignores it.
-            text: Alias for ``value`` (mutually exclusive with ``value``).
         """
-        if text is not None:
-            if value is not None:
-                raise TypeError("Widget() got both value= and text=; pass only one")
-            value = text
-
         self.id = Widget.next_instance_id  # Currently only used in debugging
         Widget.next_instance_id += 1
 
@@ -352,16 +345,6 @@ class Widget:
         if value != self._value:
             self._value = value
             self.changed()
-
-    @property
-    def text(self):
-        """Alias for :attr:`value` (string content on labels and similar)."""
-        return self._value
-
-    @text.setter
-    def text(self, value):
-        """Set :attr:`value` via the ``text`` alias."""
-        self.value = value
 
     def add_child(self, child):
         """Adds a child widget to the current widget."""

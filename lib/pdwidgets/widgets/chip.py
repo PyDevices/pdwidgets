@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
-"""Chip / Tag — compact selectable filter chip (Badge stays status-only)."""
+"""Chip — compact selectable filter chip (Badge stays status-only)."""
 
 from eventsys import events
 
@@ -104,6 +104,3 @@ class Chip(Widget):
         tx = pa.x + (pa.w - tw) // 2
         ty = pa.y + (pa.h - self.text_height) // 2
         self.display.framebuf.text(self.label, tx, ty, ink, height=self.text_height)
-
-
-Tag = Chip

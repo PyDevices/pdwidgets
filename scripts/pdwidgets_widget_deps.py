@@ -8,7 +8,7 @@ Run from repo root::
 
     .venv/bin/python scripts/pdwidgets_widget_deps.py
 
-Writes ``src/add_ons/pdwidgets/WIDGET_DEPS.md``. Pass ``--check`` to exit
+Writes ``lib/pdwidgets/WIDGET_DEPS.md``. Pass ``--check`` to exit
 non-zero if the file would change (for CI).
 """
 
@@ -20,8 +20,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-WIDGETS_DIR = ROOT / "src" / "pdwidgets" / "widgets"
-OUT_PATH = ROOT / "src" / "pdwidgets" / "WIDGET_DEPS.md"
+WIDGETS_DIR = ROOT / "lib" / "pdwidgets" / "widgets"
+OUT_PATH = ROOT / "lib" / "pdwidgets" / "WIDGET_DEPS.md"
 
 HEADER = """\
 # pdwidgets widget dependency graph

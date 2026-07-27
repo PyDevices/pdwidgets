@@ -133,7 +133,7 @@ class ColorTheme:
         self.on_success = c(0xFFFFFF)
         self.transparent = False
         # Priority B controls (map widgets to these; no hard-coded RGB)
-        # Chip / Tag compact filters
+        # Chip compact filters
         self.chip = self.surface_variant
         self.chip_selected = self.primary
         self.on_chip = self.on_surface

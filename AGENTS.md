@@ -29,9 +29,8 @@ See `docs/publishing.md`.
 
 ## Widget API (agent contract)
 
-- **`text` / `value`**: `Widget` accepts `text=` as an alias for `value=`. Prefer
-  `value=` in new code; `text=` is supported for discovery. `Button` uses
-  `label=` (with `text=` as an alias for the face label — not `value`).
+- **Content kwargs**: Labels use `value=`; buttons use `label=`. There is no
+  `text=` kwarg and no class-name aliases (`ListTile`, `Tag`, `TabBar`, etc.).
 - **`radius`**: Stored on every `Widget` (default `0`). Rounded faces (`Button`,
   `Card`, `Chip`, …) read `self.radius`; the base `draw()` fill ignores it.
 - **Detach / empty**: `widget.remove()` detaches from the parent;

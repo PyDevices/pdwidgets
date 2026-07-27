@@ -28,7 +28,6 @@ class Label(Widget):
         inverted=False,
         font_data=None,
         font=None,
-        text=None,
     ):
         """
         Initialize a Label widget to display text.
@@ -58,14 +57,9 @@ class Label(Widget):
             font_data (str): Alternate romfont file/memoryview for the text.
             font (module): Proportional bitmap font module (``_write_font`` style);
                 when given, overrides romfont rendering and sizing.
-            text (str): Alias for ``value`` (mutually exclusive with ``value``).
         """
         if text_height not in TEXT_SIZE:
             raise ValueError("Text height must be 8, 14 or 16 pixels.")
-        if text is not None:
-            if value is not None:
-                raise TypeError("Label() got both value= and text=; pass only one")
-            value = text
         padding = padding if padding is not None else (0, 0, 0, 0)
         value = value if value is not None else ""
         self._font = font

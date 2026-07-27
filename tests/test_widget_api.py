@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Brad Barnett
 # SPDX-License-Identifier: MIT
-"""Widget text/radius aliases, remove/clear, and event callback order."""
+"""Widget radius, remove/clear, and event callback order."""
 
 import unittest
 from types import SimpleNamespace
@@ -28,17 +28,10 @@ class TestWidgetApi(unittest.TestCase):
             translate_point=lambda pos: pos,
         )
 
-    def test_text_and_radius_kwargs(self):
-        w = Widget(self.root, w=10, h=10, text="hi", radius=5)
+    def test_value_and_radius_kwargs(self):
+        w = Widget(self.root, w=10, h=10, value="hi", radius=5)
         self.assertEqual(w.value, "hi")
-        self.assertEqual(w.text, "hi")
         self.assertEqual(w.radius, 5)
-        w.text = "yo"
-        self.assertEqual(w.value, "yo")
-
-    def test_text_and_value_conflict(self):
-        with self.assertRaises(TypeError):
-            Widget(self.root, w=10, h=10, value="a", text="b")
 
     def test_remove_and_clear(self):
         a = Widget(self.root, w=10, h=10)
@@ -64,6 +57,21 @@ class TestWidgetApi(unittest.TestCase):
         self.assertEqual(len(seen), 1)
         self.assertIs(seen[0][0], child)
         self.assertIs(seen[0][1], event)
+
+    def test_removed_aliases_not_exported(self):
+        import pdwidgets as pd
+
+        for name in (
+            "Arc",
+            "BusyIndicator",
+            "ContextMenu",
+            "ExpansionPanel",
+            "ListTile",
+            "TabBar",
+            "Tag",
+        ):
+            with self.assertRaises(AttributeError):
+                getattr(pd, name)
 
 
 if __name__ == "__main__":

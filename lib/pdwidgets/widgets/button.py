@@ -33,7 +33,6 @@ class Button(Widget):
         pressed_offset=2,
         pressed=False,
         label=None,
-        text=None,
         text_color=None,
         text_height=TEXT_SIZE.LARGE,
         scale=1,
@@ -66,7 +65,6 @@ class Button(Widget):
             pressed_offset (int): The offset of the widget when pressed (default is 2).
             pressed (bool): The state of the widget (default is False).
             label (str): The text label of the widget.
-            text (str): Alias for ``label`` (mutually exclusive with ``label``).
             text_color (int): The color of the text label.
             text_height (int): The height of the text label (default is TEXT_SIZE.LARGE).
             scale (int): Romfont scale factor passed to the label (default is 1).
@@ -86,10 +84,6 @@ class Button(Widget):
                 role as filling a scratch buffer with the disc color before
                 blitting a circular key).
         """
-        if text is not None:
-            if label is not None:
-                raise TypeError("Button() got both label= and text=; pass only one")
-            label = text
         self.pressed_offset = pressed_offset
         self.shadow = shadow
         self._style = normalize_style(style)
