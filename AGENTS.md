@@ -27,6 +27,20 @@ SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
 Tag `vX.Y.Z` triggers micropython-lib sync, MIP index rebuild, and TestPyPI upload.
 See `docs/publishing.md`.
 
+## Widget API (agent contract)
+
+- **`text` / `value`**: `Widget` accepts `text=` as an alias for `value=`. Prefer
+  `value=` in new code; `text=` is supported for discovery. `Button` uses
+  `label=` (with `text=` as an alias for the face label — not `value`).
+- **`radius`**: Stored on every `Widget` (default `0`). Rounded faces (`Button`,
+  `Card`, `Chip`, …) read `self.radius`; the base `draw()` fill ignores it.
+- **Detach / empty**: `widget.remove()` detaches from the parent;
+  `widget.clear()` removes all children. Both use `remove_child` under the hood.
+  Hiding without detaching: `widget.hide()` or `widget.visible = False`.
+- **Event callbacks**: `add_event_cb` invokes
+  `callback(data_or_sender, event)` — sender/data first, event second. Default
+  `data` is the widget that registered the callback.
+
 ## Widget dependency graph
 
 Regenerate after editing widgets:

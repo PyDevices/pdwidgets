@@ -38,7 +38,6 @@ class Chip(Widget):
         """Selectable filter chip; ``value`` is selected bool."""
         self.label = label
         self.text_height = text_height
-        self.radius = radius
         self._style = normalize_style(style)
         self._bg_hi = bg_hi
         self._bg_lo = bg_lo
@@ -48,7 +47,19 @@ class Chip(Widget):
         bg = bg if bg is not None else parent.color_theme.chip
         fg = fg if fg is not None else parent.color_theme.on_chip
         super().__init__(
-            parent, x, y, w, h, align, align_to, fg, bg, visible, value, padding
+            parent,
+            x,
+            y,
+            w,
+            h,
+            align,
+            align_to,
+            fg,
+            bg,
+            visible,
+            value,
+            padding,
+            radius=radius,
         )
 
     @property

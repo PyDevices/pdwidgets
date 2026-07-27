@@ -35,6 +35,8 @@ class Widget:
         visible=True,
         value=None,
         padding=None,
+        radius=0,
+        text=None,
     ):
         """
         The base Widget class for creating widgets.  May be used as a base class for custom widgets or
@@ -52,9 +54,17 @@ class Widget:
             fg (int): The foreground color of the widget (default is the parent's foreground color).
             bg (int): The background color of the widget (default is the parent's background color).
             visible (bool): The visibility of the widget (default is True).
-            value (str): The value of the widget (e.g., text of a label, value of a slider).
+            value: The value of the widget (e.g., text of a label, value of a slider).
             padding (tuple): The padding on each side of the widget (default is (2, 2, 2, 2)).
+            radius (int): Corner radius stored on the widget (default 0). Drawing widgets that
+                round their face read :attr:`radius`; the base :meth:`draw` fill ignores it.
+            text: Alias for ``value`` (mutually exclusive with ``value``).
         """
+        if text is not None:
+            if value is not None:
+                raise TypeError("Widget() got both value= and text=; pass only one")
+            value = text
+
         self.id = Widget.next_instance_id  # Currently only used in debugging
         Widget.next_instance_id += 1
 
@@ -64,6 +74,7 @@ class Widget:
         self._visible = visible
         self._value = value  # Value of the widget (e.g., text of a label)
         self.padding = padding if padding is not None else DEFAULT_PADDING
+        self.radius = radius
 
         self.children: list[Widget] = []
         self.dirty_widgets = set()
@@ -109,8 +120,9 @@ class Widget:
 
         Args:
             event_type: ``eventsys.events`` constant (e.g. ``events.MOUSEBUTTONDOWN``).
-            callback: Callable invoked as ``callback(event, data)``.
-            data: User data passed to callback; defaults to this widget.
+            callback: Callable invoked as ``callback(data_or_sender, event)``.
+            data: User data passed as the first callback argument; defaults to
+                this widget (the sender).
         """
         # Each item's key is the callback and value is the optional data.  If the event_type is not found,
         # add it to the dictionary with the callback and data.
@@ -341,6 +353,16 @@ class Widget:
             self._value = value
             self.changed()
 
+    @property
+    def text(self):
+        """Alias for :attr:`value` (string content on labels and similar)."""
+        return self._value
+
+    @text.setter
+    def text(self, value):
+        """Set :attr:`value` via the ``text`` alias."""
+        self.value = value
+
     def add_child(self, child):
         """Adds a child widget to the current widget."""
         _log("Adding", child, "to", self)
@@ -383,6 +405,17 @@ class Widget:
                 self.parent.add_dirty_widget(self)
             for child in self.children:
                 child.invalidate()
+
+    def remove(self):
+        """Detach this widget from its parent (no-op if already detached)."""
+        parent = self._parent
+        if parent is not None:
+            parent.remove_child(self)
+
+    def clear(self):
+        """Remove all child widgets via :meth:`remove_child`."""
+        for child in list(self.children):
+            self.remove_child(child)
 
     def remove_child(self, widget):
         """Removes a child widget from the current widget.
