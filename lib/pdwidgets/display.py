@@ -38,28 +38,40 @@ def _mark_updates_enabled():
 class Display(Widget):
     """Root display surface that owns the framebuffer, event loop, and widget tree.
 
-    Construct with a board ``display_drv`` and ``eventsys.Runtime``. The runtime
-    drives input dispatch and periodic :meth:`tick` rendering; apps call
-    ``runtime.run_forever()`` after building the UI.
+    Create one :class:`Display` per hardware panel and attach it to the app's
+    shared :mod:`eventsys` runtime. The display becomes the root of the widget
+    hierarchy, and its render loop is driven by the runtime's tick callback so
+    widgets redraw without a separate timer of their own.
+
+    Typical setup:
+
+    - build a :class:`Screen` for the active page
+    - add child widgets with relative geometry and alignment
+    - call :meth:`runtime.run_forever() <eventsys.Runtime.run_forever>` after
+      construction to start input handling and rendering
     """
     displays = []
     timer = None  # pdwidgets owns no timer; kept as None for API/back-compat.
     tick_period = 10  # Render tick period (ms) for the runtime on_tick subscription.
 
     def __init__(self, display_drv, runtime, tfa=0, bfa=0, format=RGB565):
-        """
-        Initialize a Display object to manage the display and child widgets.
+        """Initialize a display root from the board's display driver and runtime.
 
         Args:
-            display_drv (DisplayDriver): The display driver object that manages the display hardware.
-            runtime (Runtime): The event runtime object that manages the event system.
-            tfa (int): The top fixed area of the display.
-            bfa (int): The bottom fixed area of the display.
-            format (int): The color format of the display (default is RGB565).
+            display_drv (DisplayDriver): The hardware driver that exposes the
+                framebuffer dimensions, color depth, and any scroll regions.
+            runtime (Runtime): The shared event runtime that will dispatch input
+                and drive periodic redraws.
+            tfa (int): Top fixed area used for split displays or status bars.
+            bfa (int): Bottom fixed area used for split displays or status bars.
+            format (int): Framebuffer color format; defaults to :data:`RGB565`.
 
-        Usage:
+        Example:
             from board_config import display_drv, runtime
+
             display = Display(display_drv, runtime)
+            screen = Screen(display)
+            Label(screen, value="Hello")
         """
         self.display_drv = display_drv
         super().__init__(
@@ -105,11 +117,11 @@ class Display(Widget):
     def _attach_to_runtime(self):
         """Wire input dispatch and frame rendering into the shared runtime.
 
-        The canonical idiom owns no loop: the runtime's auto-service tick polls
-        devices and dispatches events to :meth:`handle_event`, while a shared-
-        timer subscription drives :meth:`tick` (flush/redraw). ``async_`` tracks
-        ``runtime.timer_async`` so a sync render timer never coexists with the
-        async loop.
+        The display does not create its own event loop. Instead, it subscribes
+        to the runtime's event stream for widget input and registers a periodic
+        render tick that calls :meth:`tick`. The runtime decides whether that
+        tick should run synchronously or asynchronously depending on
+        ``runtime.timer_async``.
         """
         runtime = self.runtime
         if runtime is None:
