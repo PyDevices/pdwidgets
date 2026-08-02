@@ -1,4 +1,4 @@
-"""PNG decoder smoke tool (pydisplay add_ons/png + DisplayBuffer).
+"""PNG decoder smoke tool (pydisplay utils/png + DisplayBuffer).
 
 Lives in pdwidgets because it walks a material-design-icons ``png/`` tree used
 for icon authoring here. Requires a sibling **pydisplay** checkout (board_config,
@@ -32,7 +32,7 @@ def _resolve_pydisplay_root() -> Path:
         )
     )
     for root in candidates:
-        if (root / "src" / "lib").is_dir() and (root / "src" / "add_ons").is_dir():
+        if (root / "src" / "lib").is_dir() and (root / "src" / "utils").is_dir():
             return root.resolve()
     tried = ", ".join(str(p) for p in candidates)
     raise SystemExit(
@@ -46,7 +46,7 @@ _src = str(_pydisplay / "src")
 if _src not in sys.path:
     sys.path.insert(0, _src)
 
-import lib.path  # noqa: E402, F401, I001
+import utils.path  # noqa: E402, F401, I001
 from board_config import runtime  # noqa: E402
 from color_setup import ssd  # noqa: E402
 from displaybuf import alloc_buffer  # noqa: E402

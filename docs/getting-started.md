@@ -11,7 +11,7 @@ For a local pydisplay checkout, make sure the repo libraries are on the import
 path before you start:
 
 ```python
-import lib.path   # adds lib/, add_ons/, and examples/ for a pydisplay dev clone
+import utils.path   # adds lib/, utils/, and examples/ for a pydisplay dev clone
 ```
 
 Install from [micropython-lib MIP](installation.md) or [TestPyPI](installation.md):

@@ -55,7 +55,7 @@ The Cloud Agent update script creates the repo-root `.venv` (with `ruff`).
 `eventsys`/`pygraphics`/`multimer` — none are pip-installed, so the bare
 `unittest discover` / bench commands above fail without `PYTHONPATH`. In this
 multi-repo workspace `palettes` comes from the sibling `palettes` repo (not
-pydisplay's `add_ons`, unlike CI's sparse-checkout):
+pydisplay's `utils`, unlike CI's sparse-checkout):
 
 ```bash
 PYTHONPATH="lib:tests/stubs:/agent/repos/palettes/lib:/agent/repos/pygraphics/lib:/agent/repos/pydisplay/src/lib" \
