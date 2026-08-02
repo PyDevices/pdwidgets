@@ -19,8 +19,8 @@ Run from the pdwidgets repo root (needs sibling pydisplay for ``pygraphics`` /
 from __future__ import annotations
 
 import os
-import sys
 from pathlib import Path
+import sys
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -48,9 +48,9 @@ def resolve_pydisplay_root() -> Path:
 
 _pydisplay = resolve_pydisplay_root()
 sys.path.insert(0, str(_pydisplay / "src"))
-import utils.path  # noqa: E402, F401
 from png import Reader  # noqa: E402
 from pygraphics import MONO_HLSB, FrameBuffer  # noqa: E402
+import utils.path  # noqa: E402, F401
 
 # f"{source}/{category}/{short_name}/{family}/{size}/{scale}"
 source = Path(

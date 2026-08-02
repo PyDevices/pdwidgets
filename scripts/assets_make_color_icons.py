@@ -22,9 +22,9 @@ from __future__ import annotations
 import argparse
 import io
 import os
+from pathlib import Path
 import sys
 import urllib.request
-from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -86,8 +86,8 @@ def fetch_png(cat, name, dp):
 
 
 def convert(png_bytes, accent):
-    import pygraphics
     from PIL import Image
+    import pygraphics
 
     img = Image.open(io.BytesIO(png_bytes)).convert("RGBA")
     w, h = img.size

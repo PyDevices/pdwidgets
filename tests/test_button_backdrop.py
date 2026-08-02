@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: MIT
 """Button.backdrop clears AABB without parent.draw."""
 
-import unittest
 from types import SimpleNamespace
+import unittest
 from unittest.mock import MagicMock, PropertyMock, patch
 
 from pdwidgets.widgets.button import Button
