@@ -6,8 +6,8 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import MagicMock, PropertyMock, patch
 
-from pygraphics import Area
 from pdwidgets.widgets.button import Button
+from pygraphics import Area
 
 
 class TestButtonBackdrop(unittest.TestCase):

@@ -63,5 +63,5 @@ PYTHONPATH="lib:tests/stubs:/agent/repos/palettes/lib:/agent/repos/pygraphics/li
 ```
 
 The pydisplay repo's `.venv` also gets a `pydevices_siblings.pth` (added by the
-update script) listing `palettes/lib`, `pdwidgets/lib`, and `graphics/lib`, so
+update script) listing `palettes/lib`, `pdwidgets/lib`, and `pygraphics/lib`, so
 pydisplay examples that import them run in the cross-runtime matrix.

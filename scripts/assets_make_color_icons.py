@@ -85,7 +85,8 @@ def fetch_png(cat, name, dp):
         return resp.read()
 
 
-def convert(png_bytes, accent, graphics):
+def convert(png_bytes, accent):
+    import pygraphics
     from PIL import Image
 
     img = Image.open(io.BytesIO(png_bytes)).convert("RGBA")
@@ -120,7 +121,7 @@ def main():
     for cat, name, dp, accent, base in ICONS:
         print(f"fetching {cat}/{name} {dp}dp ...", end=" ", flush=True)
         png = fetch_png(cat, name, dp)
-        fb, w, h = convert(png, accent, graphics)
+        fb, w, h = convert(png, accent)
         out = icon_dir / f"{base}_{dp}dp.bmp"
         out.parent.mkdir(parents=True, exist_ok=True)
         pygraphics.save_image(fb, str(out))

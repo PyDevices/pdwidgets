@@ -12,10 +12,10 @@ Run from the pdwidgets repo root (or with ``PYDISPLAY_ROOT`` set)::
 
 from __future__ import annotations
 
-from collections import namedtuple
 import os
-from pathlib import Path
 import sys
+from collections import namedtuple
+from pathlib import Path
 
 _ROOT = Path(__file__).resolve().parents[1]
 
