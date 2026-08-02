@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: MIT
 """Widget radius, remove/clear, and event callback order."""
 
-import unittest
 from types import SimpleNamespace
+import unittest
 
 from eventsys import events
 from pdwidgets.widget import Widget

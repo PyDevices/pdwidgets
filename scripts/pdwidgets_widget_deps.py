@@ -16,8 +16,8 @@ from __future__ import annotations
 
 import argparse
 import ast
-import sys
 from pathlib import Path
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 WIDGETS_DIR = ROOT / "lib" / "pdwidgets" / "widgets"

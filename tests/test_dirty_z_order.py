@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: MIT
 """Dirty render must paint siblings in children (z) order."""
 
-import unittest
 from types import SimpleNamespace
+import unittest
 
 from pdwidgets.display import Display
 
