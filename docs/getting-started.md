@@ -14,7 +14,7 @@ path before you start:
 import utils.path   # adds lib/, utils/, and examples/ for a pydisplay dev clone
 ```
 
-Install from [micropython-lib MIP](installation.md) or [TestPyPI](installation.md):
+Install from [micropython-lib MIP](installation.md) for MicroPython or [TestPyPI](installation.md) for CPython:
 
 ```python
 import mip
