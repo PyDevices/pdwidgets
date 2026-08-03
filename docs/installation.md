@@ -17,7 +17,7 @@ mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/
 
 ## CPython — TestPyPI
 
-Wheels are published to [TestPyPI](https://test.pypi.org/project/pdwidgets/) for development and CI (not production PyPI). Use the two-index pattern:
+Pure-Python CPython wheels are published to [TestPyPI](https://test.pypi.org/project/pdwidgets/) for development and CI (not production PyPI). Use the two-index pattern:
 
 ```bash
 pip install \
