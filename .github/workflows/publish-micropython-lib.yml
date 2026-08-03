@@ -1,4 +1,4 @@
-# Publish pdwidgets to micropython-lib, MIP index, and TestPyPI.
+# Publish the Python-only pdwidgets package to micropython-lib and TestPyPI.
 #
 # Release trigger: push tag vX.Y.Z (see scripts/publish_release_tag.sh).
 #

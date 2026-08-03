@@ -24,7 +24,7 @@ SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
 
 ## Publishing
 
-Tag `vX.Y.Z` triggers micropython-lib sync, MIP index rebuild, and TestPyPI upload.
+Tag `vX.Y.Z` triggers micropython-lib sync, MIP index rebuild, and TestPyPI upload for this Python-only package.
 See `docs/publishing.md`.
 
 ## Widget API (agent contract)
