@@ -1,6 +1,6 @@
 # pdwidgets
 
-Python-only widget toolkit for [pydisplay](https://github.com/PyDevices/pydisplay) — buttons, lists, themes, navigation, and more on MicroPython, CircuitPython, and CPython. This package has no native C extension; it is published as a pure-Python package to TestPyPI and micropython-lib / MIP.
+Python-only widget toolkit for [pydisplay](https://github.com/PyDevices/pydisplay) — buttons, lists, themes, navigation, and more on MicroPython, CircuitPython, and CPython. This package has no native C extension; it is published as a pure-Python package on TestPyPI for CPython and through micropython-lib / MIP for MicroPython.
 
 ## Install
 

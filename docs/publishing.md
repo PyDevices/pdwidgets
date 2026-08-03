@@ -1,6 +1,6 @@
 # Publishing and releases
 
-How changes in this repo become versioned **`pdwidgets`** wheels on [TestPyPI](https://test.pypi.org/project/pdwidgets/) and MIP packages on [micropython-lib gh-pages](https://PyDevices.github.io/micropython-lib/mip/PyDevices).
+How changes in this repo become versioned **`pdwidgets`** CPython wheels on [TestPyPI](https://test.pypi.org/project/pdwidgets/) and MicroPython packages on [micropython-lib gh-pages](https://PyDevices.github.io/micropython-lib/mip/PyDevices).
 
 ## Pipeline
 
