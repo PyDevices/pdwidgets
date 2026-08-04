@@ -26,7 +26,11 @@ pip install \
   pdwidgets displaysys pygraphics eventsys multimer palettes
 ```
 
-You also need a pydisplay `board_config` for your display backend. See [pydisplay desktop quick start](https://pydisplay.readthedocs.io/en/latest/guides/desktop-cpython/).
+You also need a pydisplay-compatible `board_config` for your display backend.
+You can provide your own `board_config.py` or optionally install a prebuilt
+board package from micropython-hardware:
+[install-workflows](https://pydevices.github.io/micropython-hardware/install-workflows.html).
+For desktop setup details, see [pydisplay desktop quick start](https://pydisplay.readthedocs.io/en/latest/guides/desktop-cpython/).
 
 ## PyScript (browser)
 
