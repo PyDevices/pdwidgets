@@ -10,7 +10,7 @@ Python-only widget toolkit for [pydisplay](https://github.com/PyDevices/pydispla
 pip install \
   -i https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ \
-  pdwidgets displaysys pygraphics eventsys multimer palettes
+  pdwidgets displaydev pygraphics eventsys multimer palettes
 ```
 
 Requires a pydisplay-compatible `board_config` and display stack. You can use
@@ -46,7 +46,7 @@ from pdwidgets.widgets.button import Button
 ## What you get
 
 - Screens, themes, and a growing widget set (buttons, lists, navigation, …)
-- Works with pydisplay `displaysys` + `eventsys.Runtime`
+- Works with pydisplay `displaydev` + `eventsys.Runtime`
 - Importable icon modules under `pdwidgets.icons` (no binary MIP assets)
 
 ## Links

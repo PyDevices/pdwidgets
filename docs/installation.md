@@ -23,7 +23,7 @@ Pure-Python CPython wheels are published to [TestPyPI](https://test.pypi.org/pro
 pip install \
   -i https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ \
-  pdwidgets displaysys pygraphics eventsys multimer palettes
+  pdwidgets displaydev pygraphics eventsys multimer palettes
 ```
 
 You also need a pydisplay-compatible `board_config` for your display backend.
