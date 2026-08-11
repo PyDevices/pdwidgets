@@ -10,7 +10,7 @@ try:
 except ImportError:
     from multimer import ticks_ms
 
-from eventsys import events
+import events
 from pygraphics import RGB565, Area, FrameBuffer
 
 from ._constants import ALIGN

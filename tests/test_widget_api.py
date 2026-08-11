@@ -5,7 +5,7 @@
 from types import SimpleNamespace
 import unittest
 
-from eventsys import events
+import events
 from pdwidgets.widget import Widget
 
 
