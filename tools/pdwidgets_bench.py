@@ -29,13 +29,16 @@ os.environ.setdefault("SDL_AUDIODRIVER", "dummy")
 from time import perf_counter
 
 import board_config
+import eventsys
 
 import pdwidgets as pd
 from pdwidgets import pct
 
+runtime = eventsys.Runtime.from_board_config(board_config)
+
 
 def build_screen():
-    display = pd.Display(board_config.display_drv, board_config.runtime)
+    display = pd.Display(board_config.display_drv, runtime)
     screen = pd.Screen(display, visible=False)
 
     # A representative mix of widgets.

@@ -1,6 +1,6 @@
 # Publishing and releases
 
-How changes in this repo become versioned **`pdwidgets`** CPython wheels on [TestPyPI](https://test.pypi.org/project/pdwidgets/) and MicroPython packages on [micropython-lib gh-pages](https://PyDevices.github.io/micropython-lib/mip/PyDevices).
+How changes in this repo become versioned **`pydevices-pdwidgets`** CPython wheels on [TestPyPI](https://test.pypi.org/project/pydevices-pdwidgets/) and unprefixed **`pdwidgets`** MicroPython packages on [micropython-lib gh-pages](https://PyDevices.github.io/micropython-lib/mip/PyDevices).
 
 ## Pipeline
 
@@ -33,7 +33,7 @@ Format: **`0.0.x`** semver until promoted. TestPyPI rejects duplicate versions.
 ## Install from TestPyPI
 
 ```bash
-pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ pdwidgets
+pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ pydevices-pdwidgets
 ```
 
 ## MIP install

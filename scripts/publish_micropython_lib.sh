@@ -88,6 +88,7 @@ DESCRIPTION_PREFIX="pdwidgets"
 AUTHOR="Brad Barnett <contact@pydevices.com>"
 LICENSE="MIT"
 BASENAME=pdwidgets
+PYPI_NAME=pydevices-pdwidgets
 DEST_REPO="${MICROPYTHON_LIB_DIR:-$SOURCE_REPO/../micropython-lib}"
 DEST_REPO="$(cd "$DEST_REPO" 2>/dev/null && pwd || echo "$DEST_REPO")"
 export MICROPYTHON_LIB_DIR="$DEST_REPO"
@@ -156,12 +157,12 @@ metadata(
     version="$VERSION",
     author="$AUTHOR",
     license="$LICENSE",
-    pypi_publish="$BASENAME",
+    pypi_publish="$PYPI_NAME",
 )
-require("eventsys")
-require("pygraphics", pypi="pygraphics")
-require("multimer")
-require("palettes")
+require("eventsys", pypi="pydevices-eventsys")
+require("pygraphics", pypi="pydevices-pygraphics")
+require("multimer", pypi="pydevices-multimer")
+require("palettes", pypi="pydevices-palettes")
 package("$BASENAME")
 EOF
 

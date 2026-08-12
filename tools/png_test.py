@@ -47,10 +47,13 @@ if _src not in sys.path:
     sys.path.insert(0, _src)
 
 import utils.path  # noqa: E402, F401, I001
-from board_config import runtime  # noqa: E402
+import board_config  # noqa: E402
+import eventsys  # noqa: E402
 from color_setup import ssd  # noqa: E402
 from displaybuf import alloc_buffer  # noqa: E402
 import png  # noqa: E402
+
+runtime = eventsys.Runtime.from_board_config(board_config)
 
 png_image = namedtuple("png_image", ["width", "height", "pixels", "metadata"])  # noqa: PYI024
 

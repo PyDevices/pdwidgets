@@ -21,8 +21,9 @@ import mip
 mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
 ```
 
-A pydisplay-compatible `board_config` module must export `display_drv` and
-`runtime` so the UI can connect to the hardware and event loop.
+A PyDevices `board_config` module exports hardware endpoints such as
+`display_drv` and input-reader aliases. The application chooses its traffic
+controller; the example below uses the optional `eventsys` package.
 
 ## A practical app skeleton
 
@@ -31,10 +32,11 @@ widgets, then hand control to the runtime:
 
 ```python
 import board_config
+import eventsys
 import pdwidgets as pd
 
-
-display = pd.Display(board_config.display_drv, board_config.runtime)
+runtime = eventsys.Runtime.from_board_config(board_config)
+display = pd.Display(board_config.display_drv, runtime)
 screen = pd.Screen(display, bg=0x0000)
 
 pd.Label(screen, value="Hello", x=8, y=8)
@@ -42,7 +44,7 @@ pd.Label(screen, value="Hello", x=8, y=8)
 button = pd.Button(screen, label="Tap me", x=8, y=40)
 button.add_event_cb(pd.events.MOUSEBUTTONUP, lambda sender, event: setattr(sender, "value", "Tapped"))
 
-board_config.runtime.run_forever()
+runtime.run_forever()
 ```
 
 The important detail is that `Display` wires itself into the shared runtime at

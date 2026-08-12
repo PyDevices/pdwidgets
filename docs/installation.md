@@ -17,13 +17,14 @@ mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/
 
 ## CPython — TestPyPI
 
-Pure-Python CPython wheels are published to [TestPyPI](https://test.pypi.org/project/pdwidgets/) for development and CI (not production PyPI). Use the two-index pattern:
+Pure-Python CPython wheels are published as [`pydevices-pdwidgets`](https://test.pypi.org/project/pydevices-pdwidgets/) for development and CI (not production PyPI). Use the two-index pattern:
 
 ```bash
 pip install \
   -i https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ \
-  pdwidgets displaydev pygraphics eventsys multimer palettes
+  pydevices-pdwidgets pydevices-displaydev pydevices-pygraphics \
+  pydevices-eventsys pydevices-multimer pydevices-palettes
 ```
 
 You also need a pydisplay-compatible `board_config` for your display backend.

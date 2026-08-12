@@ -10,7 +10,8 @@ Python-only widget toolkit for [pydisplay](https://github.com/PyDevices/pydispla
 pip install \
   -i https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ \
-  pdwidgets displaydev pygraphics eventsys multimer palettes
+  pydevices-pdwidgets pydevices-displaydev pydevices-pygraphics \
+  pydevices-eventsys pydevices-multimer pydevices-palettes
 ```
 
 Requires a pydisplay-compatible `board_config` and display stack. You can use
@@ -29,12 +30,14 @@ mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/
 
 ```python
 import board_config
+import eventsys
 import pdwidgets as pd
 
-display = pd.Display(board_config.display_drv, board_config.runtime)
+runtime = eventsys.Runtime.from_board_config(board_config)
+display = pd.Display(board_config.display_drv, runtime)
 screen = pd.Screen(display)
 pd.Button(screen, x=10, y=10, w=120, h=40, label="Hello")
-board_config.runtime.run_forever()
+runtime.run_forever()
 ```
 
 Lean imports (MCU-friendly):

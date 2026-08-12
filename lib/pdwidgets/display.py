@@ -67,9 +67,11 @@ class Display(Widget):
             format (int): Framebuffer color format; defaults to :data:`RGB565`.
 
         Example:
-            from board_config import display_drv, runtime
+            import board_config
+            import eventsys
 
-            display = Display(display_drv, runtime)
+            runtime = eventsys.Runtime.from_board_config(board_config)
+            display = Display(board_config.display_drv, runtime)
             screen = Screen(display)
             Label(screen, value="Hello")
         """

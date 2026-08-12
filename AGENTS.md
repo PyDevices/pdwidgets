@@ -5,7 +5,7 @@ Cross-platform widget toolkit for pydisplay (`import pdwidgets`).
 ## Environment
 
 - Python venv at `.venv` — `.venv/bin/python`, `.venv/bin/ruff`
-- Depends on pydisplay packages: `eventsys`, `pygraphics`, `multimer`, `palettes`
+- Depends on canonical PyDevices packages: `eventsys`, `pygraphics`, `multimer`, `palettes`
 - Source layout: `lib/pdwidgets/` (import name `pdwidgets`)
 
 ## Tests and lint
@@ -24,7 +24,8 @@ SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
 
 ## Publishing
 
-Tag `vX.Y.Z` triggers micropython-lib sync, MIP index rebuild, and TestPyPI upload for this Python-only package.
+Tag `vX.Y.Z` triggers micropython-lib sync, MIP index rebuild, and a
+`pydevices-pdwidgets` TestPyPI upload. The import and MIP name stay `pdwidgets`.
 See `docs/publishing.md`.
 
 ## Widget API (agent contract)
@@ -58,7 +59,7 @@ multi-repo workspace `palettes` comes from the sibling `palettes` repo (not
 pydisplay's `utils`, unlike CI's sparse-checkout):
 
 ```bash
-PYTHONPATH="lib:tests/stubs:/agent/repos/palettes/lib:/agent/repos/pygraphics/lib:/agent/repos/pydisplay/src/lib" \
+PYTHONPATH="lib:tests/stubs:/agent/repos/palettes/lib:/agent/repos/pygraphics/lib:/agent/repos/micropython-hardware/lib" \
   .venv/bin/python -m unittest discover -s tests
 ```
 
