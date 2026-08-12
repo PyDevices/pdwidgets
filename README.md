@@ -49,7 +49,7 @@ from pdwidgets.widgets.button import Button
 ## What you get
 
 - Screens, themes, and a growing widget set (buttons, lists, navigation, …)
-- Works with pydisplay `displaydev` + `eventsys.Runtime`
+- Works with PyDevices `displaydev` + application-owned `eventsys.Runtime`
 - Importable icon modules under `pdwidgets.icons` (no binary MIP assets)
 
 ## Links
