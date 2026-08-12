@@ -36,7 +36,7 @@ plugins:
       scripts:
         - scripts/mkdocs_gen_ref_pages.py
   - literate-nav:
-      nav_file: SUMMARY.md
+      nav_file: summary.md
   - section-index
   - mkdocstrings:
       handlers:

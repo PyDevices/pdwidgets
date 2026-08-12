@@ -39,5 +39,5 @@ for path in sorted((lib / "pdwidgets").rglob("*.py")):
 
     mkdocs_gen_files.set_edit_path(full_doc_path, path.relative_to(root))
 
-with mkdocs_gen_files.open("reference/SUMMARY.md", "w") as nav_file:
+with mkdocs_gen_files.open("reference/summary.md", "w") as nav_file:
     nav_file.writelines(nav.build_literate_nav())

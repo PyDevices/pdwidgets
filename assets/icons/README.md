@@ -4,7 +4,7 @@ Source PNGs: https://github.com/google/material-design-icons/tree/master/png
 
 Regenerate with ``scripts/assets_convert_md_png_to_pbm.py`` (bulk tree) from the
 pdwidgets repo root. This tree is **not** the runtime widget set —
-see [`lib/pdwidgets/icons/`](../lib/pdwidgets/icons/) for icons shipped with the
+see [`lib/pdwidgets/icons/`](../../lib/pdwidgets/icons/) for icons shipped with the
 package (``.py`` modules via ``scripts/assets_icons_to_py.py`` after the
 Material Design generate / color scripts).
 

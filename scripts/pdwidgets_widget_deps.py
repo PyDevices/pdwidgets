@@ -2,13 +2,13 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
-"""Regenerate pdwidgets WIDGET_DEPS.md from AST of widgets/*.py.
+"""Regenerate pdwidgets widget-dependencies.md from AST of widgets/*.py.
 
 Run from repo root::
 
     .venv/bin/python scripts/pdwidgets_widget_deps.py
 
-Writes ``lib/pdwidgets/WIDGET_DEPS.md``. Pass ``--check`` to exit
+Writes ``lib/pdwidgets/widget-dependencies.md``. Pass ``--check`` to exit
 non-zero if the file would change (for CI).
 """
 
@@ -21,7 +21,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 WIDGETS_DIR = ROOT / "lib" / "pdwidgets" / "widgets"
-OUT_PATH = ROOT / "lib" / "pdwidgets" / "WIDGET_DEPS.md"
+OUT_PATH = ROOT / "lib" / "pdwidgets" / "widget-dependencies.md"
 
 HEADER = """\
 # pdwidgets widget dependency graph
@@ -93,15 +93,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--check",
         action="store_true",
-        help="Exit 1 if WIDGET_DEPS.md would change",
+        help="Exit 1 if widget-dependencies.md would change",
     )
     args = parser.parse_args(argv)
     text = build_markdown()
     if args.check:
         if not OUT_PATH.is_file() or OUT_PATH.read_text(encoding="utf-8") != text:
-            print("WIDGET_DEPS.md is stale; run scripts/pdwidgets_widget_deps.py", file=sys.stderr)
+            print("widget-dependencies.md is stale; run scripts/pdwidgets_widget_deps.py", file=sys.stderr)
             return 1
-        print("WIDGET_DEPS.md up to date")
+        print("widget-dependencies.md up to date")
         return 0
     OUT_PATH.write_text(text, encoding="utf-8")
     print(f"Wrote {OUT_PATH.relative_to(ROOT)}")
