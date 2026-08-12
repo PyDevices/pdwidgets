@@ -1,6 +1,6 @@
 # AGENTS.md — pdwidgets
 
-Cross-platform widget toolkit for pydisplay (`import pdwidgets`).
+Cross-platform widget toolkit for PyDevices (`import pdwidgets`).
 
 ## Environment
 
@@ -15,7 +15,7 @@ Cross-platform widget toolkit for pydisplay (`import pdwidgets`).
 .venv/bin/ruff check lib tests scripts
 ```
 
-Headless bench (needs pydisplay `board_config` on path):
+Headless bench (needs pydevices-examples `board_config` on path):
 
 ```bash
 SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
@@ -52,17 +52,16 @@ Regenerate after editing widgets:
 ## Cursor Cloud specific instructions
 
 The Cloud Agent update script creates the repo-root `.venv` (with `ruff`).
-`pdwidgets` is source-only and imports `palettes` plus pydisplay's
-`eventsys`/`pygraphics`/`multimer` — none are pip-installed, so the bare
+`pdwidgets` is source-only and imports `palettes` plus product-owned
+`eventsys`/`multimer` and sibling `pygraphics` — none are pip-installed, so the bare
 `unittest discover` / bench commands above fail without `PYTHONPATH`. In this
-multi-repo workspace `palettes` comes from the sibling `palettes` repo (not
-pydisplay's `utils`, unlike CI's sparse-checkout):
+multi-repo workspace `palettes` and `pygraphics` come from sibling repos:
 
 ```bash
-PYTHONPATH="lib:tests/stubs:/agent/repos/palettes/lib:/agent/repos/pygraphics/lib:/agent/repos/micropython-hardware/lib" \
+PYTHONPATH="lib:tests/stubs:/agent/repos/palettes/lib:/agent/repos/pygraphics/lib:/agent/repos/pydevices/lib" \
   .venv/bin/python -m unittest discover -s tests
 ```
 
-The pydisplay repo's `.venv` also gets a `pydevices_siblings.pth` (added by the
+The pydevices-examples repo's `.venv` also gets a `pydevices_siblings.pth` (added by the
 update script) listing `palettes/lib`, `pdwidgets/lib`, and `pygraphics/lib`, so
-pydisplay examples that import them run in the cross-runtime matrix.
+pydevices-examples applications that import them run in the cross-runtime matrix.

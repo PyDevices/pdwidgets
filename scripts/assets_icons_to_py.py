@@ -2,8 +2,8 @@
 """
 Convert ``lib/pdwidgets/icons/*.{pbm,bmp}`` into importable ``.py`` modules.
 
-Installs ``pygraphics`` from TestPyPI (unless already importable), or
-uses sibling ``pydisplay/src/lib`` when present. Loads each binary via
+Installs ``pydevices-pygraphics`` from TestPyPI (unless already importable), or
+uses sibling ``pygraphics/lib`` when present. Loads each binary via
 ``FrameBuffer.from_file``, then writes modules via ``FrameBuffer.export``
 (``BITMAP = bytearray(...)`` for zero-copy MicroPython loads).
 
@@ -29,24 +29,24 @@ import sys
 REPO_ROOT = Path(__file__).resolve().parent.parent
 ICONS_DIR = REPO_ROOT / "src" / "pdwidgets" / "icons"
 BINARY_SUFFIXES = {".pbm", ".bmp"}
-PYDISPLAY_LIB = REPO_ROOT.parent / "pydisplay" / "src" / "lib"
+PYGRAPHICS_LIB = REPO_ROOT.parent / "pygraphics" / "lib"
 
 
 def ensure_graphics(*, install: bool) -> None:
-    if PYDISPLAY_LIB.is_dir() and str(PYDISPLAY_LIB) not in sys.path:
-        sys.path.insert(0, str(PYDISPLAY_LIB))
+    if PYGRAPHICS_LIB.is_dir() and str(PYGRAPHICS_LIB) not in sys.path:
+        sys.path.insert(0, str(PYGRAPHICS_LIB))
     try:
         import pygraphics  # noqa: F401
         from pygraphics import FrameBuffer
 
         if not hasattr(FrameBuffer, "export"):
-            raise ImportError("pygraphics.FrameBuffer.export missing (need newer pydisplay)")
+            raise ImportError("pygraphics.FrameBuffer.export missing (need newer pygraphics)")
         return
     except ImportError:
         if not install:
             raise SystemExit(
                 "graphics is not importable with FrameBuffer.export; omit --no-install "
-                "or use sibling pydisplay/src/lib"
+                "or use sibling pygraphics/lib"
             ) from None
     cmd = [
         sys.executable,
@@ -57,7 +57,7 @@ def ensure_graphics(*, install: bool) -> None:
         "https://test.pypi.org/simple/",
         "--extra-index-url",
         "https://pypi.org/simple/",
-        "pygraphics",
+        "pydevices-pygraphics",
     ]
     print("Running:", " ".join(cmd))
     subprocess.check_call(cmd)

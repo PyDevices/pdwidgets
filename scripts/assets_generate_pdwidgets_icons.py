@@ -12,8 +12,7 @@ that ``pdwidgets._themes.IconTheme`` actually expects, at every ``ICON_SIZE``
 (18/24/36/48dp), using the "materialicons" (baseline/filled) family.
 For color BMP565 status icons, see ``assets_make_color_icons.py``.
 
-Run from the pdwidgets repo root (needs a sibling pydisplay checkout for
-``pygraphics``)::
+Run from the pdwidgets repo root (needs a sibling ``pygraphics`` checkout)::
 
     .venv/bin/python scripts/assets_generate_pdwidgets_icons.py
 
@@ -33,27 +32,27 @@ from PIL import Image
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
-def resolve_pydisplay_root(explicit: str | None = None) -> Path:
-    """Return a local checkout of https://github.com/PyDevices/pydisplay (for graphics)."""
+def resolve_pygraphics_root(explicit: str | None = None) -> Path:
+    """Return a local checkout of https://github.com/PyDevices/pygraphics."""
     candidates: list[Path] = []
     if explicit:
         candidates.append(Path(explicit))
-    env_root = os.environ.get("PYDISPLAY_ROOT")
+    env_root = os.environ.get("PYGRAPHICS_ROOT")
     if env_root:
         candidates.append(Path(env_root))
     candidates.extend(
         (
-            REPO_ROOT.parent / "pydisplay",
-            Path.home() / "gh" / "pydevices" / "pydisplay",
+            REPO_ROOT.parent / "pygraphics",
+            Path.home() / "gh" / "pydevices" / "pygraphics",
         )
     )
     for root in candidates:
-        if (root / "src" / "lib" / "pygraphics").is_dir():
+        if (root / "lib" / "pygraphics").is_dir():
             return root.resolve()
     tried = ", ".join(str(p) for p in candidates)
     raise SystemExit(
-        "pydisplay checkout not found (needed for pygraphics). Clone "
-        f"https://github.com/PyDevices/pydisplay or pass --pydisplay-root. Tried: {tried}"
+        "pygraphics checkout not found. Clone https://github.com/PyDevices/pygraphics "
+        f"or pass --pygraphics-root. Tried: {tried}"
     )
 
 
@@ -125,15 +124,15 @@ def main() -> int:
         help="Local checkout of google/material-design-icons (default: ~/material-design-icons)",
     )
     parser.add_argument(
-        "--pydisplay-root",
+        "--pygraphics-root",
         default=None,
-        help="Local checkout of PyDevices/pydisplay (for pygraphics; default: PYDISPLAY_ROOT, ../pydisplay, …)",
+        help="Local checkout of PyDevices/pygraphics (default: PYGRAPHICS_ROOT, ../pygraphics, …)",
     )
     parser.add_argument("--force", action="store_true", help="Regenerate files that already exist")
     args = parser.parse_args()
 
-    pydisplay_root = resolve_pydisplay_root(args.pydisplay_root)
-    sys.path.insert(0, str(pydisplay_root / "src" / "lib"))
+    pygraphics_root = resolve_pygraphics_root(args.pygraphics_root)
+    sys.path.insert(0, str(pygraphics_root / "lib"))
 
     dest = REPO_ROOT / "src" / "pdwidgets" / "icons"
 

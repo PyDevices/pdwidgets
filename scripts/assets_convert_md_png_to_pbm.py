@@ -10,8 +10,8 @@ Source path shape::
 For the curated runtime set under ``lib/pdwidgets/icons/``, use
 ``assets_generate_pdwidgets_icons.py`` instead.
 
-Run from the pdwidgets repo root (needs sibling pydisplay for ``pygraphics`` /
-``png``)::
+Run from the pdwidgets repo root (needs sibling ``pydevices-examples`` for
+``png`` and sibling ``pygraphics`` for the framebuffer)::
 
     .venv/bin/python scripts/assets_convert_md_png_to_pbm.py
 """
@@ -25,29 +25,30 @@ import sys
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
-def resolve_pydisplay_root() -> Path:
-    env_root = os.environ.get("PYDISPLAY_ROOT")
+def resolve_pydevices_examples_root() -> Path:
+    env_root = os.environ.get("PYDEVICES_EXAMPLES_ROOT")
     candidates = []
     if env_root:
         candidates.append(Path(env_root))
     candidates.extend(
         (
-            REPO_ROOT.parent / "pydisplay",
-            Path.home() / "gh" / "pydevices" / "pydisplay",
+            REPO_ROOT.parent / "pydevices-examples",
+            Path.home() / "gh" / "pydevices" / "pydevices-examples",
         )
     )
     for root in candidates:
-        if (root / "src" / "lib" / "pygraphics").is_dir():
+        if (root / "src" / "utils").is_dir():
             return root.resolve()
     tried = ", ".join(str(p) for p in candidates)
     raise SystemExit(
-        "pydisplay checkout not found (needed for pygraphics/png). "
-        f"Set PYDISPLAY_ROOT or clone sibling pydisplay. Tried: {tried}"
+        "pydevices-examples checkout not found (needed for png utilities). "
+        f"Set PYDEVICES_EXAMPLES_ROOT or clone sibling pydevices-examples. Tried: {tried}"
     )
 
 
-_pydisplay = resolve_pydisplay_root()
-sys.path.insert(0, str(_pydisplay / "src"))
+_pydevices_examples = resolve_pydevices_examples_root()
+sys.path.insert(0, str(_pydevices_examples / "src"))
+sys.path.insert(0, str(REPO_ROOT.parent / "pygraphics" / "lib"))
 from png import Reader  # noqa: E402
 from pygraphics import MONO_HLSB, FrameBuffer  # noqa: E402
 import utils.path  # noqa: E402, F401

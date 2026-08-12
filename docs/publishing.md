@@ -42,4 +42,4 @@ pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/
 mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
 ```
 
-`pdwidgets` is **not** part of `pydisplay-bundle`.
+`pdwidgets` is **not** part of `pydevices-bundle`.

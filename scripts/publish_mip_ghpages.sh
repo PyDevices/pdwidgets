@@ -3,7 +3,7 @@
 #
 # Requires:
 #   MICROPYTHON_LIB_DIR   checkout of PyDevices/micropython-lib (PyDevices branch)
-#   PYDISPLAY_DIR         pydisplay repo root (default: parent of scripts/)
+#   PDWIDGETS_DIR         pdwidgets repo root (default: parent of scripts/)
 #
 # Optional:
 #   MICROPYTHON_DIR       micropython source for mpy-cross (default: /tmp/micropython)

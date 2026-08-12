@@ -1,13 +1,13 @@
-"""PNG decoder smoke tool (pydisplay utils/png + DisplayBuffer).
+"""PNG decoder smoke tool (pydevices-examples utils/png + DisplayBuffer).
 
 Lives in pdwidgets because it walks a material-design-icons ``png/`` tree used
-for icon authoring here. Requires a sibling **pydisplay** checkout (board_config,
+for icon authoring here. Requires a sibling **pydevices-examples** checkout (board_config,
 ``png``, display stack), ``pypng``, and the icons ``png/`` tree (or
-``PDWIDGETS_PNG_DIR`` / ``PYDISPLAY_PNG_DIR`` / ``MATERIAL_DESIGN_ICONS_PNG``).
+``PDWIDGETS_PNG_DIR`` / ``PYDEVICES_PNG_DIR`` / ``MATERIAL_DESIGN_ICONS_PNG``).
 
-Run from the pdwidgets repo root (or with ``PYDISPLAY_ROOT`` set)::
+Run from the pdwidgets repo root (or with ``PYDEVICES_EXAMPLES_ROOT`` set)::
 
-    SDL_VIDEODRIVER=dummy ../pydisplay/.venv/bin/python tools/png_test.py
+    SDL_VIDEODRIVER=dummy ../pydevices-examples/.venv/bin/python tools/png_test.py
 """
 
 from __future__ import annotations
@@ -20,15 +20,15 @@ from pathlib import Path
 _ROOT = Path(__file__).resolve().parents[1]
 
 
-def _resolve_pydisplay_root() -> Path:
-    env_root = os.environ.get("PYDISPLAY_ROOT")
+def _resolve_pydevices_examples_root() -> Path:
+    env_root = os.environ.get("PYDEVICES_EXAMPLES_ROOT")
     candidates = []
     if env_root:
         candidates.append(Path(env_root))
     candidates.extend(
         (
-            _ROOT.parent / "pydisplay",
-            Path.home() / "gh" / "pydevices" / "pydisplay",
+            _ROOT.parent / "pydevices-examples",
+            Path.home() / "gh" / "pydevices" / "pydevices-examples",
         )
     )
     for root in candidates:
@@ -36,13 +36,13 @@ def _resolve_pydisplay_root() -> Path:
             return root.resolve()
     tried = ", ".join(str(p) for p in candidates)
     raise SystemExit(
-        "pydisplay checkout not found (needed for board_config / png). "
-        f"Set PYDISPLAY_ROOT. Tried: {tried}"
+        "pydevices-examples checkout not found (needed for board_config / png). "
+        f"Set PYDEVICES_EXAMPLES_ROOT. Tried: {tried}"
     )
 
 
-_pydisplay = _resolve_pydisplay_root()
-_src = str(_pydisplay / "src")
+_pydevices_examples = _resolve_pydevices_examples_root()
+_src = str(_pydevices_examples / "src")
 if _src not in sys.path:
     sys.path.insert(0, _src)
 
@@ -102,7 +102,7 @@ def _is_dir(path):
 
 def _resolve_png_dir():
     getenv = getattr(os, "getenv", None)
-    for key in ("PDWIDGETS_PNG_DIR", "PYDISPLAY_PNG_DIR", "MATERIAL_DESIGN_ICONS_PNG"):
+    for key in ("PDWIDGETS_PNG_DIR", "PYDEVICES_PNG_DIR", "MATERIAL_DESIGN_ICONS_PNG"):
         override = getenv(key) if getenv is not None else None
         if override and _is_dir(override):
             return _norm_path(override).rstrip("/") + "/"
@@ -163,9 +163,9 @@ def png_files(directory):
 
 
 try:
-    import pydisplay_test_mode
+    import pydevices_test_mode
 
-    _max_pngs = 2 if pydisplay_test_mode.ENABLED else None
+    _max_pngs = 2 if pydevices_test_mode.ENABLED else None
 except ImportError:
     _max_pngs = None
 

@@ -1,17 +1,17 @@
 # pdwidgets (widget toolkit)
 
-pdwidgets is the UI layer used by pydisplay for building screen-sized apps on
+pdwidgets is the UI layer used by pydevices-examples for building screen-sized apps on
 MicroPython, CircuitPython, and CPython. The public API is intentionally small:
 create a root :class:`Display`, add a :class:`Screen`, and compose widgets such
 as labels, buttons, lists, and dialogs around that tree.
 
 ## Setup
 
-For a local pydisplay checkout, make sure the repo libraries are on the import
+For a local pydevices-examples checkout, make sure the repo libraries are on the import
 path before you start:
 
 ```python
-import utils.path   # adds lib/, utils/, and examples/ for a pydisplay dev clone
+import utils.path   # adds lib/, utils/, and examples/ for a pydevices-examples dev clone
 ```
 
 Install from [micropython-lib MIP](installation.md) for MicroPython or [TestPyPI](installation.md) for CPython:
@@ -73,7 +73,7 @@ short loop so the display flushes intermediate updates.
 
 ## Examples worth reading
 
-The best examples live in the pydisplay repo under `src/examples/` and show how
+The best examples live in the pydevices-examples repo under `src/examples/` and show how
 real applications use the toolkit:
 
 | Script | Description |

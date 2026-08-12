@@ -27,15 +27,15 @@ pip install \
   pydevices-eventsys pydevices-multimer pydevices-palettes
 ```
 
-You also need a pydisplay-compatible `board_config` for your display backend.
+You also need a PyDevices-compatible `board_config` for your display backend.
 You can provide your own `board_config.py` or optionally install a prebuilt
-board package from micropython-hardware:
-[install-workflows](https://pydevices.github.io/micropython-hardware/install-workflows.html).
-For desktop setup details, see [pydisplay desktop quick start](https://pydisplay.readthedocs.io/en/latest/guides/desktop-cpython/).
+board package from pydevices:
+[install-workflows](https://pydevices.github.io/pydevices/install-workflows.html).
+For desktop setup details, see [pydevices-examples desktop quick start](https://pydisplay.readthedocs.io/en/latest/guides/desktop-cpython/).
 
 ## PyScript (browser)
 
-Widget gallery examples in [pydisplay PyScript](https://pydevices.github.io/pydisplay/pyscript/) install `pdwidgets` at runtime via the micropython-lib MIP index (`# pyscript mip: pdwidgets` in example headers).
+Widget gallery examples in [pydevices-examples PyScript](https://pydevices.github.io/pydevices-examples/pyscript/) install `pdwidgets` at runtime via the micropython-lib MIP index (`# pyscript mip: pdwidgets` in example headers).
 
 On the Pyodide (CPython) loader, examples may use `# pyodide wheels: pdwidgets` to `micropip`-install from TestPyPI.
 
@@ -45,8 +45,8 @@ On the Pyodide (CPython) loader, examples may use `# pyodide wheels: pdwidgets` 
 git clone https://github.com/PyDevices/pdwidgets.git
 ```
 
-Add `src/` to `sys.path` alongside a pydisplay checkout or installed wheels.
+Add `src/` to `sys.path` alongside a pydevices-examples checkout or installed wheels.
 
-## Not in pydisplay-bundle
+## Not in pydevices-bundle
 
-`pdwidgets` is a separate package and is **not** included in the `pydisplay-bundle` MIP metapackage. Install it explicitly when you need widgets.
+`pdwidgets` is a separate package and is **not** included in the `pydevices-bundle` MIP metapackage. Install it explicitly when you need widgets.

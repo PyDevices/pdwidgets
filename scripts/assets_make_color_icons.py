@@ -9,7 +9,7 @@ writes a BMP565 file into ``lib/pdwidgets/icons/``. Non-glyph pixels are set to
 a magenta chroma key so ``pdwidgets.Icon(chroma=CHROMA_565)`` can render them
 with a transparent background. No PNG is shipped or decoded at runtime.
 
-Usage (from the pdwidgets repo root; needs sibling pydisplay for ``pygraphics``)::
+Usage (from the pdwidgets repo root; needs sibling ``pygraphics``)::
 
     .venv/bin/python scripts/assets_make_color_icons.py
 
@@ -41,27 +41,27 @@ ICONS = [
 API = "https://api.github.com/repos/google/material-design-icons/contents/png/{cat}/{name}/materialicons/{dp}dp/1x"
 
 
-def resolve_pydisplay_root(explicit: str | None = None) -> Path:
-    """Return a local checkout of https://github.com/PyDevices/pydisplay (for graphics)."""
+def resolve_pygraphics_root(explicit: str | None = None) -> Path:
+    """Return a local checkout of https://github.com/PyDevices/pygraphics."""
     candidates: list[Path] = []
     if explicit:
         candidates.append(Path(explicit))
-    env_root = os.environ.get("PYDISPLAY_ROOT")
+    env_root = os.environ.get("PYGRAPHICS_ROOT")
     if env_root:
         candidates.append(Path(env_root))
     candidates.extend(
         (
-            REPO_ROOT.parent / "pydisplay",
-            Path.home() / "gh" / "pydevices" / "pydisplay",
+            REPO_ROOT.parent / "pygraphics",
+            Path.home() / "gh" / "pydevices" / "pygraphics",
         )
     )
     for root in candidates:
-        if (root / "src" / "lib" / "pygraphics").is_dir():
+        if (root / "lib" / "pygraphics").is_dir():
             return root.resolve()
     tried = ", ".join(str(p) for p in candidates)
     raise SystemExit(
-        "pydisplay checkout not found (needed for pygraphics). Clone "
-        f"https://github.com/PyDevices/pydisplay or pass --pydisplay-root. Tried: {tried}"
+        "pygraphics checkout not found. Clone https://github.com/PyDevices/pygraphics "
+        f"or pass --pygraphics-root. Tried: {tried}"
     )
 
 
@@ -105,14 +105,14 @@ def convert(png_bytes, accent):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--pydisplay-root",
+        "--pygraphics-root",
         default=None,
-        help="Local checkout of PyDevices/pydisplay (for pygraphics; default: PYDISPLAY_ROOT, ../pydisplay, …)",
+        help="Local checkout of PyDevices/pygraphics (default: PYGRAPHICS_ROOT, ../pygraphics, …)",
     )
     args = parser.parse_args()
 
-    pydisplay_root = resolve_pydisplay_root(args.pydisplay_root)
-    sys.path.insert(0, str(pydisplay_root / "src" / "lib"))
+    pygraphics_root = resolve_pygraphics_root(args.pygraphics_root)
+    sys.path.insert(0, str(pygraphics_root / "lib"))
     import pygraphics  # noqa: E402
 
     icon_dir = REPO_ROOT / "src" / "pdwidgets" / "icons"

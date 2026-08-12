@@ -1,6 +1,6 @@
 # pdwidgets
 
-Python-only widget toolkit for [pydisplay](https://github.com/PyDevices/pydisplay) — buttons, lists, themes, navigation, and more on MicroPython, CircuitPython, and CPython. This package has no native C extension; it is published as a pure-Python package on TestPyPI for CPython and through micropython-lib / MIP for MicroPython.
+Python-only widget toolkit for [PyDevices](https://github.com/PyDevices/pydevices) — buttons, lists, themes, navigation, and more on MicroPython, CircuitPython, and CPython. This package has no native C extension; it is published as a pure-Python package on TestPyPI for CPython and through micropython-lib / MIP for MicroPython. Applications and live demos live in [pydevices-examples](https://github.com/PyDevices/pydevices-examples).
 
 ## Install
 
@@ -14,10 +14,10 @@ pip install \
   pydevices-eventsys pydevices-multimer pydevices-palettes
 ```
 
-Requires a pydisplay-compatible `board_config` and display stack. You can use
+Requires a PyDevices-compatible `board_config` and display stack. You can use
 your own `board_config.py`, or optionally install a prebuilt one from
-micropython-hardware:
-[install-workflows](https://pydevices.github.io/micropython-hardware/install-workflows.html).
+pydevices:
+[install-workflows](https://pydevices.github.io/pydevices/install-workflows.html).
 
 ### MicroPython (MIP)
 
@@ -57,8 +57,8 @@ from pdwidgets.widgets.button import Button
 - [Documentation](https://pdwidgets.readthedocs.io)
 - [Source](https://github.com/PyDevices/pdwidgets)
 - [Issues](https://github.com/PyDevices/pdwidgets/issues)
-- [PyScript demos](https://pydevices.github.io/pydisplay/pyscript/)
-- Related: [pydisplay](https://github.com/PyDevices/pydisplay), [palettes](https://github.com/PyDevices/palettes)
+- [PyScript demos](https://pydevices.github.io/pydevices-examples/pyscript/)
+- Related: [pydevices-examples](https://github.com/PyDevices/pydevices-examples), [palettes](https://github.com/PyDevices/palettes)
 
 ## License
 
@@ -79,6 +79,6 @@ Runtime icons are **importable Python modules** under [`lib/pdwidgets/icons/`](l
 .venv/bin/python scripts/assets_icons_to_py.py --delete-binaries
 # Optional bulk dump into assets/icons/
 .venv/bin/python scripts/assets_convert_md_png_to_pbm.py
-# PNG smoke probe (pydisplay display stack + material-design-icons png/)
-SDL_VIDEODRIVER=dummy ../pydisplay/.venv/bin/python tools/png_test.py
+# PNG smoke probe (PyDevices display stack + material-design-icons png/)
+SDL_VIDEODRIVER=dummy ../pydevices-examples/.venv/bin/python tools/png_test.py
 ```

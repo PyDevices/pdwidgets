@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# pydisplay — upstream micropython-lib ``tools/build.py`` (MIP index compiler).
+# PyDevices copy of upstream micropython-lib ``tools/build.py`` (MIP index compiler).
 # Renamed from ``scripts/publish_mip_index.py``; kept as ``build.py`` so
 # ``publish_make_pyproject.py`` can ``from build import ensure_path_exists, error_color``.
 #
@@ -477,7 +477,7 @@ def main():
     cmd_parser.add_argument(
         "--lib-dir",
         default=None,
-        help="micropython-lib repo root (scan cwd); default: pydisplay repo root",
+        help="micropython-lib repo root (scan cwd); default: current repository root",
     )
     args = cmd_parser.parse_args()
 
