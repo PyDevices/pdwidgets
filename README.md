@@ -1,10 +1,75 @@
 # pdwidgets
 
-Python-only widget toolkit for [PyDevices](https://github.com/PyDevices/pydevices) — buttons, lists, themes, navigation, and more on MicroPython, CircuitPython, and CPython. This package has no native C extension; it is published as a pure-Python package on TestPyPI for CPython and through micropython-lib / MIP for MicroPython. Applications and live demos live in [pydevices-examples](https://github.com/PyDevices/pydevices-examples).
+**Pure-Python, portable widget toolkit for [PyDevices](https://github.com/PyDevices/pydevices)**
 
-## Install
+`pdwidgets` provides a complete, 100% pure-Python GUI toolkit for building touchscreen and desktop interfaces without requiring native C bindings or complex build toolchains. It runs seamlessly on **MicroPython**, **CircuitPython**, **CPython desktop**, and **PyScript (Web)**.
 
-### CPython (TestPyPI)
+### Choosing Your GUI Layer in PyDevices
+
+PyDevices supports multiple graphical approaches depending on your project needs:
+- **Raw Graphics / Canvas**: [`displaydev`](https://github.com/PyDevices/pydevices) & [`pygraphics`](https://github.com/PyDevices/pygraphics) for direct pixel, line, and shape drawing.
+- **Pure-Python GUI**: **`pdwidgets`** for portable, python-native buttons, lists, themes, and screen management.
+- **C-Native GUI**: [`lvgl`](https://github.com/PyDevices/lvgl-bindings) for complex vector widgets and C-accelerated animation engines.
+
+---
+
+## Quick Start: Interactive Button & Screen
+
+```python
+import board_config
+import eventsys
+import pdwidgets as pd
+from pdwidgets.icons import touch_app  # Pure-Python icon bytecode
+
+# 1. Initialize display and event runtime
+runtime = eventsys.Runtime.from_board_config(board_config)
+display = pd.Display(board_config.display_drv, runtime)
+screen = pd.Screen(display)
+
+_taps = 0
+
+# 2. Add an interactive button with a click handler
+btn = pd.Button(
+    screen,
+    x=40,
+    y=60,
+    w=160,
+    h=50,
+    label="Tap me (0)",
+    icon=touch_app,
+)
+
+def on_button_click(event):
+    global _taps
+    _taps += 1
+    btn.set_label(f"Tap me ({_taps})")
+    display.refresh()
+
+btn.on_click(on_button_click)
+
+# 3. Draw initial screen and start event loop
+display.show(screen)
+runtime.run_forever()
+```
+
+---
+
+## Key Features
+
+- **100% Pure Python & Portable**: Zero native C extensions or compilation steps required.
+- **Zero-File Icon System (`pdwidgets.icons`)**: Material Design icons packaged directly as importable Python bytecode modules (`bytearray` bitmaps)—no SD card assets, binary file I/O, or asset path management needed.
+- **MCU Memory-Friendly (Lean Imports)**: Import individual widgets to minimize RAM footprint on microcontrollers:
+  ```python
+  from pdwidgets.widgets.button import Button
+  from pdwidgets.widgets.screen import Screen
+  ```
+- **Integrated Theming**: Customizable color schemes, border radii, and visual states using [`palettes`](https://github.com/PyDevices/palettes).
+
+---
+
+## Installation
+
+### CPython Desktop (TestPyPI)
 
 ```bash
 pip install \
@@ -14,11 +79,6 @@ pip install \
   pydevices-eventsys pydevices-multimer pydevices-palettes
 ```
 
-Requires a PyDevices-compatible `board_config` and display stack. You can use
-your own `board_config.py`, or optionally install a prebuilt one from
-pydevices:
-[install-workflows](https://pydevices.github.io/pydevices/install-workflows.html).
-
 ### MicroPython (MIP)
 
 ```python
@@ -26,43 +86,19 @@ import mip
 mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
 ```
 
-## Quick start
+---
 
-```python
-import board_config
-import eventsys
-import pdwidgets as pd
-
-runtime = eventsys.Runtime.from_board_config(board_config)
-display = pd.Display(board_config.display_drv, runtime)
-screen = pd.Screen(display)
-pd.Button(screen, x=10, y=10, w=120, h=40, label="Hello")
-runtime.run_forever()
-```
-
-Lean imports (MCU-friendly):
-
-```python
-from pdwidgets.widgets.button import Button
-```
-
-## What you get
-
-- Screens, themes, and a growing widget set (buttons, lists, navigation, …)
-- Works with PyDevices `displaydev` + application-owned `eventsys.Runtime`
-- Importable icon modules under `pdwidgets.icons` (no binary MIP assets)
-
-## Links
+## Links & Demos
 
 - [Documentation](https://pdwidgets.readthedocs.io)
-- [Source](https://github.com/PyDevices/pdwidgets)
-- [Issues](https://github.com/PyDevices/pdwidgets/issues)
-- [PyScript demos](https://pydevices.github.io/pydevices-examples/pyscript/)
-- Related: [pydevices-examples](https://github.com/PyDevices/pydevices-examples), [palettes](https://github.com/PyDevices/palettes)
+- [Source Code](https://github.com/PyDevices/pdwidgets)
+- [PyScript Live Demos](https://pydevices.github.io/pydevices-examples/pyscript/)
+- Related: [pydevices](https://github.com/PyDevices/pydevices), [palettes](https://github.com/PyDevices/palettes), [pydevices-examples](https://github.com/PyDevices/pydevices-examples)
 
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
 
 ---
 
