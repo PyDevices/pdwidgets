@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <script>try{if(localStorage.getItem('pydevices-theme')==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>pdwidgets — PyDevices</title>
-  <meta name="description" content="Cross-platform widget toolkit for PyDevices — buttons, forms, navigation, sheets, and charts on MicroPython and CPython.">
+  <title>pdwidgets — Lightweight Pure-Python UI Widget Toolkit</title>
+  <meta name="description" content="Lightweight UI widget toolkit for PyDevices — buttons, forms, sliders, sheets, and themes without requiring a native C LVGL stack.">
   <link rel="icon" type="image/svg+xml" href="https://pydevices.github.io/assets/img/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap">
-  <link rel="stylesheet" href="https://pydevices.github.io/assets/css/site.css">
+  <link rel="stylesheet" href="./vendor/pydevices-chrome/site.css">
 </head>
 <body>
   <div id="pydevices-site-header"></div>
@@ -18,134 +18,79 @@
   <section class="hero wrap">
     <div class="hero-lead">
       <div class="hero-brand">
-        <div class="logo-badge product-mark"><img src="img/product.svg" alt="pdwidgets" width="112" height="112"></div>
-        <span class="eyebrow">PyDevices / pdwidgets</span>
+        <div class="logo-badge product-mark" style="background: linear-gradient(135deg, var(--tier-2-emerald), #059669);"><img src="img/product.svg" alt="pdwidgets" width="112" height="112"></div>
+        <span class="eyebrow">pdwidgets</span>
       </div>
-      <h1>Widgets for PyDevices — without adopting LVGL.</h1>
+      <h1>pdwidgets — Pure-Python UI widget toolkit.</h1>
     </div>
-    <p>pdwidgets is a lightweight widget toolkit for PyDevices: buttons, forms, dialogs, navigation, sheets, gauges, and charts that run on MicroPython and CPython. It sits on <code>Display</code> + <code>Screen</code>; applications provide a traffic controller such as the optional <code>eventsys.Runtime</code>.</p>
-    <p>Examples live in the pydevices-examples tree as <code>src/examples/widgets_*.py</code> and show up in the <a href="https://pydevices.github.io/pydevices-examples/pyscript/">PyScript gallery</a> via MIP — the same packages you install on a board.</p>
+    <p><code>pdwidgets</code> is a pure-Python UI widget toolkit designed specifically for the PyDevices display stack. It provides responsive buttons, form controls, sliders, navigation bars, modal sheets, and Material Design themes without requiring a complex, C-compiled LVGL native extension.</p>
     <div class="cta">
-      <a class="btn primary" href="https://pydevices.github.io/pydevices-examples/pyscript/">PyScript gallery</a>
-      <a class="btn" href="https://pdwidgets.readthedocs.io">Documentation</a>
-      <a class="btn" href="https://github.com/PyDevices/pdwidgets">GitHub</a>
+      <a class="btn primary" style="background: #24292e; color: #fff; border-color: #24292e;" href="https://github.com/PyDevices/pdwidgets">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3-.3 6-1.5 6-6.5a5 5 0 0 0-1.4-3.5 4.6 4.6 0 0 0-.1-3.5s-1.1-.3-3.5 1.3a12 12 0 0 0-6 0C6.6 1.7 5.5 2 5.5 2a4.6 4.6 0 0 0-.1 3.5A5 5 0 0 0 4 9c0 5 3 6.2 6 6.5a3.4 3.4 0 0 0-1 2.6V22"/></svg>
+        GitHub Repo
+      </a>
+      <a class="btn" style="border-color: #0284c7; color: #0284c7;" href="https://pdwidgets.readthedocs.io">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Read the Docs
+      </a>
+      <a class="btn" style="border-color: var(--tier-4-purple); color: var(--tier-4-purple);" href="https://pydevices.github.io/pydevices-examples/pyscript/">PyScript Demos</a>
+      <a class="btn" style="border-color: var(--tier-5-steel); color: var(--tier-5-steel);" href="https://PyDevices.github.io/micropython-lib/mip/PyDevices">MIP Index</a>
     </div>
   </section>
 
-  <main class="cards wrap">
+  <main class="wrap" style="padding-bottom: 60px;">
+    <!-- UI Component Showcase Grid -->
     <div class="section-head">
-      <h2>Install</h2>
-      <span class="hint">MIP index + lean imports for MCU</span>
+      <h2>Pure-Python UI Component Family</h2>
+      <span class="hint">Widgets built on top of pydevices Display &amp; Screen abstractions.</span>
     </div>
-    <div class="install-block">
+
+    <div class="spec-block">
+      <div class="spec-grid">
+        <div class="spec-item tier-2">
+          <h4>Buttons &amp; Touch Triggers</h4>
+          <p>Touch-friendly buttons with active states, focus outlines, text alignment, and event callbacks.</p>
+        </div>
+
+        <div class="spec-item tier-2">
+          <h4>Form Controls &amp; Switches</h4>
+          <p>Checkboxes, radio toggles, text inputs, and numeric sliders for touchscreen user interfaces.</p>
+        </div>
+
+        <div class="spec-item tier-2">
+          <h4>Navigation &amp; Sheet Containers</h4>
+          <p>Top bars, tabbed navigators, bottom sheets, and pop-up modal dialogs.</p>
+        </div>
+
+        <div class="spec-item tier-2">
+          <h4>Material <code>ColorTheme</code></h4>
+          <p>Dynamic theme engine integrated with <code>palettes</code> for consistent light/dark UI themes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Installation & Quick Example -->
+    <div class="section-head" style="margin-top: 36px;">
+      <h2>Installation &amp; Minimal Button Loop</h2>
+    </div>
+
+    <div class="spec-block">
       <pre><code>import mip
 mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
 
-# Prefer lazy imports on constrained boards:
-from pdwidgets.widgets.button import Button</code></pre>
-    </div>
+# Example Usage:
+import board_config
+from pdwidgets.widgets.button import Button
 
-    <div class="section-head" style="margin-top: 36px;">
-      <h2>Snippets</h2>
-      <span class="hint">from real <code>widgets_*.py</code> examples</span>
+screen = board_config.screen
+btn = Button(x=20, y=40, width=120, height=45, text="Click Me")
+screen.add(btn)</code></pre>
     </div>
-    <div class="snippet-grid">
-      <div class="snippet-card">
-        <h3>Hello Button</h3>
-        <p>Minimal <code>Display</code> / <code>Screen</code> / <code>Button</code> loop.</p>
-        <pre><code>import board_config
-import eventsys
-import pdwidgets as pd
-
-runtime = eventsys.Runtime.from_board_config(board_config)
-display = pd.Display(board_config.display_drv, runtime)
-screen = pd.Screen(display)
-pd.Button(screen, x=10, y=10, w=120, h=40, label="Hello")
-runtime.run_forever()</code></pre>
-      </div>
-      <div class="snippet-card">
-        <h3>Settings / Switch / Dialog</h3>
-        <p>From <code>widgets_settings.py</code> — FormRow, Switch, modal Dialog.</p>
-        <pre><code>row = pd.FormRow(card, label="Wi-Fi", ...)
-wifi = pd.Switch(row, value=True)
-wifi.set_change_cb(lambda s: log(...))
-
-confirm = pd.Dialog(
-    screen, "Reset all settings?",
-    title="Reset", buttons=["Cancel", "Reset"],
-    on_result=...,
-)
-reset.add_event_cb(pd.events.MOUSEBUTTONDOWN, lambda s, e: confirm.show())</code></pre>
-      </div>
-      <div class="snippet-card">
-        <h3>Navigator / TabView</h3>
-        <p>From <code>widgets_nav_tabs.py</code> — pages, tabs, push/pop.</p>
-        <pre><code>nav = pd.Navigator(screen)
-root = pd.Page(nav, title="Root")
-home = pd.Page(root, title="Home", visible=False)
-# ...
-tv = pd.TabView(
-    root, y=root_bar.height,
-    h=root.height - root_bar.height,
-    tabs=[("Home", home), ("Log", log), ("About", about)],
-)
-nav.push(root)
-runtime.run_forever()</code></pre>
-      </div>
-    </div>
-
-    <div class="section-head" style="margin-top: 36px;">
-      <h2>Widget categories</h2>
-      <span class="hint">not every class — see docs for the full surface</span>
-    </div>
-    <div class="grid">
-      <div class="card">
-        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h14"/></svg></span>
-        <h3>Forms &amp; controls</h3>
-        <p>Button, Switch, CheckBox, Slider, TextInput, Dropdown, NumberStepper, RadioGroup, Form / FormRow.</p>
-      </div>
-      <div class="card">
-        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h12"/></svg></span>
-        <h3>Navigation</h3>
-        <p>AppBar, Page, Navigator, TabView, Menu, ListView, SegmentedControl.</p>
-      </div>
-      <div class="card">
-        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16v12H4zM8 8V5a4 4 0 0 1 8 0v3"/></svg></span>
-        <h3>Sheets &amp; overlays</h3>
-        <p>Dialog, Drawer, BottomSheet, Toast, Accordion, Card, Keyboard.</p>
-      </div>
-      <div class="card">
-        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span>
-        <h3>Charts &amp; feedback</h3>
-        <p>Chart, Gauge, ProgressBar, Spinner, Badge, DigitalClock, and layout helpers (Row, Column, Grid).</p>
-      </div>
-    </div>
-
-    <div class="callout" style="margin: 28px auto 0; max-width: none;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-      <div>
-        Interactive examples ship with <strong>pydevices-examples</strong> as
-        <code>src/examples/widgets_demo.py</code>,
-        <code>widgets_settings.py</code>,
-        <code>widgets_nav_tabs.py</code>, and more — not inside this repo.
-        Themes pull Material colors through <a href="https://pydevices.github.io/palettes/">palettes</a>
-        (<code>ColorTheme</code> + <code>material_design</code>).
-      </div>
-    </div>
-
-    <div class="section-head" style="margin-top: 36px;">
-      <h2>Related</h2>
-    </div>
-    <ul class="linklist">
-      <li><a href="https://pdwidgets.readthedocs.io"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/></svg>Read the Docs</a></li>
-      <li><a href="https://pydevices.github.io/pydevices-examples/pyscript/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>PyScript gallery</a></li>
-      <li><a href="https://pydevices.github.io/pydevices-examples/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>pydevices-examples</a></li>
-      <li><a href="https://pydevices.github.io/palettes/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>palettes</a></li>
-    </ul>
   </main>
 
-    <div id="pydevices-site-footer"></div>
-  <script src="https://pydevices.github.io/assets/js/site-chrome.js"></script>
-  <script src="https://pydevices.github.io/assets/js/theme-toggle.js"></script>
+  <div id="pydevices-site-footer"></div>
+  <script src="./vendor/pydevices-chrome/site-chrome.js"></script>
+  <script src="./vendor/pydevices-chrome/theme-toggle.js"></script>
+  <script src="./vendor/pydevices-chrome/tree-nav.js"></script>
 </body>
 </html>
