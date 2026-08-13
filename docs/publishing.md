@@ -23,12 +23,9 @@ Format: **`0.0.x`** semver until promoted. TestPyPI rejects duplicate versions.
 ./scripts/publish_release_tag.sh 0.0.1 --push
 ```
 
-## Secrets (repository or org)
+## Secrets
 
-| Secret | Purpose |
-|--------|---------|
-| `TESTPYPI_API_TOKEN` | TestPyPI upload |
-| `MICROPYTHON_LIB_DEPLOY_TOKEN` | PAT with `contents:write` on PyDevices/micropython-lib |
+Requires repository authentication secrets for package uploads and index syncing.
 
 ## Install from TestPyPI
 
