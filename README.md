@@ -83,7 +83,7 @@ pip install \
 
 ```python
 import mip
-mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
+mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
 ```
 
 ---

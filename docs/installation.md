@@ -5,12 +5,12 @@
 Precompiled `.mpy` packages from the [PyDevices micropython-lib](https://github.com/PyDevices/micropython-lib) fork:
 
 ```text
-https://PyDevices.github.io/micropython-lib/mip/PyDevices
+https://PyDevices.github.io/mip
 ```
 
 ```python
 import mip
-mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
+mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
 ```
 
 `pdwidgets` declares MIP dependencies on `eventsys`, `pygraphics`, `multimer`, and `palettes` — `mip` installs them from the same index when needed.

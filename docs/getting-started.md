@@ -18,7 +18,7 @@ Install from [micropython-lib MIP](installation.md) for MicroPython or [TestPyPI
 
 ```python
 import mip
-mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
+mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
 ```
 
 A PyDevices `board_config` module exports hardware endpoints such as

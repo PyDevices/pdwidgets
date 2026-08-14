@@ -1,6 +1,6 @@
 # Publishing and releases
 
-How changes in this repo become versioned **`pydevices-pdwidgets`** CPython wheels on [TestPyPI](https://test.pypi.org/project/pydevices-pdwidgets/) and unprefixed **`pdwidgets`** MicroPython packages on [micropython-lib gh-pages](https://PyDevices.github.io/micropython-lib/mip/PyDevices).
+How changes in this repo become versioned **`pydevices-pdwidgets`** CPython wheels on [TestPyPI](https://test.pypi.org/project/pydevices-pdwidgets/) and unprefixed **`pdwidgets`** MicroPython packages on [micropython-lib gh-pages](https://PyDevices.github.io/mip).
 
 ## Pipeline
 
@@ -36,7 +36,7 @@ pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/
 ## MIP install
 
 ```python
-mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
+mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
 ```
 
 `pdwidgets` is **not** part of `pydevices-bundle`.

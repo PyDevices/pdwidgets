@@ -3,7 +3,7 @@
 # and push the MIP index.
 #
 # CI: MICROPYTHON_LIB_DIR=../micropython-lib ./scripts/publish_micropython_lib.sh --push
-# MIP: mip.install("pdwidgets", index="https://PyDevices.github.io/micropython-lib/mip/PyDevices")
+# MIP: mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
 
 set -euo pipefail
 
