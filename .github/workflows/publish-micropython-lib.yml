@@ -107,9 +107,9 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          repository: PyDevices/micropython-lib
+          repository: PyDevices/mip
           ref: PyDevices
-          path: micropython-lib
+          path: mip
           token: ${{ secrets.MICROPYTHON_LIB_DEPLOY_TOKEN }}
 
       - uses: actions/setup-python@v5
@@ -120,17 +120,18 @@ jobs:
         if: github.event_name == 'push' || inputs.upload_testpypi == true
         run: pip install hatch twine
 
-      - name: Configure micropython-lib git
+      - name: Configure mip git
         run: |
-          git -C micropython-lib config user.name 'github-actions[bot]'
-          git -C micropython-lib config user.email 'github-actions[bot]@users.noreply.github.com'
-          git -C micropython-lib remote set-url origin \
-            "https://x-access-token:${{ secrets.MICROPYTHON_LIB_DEPLOY_TOKEN }}@github.com/PyDevices/micropython-lib.git"
+          git -C mip config user.name 'github-actions[bot]'
+          git -C mip config user.email 'github-actions[bot]@users.noreply.github.com'
+          git -C mip remote set-url origin \
+            "https://x-access-token:${{ secrets.MICROPYTHON_LIB_DEPLOY_TOKEN }}@github.com/PyDevices/mip.git"
 
-      - name: Sync pdwidgets into micropython-lib
+      - name: Sync pdwidgets into mip
         if: github.event_name == 'push' || inputs.sync_sources == true
         env:
-          MICROPYTHON_LIB_DIR: ${{ github.workspace }}/micropython-lib
+          MIP_DIR: ${{ github.workspace }}/mip
+          MICROPYTHON_LIB_DIR: ${{ github.workspace }}/mip
           PDWIDGETS_VERSION: ${{ steps.version.outputs.version }}
           TESTPYPI_API_TOKEN: ${{ secrets.TESTPYPI_API_TOKEN }}
         run: |
@@ -149,7 +150,8 @@ jobs:
       - name: Publish MIP index to gh-pages
         if: github.event_name == 'push' || inputs.publish_mip_index == true
         env:
-          MICROPYTHON_LIB_DIR: ${{ github.workspace }}/micropython-lib
+          MIP_DIR: ${{ github.workspace }}/mip
+          MICROPYTHON_LIB_DIR: ${{ github.workspace }}/mip
           PDWIDGETS_DIR: ${{ github.workspace }}
           MICROPYTHON_DIR: /tmp/micropython
           MIP_INDEX_OUTPUT: /tmp/mip-index
