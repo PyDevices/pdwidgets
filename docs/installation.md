@@ -1,8 +1,8 @@
 # Installation
 
-## MicroPython — micropython-lib MIP (recommended)
+## MicroPython — PyDevices MIP (recommended)
 
-Precompiled `.mpy` packages from the [PyDevices micropython-lib](https://github.com/PyDevices/micropython-lib) fork:
+Precompiled `.mpy` packages from the [PyDevices mip](https://github.com/PyDevices/mip) fork:
 
 ```text
 https://PyDevices.github.io/mip
@@ -35,7 +35,7 @@ For desktop setup details, see [pydevices-examples desktop quick start](https://
 
 ## PyScript (browser)
 
-Widget gallery examples in [pydevices-examples PyScript](https://pydevices.github.io/pydevices-examples/pyscript/) install `pdwidgets` at runtime via the micropython-lib MIP index (`# pyscript mip: pdwidgets` in example headers).
+Widget gallery examples in [pydevices-examples PyScript](https://pydevices.github.io/pydevices-examples/pyscript/) install `pdwidgets` at runtime via the PyDevices MIP index (`# pyscript mip: pdwidgets` in example headers).
 
 On the Pyodide (CPython) loader, examples may use `# pyodide wheels: pdwidgets` to `micropip`-install from TestPyPI.
 

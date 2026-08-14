@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Build mip/PyDevices from micropython-lib and push to gh-pages.
+# Build mip/PyDevices from mip and push to gh-pages.
 #
 # Requires:
-#   MICROPYTHON_LIB_DIR   checkout of PyDevices/micropython-lib (PyDevices branch)
+#   MICROPYTHON_LIB_DIR   checkout of PyDevices/mip (PyDevices branch)
 #   PDWIDGETS_DIR         pdwidgets repo root (default: parent of scripts/)
 #
 # Optional:
@@ -12,7 +12,7 @@
 #   GITHUB_SHA            used in commit message (Actions sets this)
 #
 # Push credentials: configure git remote on MICROPYTHON_LIB_DIR before calling
-# (see .github/workflows/publish-micropython-lib.yml).
+# (see .github/workflows/publish-mip.yml).
 
 set -euo pipefail
 
@@ -80,4 +80,4 @@ if [[ "$NEW_BRANCH" -eq 0 ]]; then
 fi
 git push origin gh-pages
 
-echo "Published https://pydevices.github.io/micropython-lib"
+echo "Published https://pydevices.github.io/mip"

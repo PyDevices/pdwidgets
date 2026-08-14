@@ -14,7 +14,7 @@ path before you start:
 import utils.path   # adds lib/, utils/, and examples/ for a pydevices-examples dev clone
 ```
 
-Install from [micropython-lib MIP](installation.md) for MicroPython or [TestPyPI](installation.md) for CPython:
+Install from [PyDevices MIP](installation.md) for MicroPython or [TestPyPI](installation.md) for CPython:
 
 ```python
 import mip

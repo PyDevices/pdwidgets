@@ -409,7 +409,7 @@ class ManifestFile:
 
     def require(self, name, version=None, pypi=None, library=None, **kwargs):
         """
-        Require a package by name from micropython-lib.
+        Require a package by name from mip.
 
         Optionally specify pipy="package-name" to indicate that this should
         use the named package from PyPI when building for CPython.
@@ -614,7 +614,7 @@ def main():
     cmd_parser.add_argument(
         "--lib",
         default=os.path.join(os.path.dirname(__file__), "../lib/micropython-lib"),
-        help="path to micropython-lib repo",
+        help="path to mip repo",
     )
     cmd_parser.add_argument(
         "--unix-ffi", action="store_true", help="prepend unix-ffi to the library path"

@@ -1,6 +1,6 @@
 # Publishing and releases
 
-How changes in this repo become versioned **`pydevices-pdwidgets`** CPython wheels on [TestPyPI](https://test.pypi.org/project/pydevices-pdwidgets/) and unprefixed **`pdwidgets`** MicroPython packages on [micropython-lib gh-pages](https://PyDevices.github.io/mip).
+How changes in this repo become versioned **`pydevices-pdwidgets`** CPython wheels on [TestPyPI](https://test.pypi.org/project/pydevices-pdwidgets/) and unprefixed **`pdwidgets`** MicroPython packages on [mip gh-pages](https://PyDevices.github.io/mip).
 
 ## Pipeline
 
@@ -9,7 +9,7 @@ pdwidgets (commit on main)
   ./scripts/publish_release_tag.sh 0.0.1 --push
            │
            ▼
-publish-micropython-lib.yml
+publish-mip.yml
   sync → micropython/pdwidgets/
   hatch + twine → TestPyPI
   rebuild mip/PyDevices → gh-pages

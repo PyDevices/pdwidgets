@@ -30,7 +30,7 @@
 #
 # Used in this repo:
 #   - ``scripts/publish_mip_ghpages.sh`` — build ``mip/PyDevices`` and push gh-pages
-#   - ``.github/workflows/publish-micropython-lib.yml`` — calls publish_mip_ghpages.sh
+#   - ``.github/workflows/publish-mip.yml`` — calls publish_mip_ghpages.sh
 #   - ``scripts/publish_make_pyproject.py`` — shared ``ensure_path_exists`` / ``error_color``
 #
 # Direct use (micropython-lib checkout required as ``--lib-dir``):
