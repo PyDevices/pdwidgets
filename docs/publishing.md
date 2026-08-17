@@ -10,7 +10,7 @@ and the unprefixed **`pdwidgets`** package in the PyDevices MIP index.
 published GitHub Release vX.Y.Z
   publish-release-packages.yml
     ├─ shared build + clean dependency/import test
-    ├─ Trusted Publishing → TestPyPI
+    ├─ API-token upload → TestPyPI
     └─ exact ref → serialized PyDevices/mip queue → Pages artifact
 ```
 
@@ -24,8 +24,9 @@ is exactly `vX.Y.Z`. To retry a failed channel, manually run
 
 ## Authentication
 
-TestPyPI uses Trusted Publishing with the `testpypi` GitHub environment. The
-existing `MICROPYTHON_LIB_DEPLOY_TOKEN` dispatches the central MIP queue.
+TestPyPI uses the existing `TESTPYPI_API_TOKEN`, owned by `bdbarnett`, while
+the PyDevices TestPyPI organization request is pending. The existing
+`MICROPYTHON_LIB_DEPLOY_TOKEN` dispatches the central MIP queue.
 
 ## Install from TestPyPI
 
