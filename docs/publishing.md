@@ -1,31 +1,31 @@
 # Publishing and releases
 
-How changes in this repo become versioned **`pydevices-pdwidgets`** CPython wheels on [TestPyPI](https://test.pypi.org/project/pydevices-pdwidgets/) and unprefixed **`pdwidgets`** MicroPython packages on [mip gh-pages](https://PyDevices.github.io/mip).
+How a published GitHub Release becomes versioned **`pydevices-pdwidgets`**
+artifacts on [TestPyPI](https://test.pypi.org/project/pydevices-pdwidgets/)
+and the unprefixed **`pdwidgets`** package in the PyDevices MIP index.
 
 ## Pipeline
 
 ```text
-pdwidgets (commit on main)
-  ./scripts/publish_release_tag.sh 0.0.1 --push
-           │
-           ▼
-publish-mip.yml
-  sync → micropython/pdwidgets/
-  hatch + twine → TestPyPI
-  rebuild mip/PyDevices → gh-pages
+published GitHub Release vX.Y.Z
+  publish-release-packages.yml
+    ├─ shared build + clean dependency/import test
+    ├─ Trusted Publishing → TestPyPI
+    └─ exact ref → serialized PyDevices/mip queue → Pages artifact
 ```
 
 ## Version numbers
 
 Format: **`0.0.x`** semver until promoted. TestPyPI rejects duplicate versions.
 
-```bash
-./scripts/publish_release_tag.sh 0.0.1 --push
-```
+Update and commit `VERSION`, then create and publish a GitHub Release whose tag
+is exactly `vX.Y.Z`. To retry a failed channel, manually run
+`publish-release-packages.yml` with that tag.
 
-## Secrets
+## Authentication
 
-Requires repository authentication secrets for package uploads and index syncing.
+TestPyPI uses Trusted Publishing with the `testpypi` GitHub environment. The
+existing `MICROPYTHON_LIB_DEPLOY_TOKEN` dispatches the central MIP queue.
 
 ## Install from TestPyPI
 
@@ -39,4 +39,5 @@ pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/
 mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
 ```
 
-`pdwidgets` is **not** part of `pydevices-bundle`.
+`pdwidgets` is independent of the `pydevices` and `pydevices-desktop`
+meta-packages.

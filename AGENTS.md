@@ -24,8 +24,9 @@ SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
 
 ## Publishing
 
-Tag `vX.Y.Z` triggers micropython-lib sync, MIP index rebuild, and a
-`pydevices-pdwidgets` TestPyPI upload. The import and MIP name stay `pdwidgets`.
+Commit `VERSION=X.Y.Z` and publish GitHub Release `vX.Y.Z` to trigger the
+shared build, central MIP queue, and `pydevices-pdwidgets` TestPyPI upload. The
+import and MIP name stay `pdwidgets`.
 See `docs/publishing.md`.
 
 ## Widget API (agent contract)
