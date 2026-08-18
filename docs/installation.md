@@ -31,7 +31,7 @@ You also need a PyDevices-compatible `board_config` for your display backend.
 You can provide your own `board_config.py` or optionally install a prebuilt
 board package from pydevices:
 [install-workflows](https://pydevices.github.io/pydevices/install-workflows.html).
-For desktop setup details, see [pydevices-examples desktop quick start](https://pydisplay.readthedocs.io/en/latest/guides/desktop-cpython/).
+For desktop setup details, see [pydevices install workflows](https://github.com/PyDevices/pydevices/blob/main/docs/install-workflows.md).
 
 ## PyScript (browser)
 

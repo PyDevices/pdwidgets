@@ -10,5 +10,5 @@ tutorials, and the browser gallery.
 
 - [Getting started](getting-started.md)
 - [Installation](installation.md)
-- [pydevices-examples documentation](https://pydisplay.readthedocs.io)
+- [pydevices documentation](https://github.com/PyDevices/pydevices/tree/main/docs) — the board contract and core packages
 - [Browser demos](https://pydevices.github.io/pydevices-examples/pyscript/)
