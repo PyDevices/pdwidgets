@@ -4,12 +4,10 @@
 
 `pdwidgets` provides a complete, 100% pure-Python GUI toolkit for building touchscreen and desktop interfaces without requiring native C bindings or complex build toolchains. It runs seamlessly on **MicroPython**, **CircuitPython**, **CPython desktop**, and **PyScript (Web)**.
 
-### Choosing Your GUI Layer in PyDevices
+### Where pdwidgets fits
 
-PyDevices supports multiple graphical approaches depending on your project needs:
-- **Raw Graphics / Canvas**: [`displaydev`](https://github.com/PyDevices/pydevices) & [`pygraphics`](https://github.com/PyDevices/pygraphics) for direct pixel, line, and shape drawing.
-- **Pure-Python GUI**: **`pdwidgets`** for portable, python-native buttons, lists, themes, and screen management.
-- **C-Native GUI**: [`lvgl`](https://github.com/PyDevices/lvgl-bindings) for complex vector widgets and C-accelerated animation engines.
+PyDevices offers several GUI approaches; `pdwidgets` is the pure-Python one. See
+[pydevices — choosing a GUI layer](https://github.com/PyDevices/pydevices/blob/main/docs/architecture.md#choosing-a-gui-layer).
 
 ---
 
@@ -69,24 +67,18 @@ runtime.run_forever()
 
 ## Installation
 
-### CPython Desktop (TestPyPI)
-
-```bash
-pip install \
-  -i https://test.pypi.org/simple/ \
-  --extra-index-url https://pypi.org/simple/ \
-  pydevices-pdwidgets pydevices-displaydev pydevices-pygraphics \
-  pydevices-eventsys pydevices-multimer pydevices-palettes
-```
-
-### MicroPython (MIP)
-
 ```python
 import mip
 mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
 ```
 
----
+```bash
+pip install -i https://test.pypi.org/simple/ \
+  --extra-index-url https://pypi.org/simple/ pydevices-pdwidgets
+```
+
+Full dependency chain and `board_config` requirements:
+[docs/getting-started.md](docs/getting-started.md).
 
 ## Links & Demos
 

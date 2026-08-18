@@ -24,10 +24,9 @@ SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
 
 ## Publishing
 
-Commit `VERSION=X.Y.Z` and publish GitHub Release `vX.Y.Z` to trigger the
-shared build, central MIP queue, and `pydevices-pdwidgets` TestPyPI upload. The
-import and MIP name stay `pdwidgets`.
-See `docs/publishing.md`.
+Commit `VERSION=X.Y.Z` and publish GitHub Release `vX.Y.Z`. The import and MIP
+name stay `pdwidgets`; the TestPyPI distribution is `pydevices-pdwidgets`.
+Procedure: [.github/docs/publishing-automation.md](https://github.com/PyDevices/.github/blob/main/docs/publishing-automation.md).
 
 ## Widget API (agent contract)
 

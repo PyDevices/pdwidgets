@@ -1,4 +1,7 @@
-# pdwidgets (widget toolkit)
+# pdwidgets
+
+A pure-Python PyDevices add-on for building GUIs on microcontrollers and desktop
+Python. There is no native C extension; it publishes to TestPyPI and the MIP index.
 
 pdwidgets is the UI layer used by pydevices-examples for building screen-sized apps on
 MicroPython, CircuitPython, and CPython. The public API is intentionally small:
@@ -14,12 +17,22 @@ path before you start:
 import utils.path   # adds lib/, utils/, and examples/ for a pydevices-examples dev clone
 ```
 
-Install from [PyDevices MIP](installation.md) for MicroPython or [TestPyPI](installation.md) for CPython:
-
 ```python
+# MicroPython — mip resolves the dependency chain from the same index
 import mip
 mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
 ```
+
+```bash
+# CPython — the two-index pattern, since dependencies span both registries
+pip install -i https://test.pypi.org/simple/ \
+  --extra-index-url https://pypi.org/simple/ pydevices-pdwidgets
+```
+
+pdwidgets depends on `eventsys`, `pygraphics`, and `multimer`, plus `palettes`
+for theming. You also need a PyDevices-compatible `board_config` for your display
+backend — see
+[pydevices install workflows](https://github.com/PyDevices/pydevices/blob/main/docs/install-workflows.md).
 
 A PyDevices `board_config` module exports hardware endpoints such as
 `display_drv` and input-reader aliases. The application chooses its traffic
@@ -94,3 +107,9 @@ Runtime widget icons live under [`lib/pdwidgets/icons/`](https://github.com/PyDe
 
 The theming module has a PyScript-specific workaround for `os.sep`, so some
 browser-based demos use a slightly different import path than desktop builds.
+
+## See also
+
+- [Widget dependencies](https://github.com/PyDevices/pdwidgets/blob/main/lib/pdwidgets/widget-dependencies.md)
+- [pydevices documentation](https://github.com/PyDevices/pydevices/tree/main/docs) — the board contract and core packages
+- [Browser demos](https://pydevices.github.io/pydevices-examples/pyscript/)
