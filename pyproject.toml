@@ -9,7 +9,7 @@ description = "Cross-platform widget toolkit for PyDevices"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.8"
-authors = [{ name = "Brad Barnett", email = "contact@pydevices.com" }]
+authors = [{ name = "Brad Barnett" }]
 dependencies = [
   "pydevices-eventsys",
   "pydevices-pygraphics",
