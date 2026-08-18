@@ -49,7 +49,9 @@ runtime.run_forever()
 
 The important detail is that `Display` wires itself into the shared runtime at
 construction. That means input events and redraw ticks are driven by the runtime,
-not by a separate background loop in pdwidgets.
+not by a separate background loop in pdwidgets — pdwidgets owns no timer of its
+own, and frames follow whichever provider `runtime.timer_async` selected. During
+a setup burst *before* `run_forever()`, call `pd.tick()` to flush pending draws.
 
 ## Layout and state updates
 
