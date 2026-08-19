@@ -48,12 +48,12 @@ if _src not in sys.path:
 
 import utils.path  # noqa: E402, F401, I001
 import board_config  # noqa: E402
-import eventsys  # noqa: E402
+import appdev  # noqa: E402
 from color_setup import ssd  # noqa: E402
 from displaybuf import alloc_buffer  # noqa: E402
 import png  # noqa: E402
 
-runtime = eventsys.Runtime.from_board_config(board_config)
+app = appdev.App(board_config)
 
 png_image = namedtuple("png_image", ["width", "height", "pixels", "metadata"])  # noqa: PYI024
 
@@ -232,5 +232,5 @@ def _show_next(_=None):
     st["phase"] = "clear"
 
 
-runtime.on_tick(_show_next, period=1000, async_=runtime.timer_async)
-runtime.run_forever()
+app.every(1000, _show_next)
+app.run()

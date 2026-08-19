@@ -11,7 +11,7 @@ license = "MIT"
 requires-python = ">=3.8"
 authors = [{ name = "Brad Barnett" }]
 dependencies = [
-  "pydevices-eventsys",
+  "pydevices-appdev",
   "pydevices-pygraphics",
   "pydevices-multimer",
   "pydevices-palettes",
@@ -43,5 +43,5 @@ lint.ignore = ["E501", "F401", "F403", "F405", "ISC003", "PLC0415", "SIM105"]
 [tool.ruff.lint.isort]
 # Keep import sections stable in CI, which checkouts deps as sibling trees
 # (pygraphics/, pydevices-examples/, palettes/) that would otherwise become first-party.
-known-third-party = ["eventsys", "pygraphics", "multimer", "palettes", "micropython", "png"]
+known-third-party = ["appdev", "pygraphics", "multimer", "palettes", "micropython", "png"]
 force-sort-within-sections = true

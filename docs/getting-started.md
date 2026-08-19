@@ -29,14 +29,14 @@ pip install -i https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ pydevices-pdwidgets
 ```
 
-pdwidgets depends on `eventsys`, `pygraphics`, and `multimer`, plus `palettes`
+pdwidgets depends on `appdev`, `pygraphics`, and `multimer`, plus `palettes`
 for theming. You also need a PyDevices-compatible `board_config` for your display
 backend — see
 [pydevices install workflows](https://github.com/PyDevices/pydevices/blob/main/docs/install-workflows.md).
 
 A PyDevices `board_config` module exports hardware endpoints such as
 `display_drv` and input-reader aliases. The application chooses its traffic
-controller; the example below uses the optional `eventsys` package.
+controller; the example below uses the optional `appdev` package.
 
 ## A practical app skeleton
 
@@ -45,10 +45,10 @@ widgets, then hand control to the runtime:
 
 ```python
 import board_config
-import eventsys
+import appdev
 import pdwidgets as pd
 
-runtime = eventsys.Runtime.from_board_config(board_config)
+runtime = appdev.App(board_config)
 display = pd.Display(board_config.display_drv, runtime)
 screen = pd.Screen(display, bg=0x0000)
 

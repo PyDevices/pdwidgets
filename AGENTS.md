@@ -5,7 +5,7 @@ Cross-platform widget toolkit for PyDevices (`import pdwidgets`).
 ## Environment
 
 - Python venv at `.venv` — `.venv/bin/python`, `.venv/bin/ruff`
-- Depends on canonical PyDevices packages: `eventsys`, `pygraphics`, `multimer`, `palettes`
+- Depends on canonical PyDevices packages: `appdev`, `pygraphics`, `multimer`, `palettes`
 - Source layout: `lib/pdwidgets/` (import name `pdwidgets`)
 
 ## Tests and lint
@@ -53,7 +53,7 @@ Regenerate after editing widgets:
 
 The Cloud Agent update script creates the repo-root `.venv` (with `ruff`).
 `pdwidgets` is source-only and imports `palettes` plus product-owned
-`eventsys`/`multimer` and sibling `pygraphics` — none are pip-installed, so the bare
+`appdev`/`multimer` and sibling `pygraphics` — none are pip-installed, so the bare
 `unittest discover` / bench commands above fail without `PYTHONPATH`. In this
 multi-repo workspace `palettes` and `pygraphics` come from sibling repos:
 

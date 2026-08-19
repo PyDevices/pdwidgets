@@ -15,12 +15,12 @@ PyDevices offers several GUI approaches; `pdwidgets` is the pure-Python one. See
 
 ```python
 import board_config
-import eventsys
+import appdev
 import pdwidgets as pd
 from pdwidgets.icons import touch_app  # Pure-Python icon bytecode
 
 # 1. Initialize display and event runtime
-runtime = eventsys.Runtime.from_board_config(board_config)
+runtime = appdev.App(board_config)
 display = pd.Display(board_config.display_drv, runtime)
 screen = pd.Screen(display)
 
