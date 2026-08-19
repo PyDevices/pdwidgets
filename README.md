@@ -78,7 +78,7 @@ pip install -i https://test.pypi.org/simple/ \
 ```
 
 Full dependency chain and `board_config` requirements:
-[docs/getting-started.md](docs/getting-started.md).
+[docs/index.md](docs/index.md).
 
 ## Links & Demos
 

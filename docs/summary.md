@@ -1,2 +1,2 @@
-* [pdwidgets](getting-started.md)
+* [pdwidgets](index.md)
 * [API Reference](reference/)
