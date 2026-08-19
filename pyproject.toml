@@ -11,9 +11,10 @@ license = "MIT"
 requires-python = ">=3.8"
 authors = [{ name = "Brad Barnett" }]
 dependencies = [
-  "pydevices-appdev",
+  # appdev and multimer both come from "pydevices": all of pydevices/lib ships
+  # as one distribution on PyPI, while MIP keeps them as separate packages.
+  "pydevices",
   "pydevices-pygraphics",
-  "pydevices-multimer",
   "pydevices-palettes",
 ]
 urls = { Homepage = "https://github.com/PyDevices/pdwidgets", Issues = "https://github.com/PyDevices/pdwidgets/issues" }
