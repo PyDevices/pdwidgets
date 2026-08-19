@@ -11,7 +11,11 @@ Cross-platform widget toolkit for PyDevices (`import pdwidgets`).
 ## Tests and lint
 
 ```bash
-.venv/bin/python -m unittest discover -s tests
+# pdwidgets is source-only and imports siblings, so PYTHONPATH is required --
+# see "Import path" below. The bare unittest command fails with
+# ModuleNotFoundError: No module named 'events'.
+PYTHONPATH="lib:tests/stubs:../pydevices/lib:../pygraphics/lib:../palettes/lib" \
+  .venv/bin/python -m unittest discover -s tests
 .venv/bin/ruff check lib tests scripts
 ```
 
@@ -58,9 +62,14 @@ The Cloud Agent update script creates the repo-root `.venv` (with `ruff`).
 multi-repo workspace `palettes` and `pygraphics` come from sibling repos:
 
 ```bash
-PYTHONPATH="lib:tests/stubs:/agent/repos/palettes/lib:/agent/repos/pygraphics/lib:/agent/repos/pydevices/lib" \
+PYTHONPATH="lib:tests/stubs:../pydevices/lib:../pygraphics/lib:../palettes/lib" \
   .venv/bin/python -m unittest discover -s tests
 ```
+
+Relative sibling paths, not `/agent/repos/...`: they resolve on a developer
+workspace and on the cloud VM alike, since the VM's workspace root symlinks to
+`/agent/repos`. This mirrors the `PYTHONPATH` that `.github/workflows/tests.yml`
+builds after checking the siblings out.
 
 The pydevices-examples repo's `.venv` also gets a `pydevices_siblings.pth` (added by the
 update script) listing `palettes/lib`, `pdwidgets/lib`, and `pygraphics/lib`, so
