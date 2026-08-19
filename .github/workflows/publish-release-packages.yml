@@ -15,62 +15,13 @@ permissions:
   contents: read
 
 jobs:
-  prepare-release:
-    runs-on: ubuntu-latest
-    outputs:
-      release-ref: ${{ steps.release.outputs.release-ref }}
-      version: ${{ steps.release.outputs.version }}
-    steps:
-      - name: Resolve and validate the release tag
-        id: release
-        env:
-          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.release-ref }}
-        run: |
-          if [[ ! "$RELEASE_TAG" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
-            echo "Release ref must be an exact vX.Y.Z tag: $RELEASE_TAG" >&2
-            exit 1
-          fi
-          echo "release-ref=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
-          echo "version=${BASH_REMATCH[1]}" >> "$GITHUB_OUTPUT"
-
-  build-and-validate-testpypi-package:
-    needs: prepare-release
-    uses: PyDevices/.github/.github/workflows/reusable-build-pure-python-distribution.yml@publishing-v1
+  publish:
+    uses: PyDevices/.github/.github/workflows/reusable-publish-release-packages.yml@publishing-v2
     with:
+      build-kind: pure-python
       distribution-name: pydevices-pdwidgets
       import-name: pdwidgets
-      release-ref: ${{ needs.prepare-release.outputs.release-ref }}
-      version: ${{ needs.prepare-release.outputs.version }}
       install-dependencies: true
-
-  publish-validated-package-to-testpypi:
-    needs:
-      - prepare-release
-      - build-and-validate-testpypi-package
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download validated distributions
-        uses: actions/download-artifact@v4
-        with:
-          name: testpypi-pydevices-pdwidgets-${{ needs.prepare-release.outputs.version }}
-          path: dist
-
-      - name: Publish distributions to TestPyPI with API token
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.TESTPYPI_API_TOKEN }}
-          repository-url: https://test.pypi.org/legacy/
-          skip-existing: true
-
-  request-serialized-mip-publication:
-    needs:
-      - prepare-release
-      - build-and-validate-testpypi-package
-    uses: PyDevices/.github/.github/workflows/reusable-request-mip-publication.yml@publishing-v1
-    with:
-      release-ref: ${{ needs.prepare-release.outputs.release-ref }}
-      version: ${{ needs.prepare-release.outputs.version }}
-      profile: pdwidgets
-    secrets:
-      mip-publication-token: ${{ secrets.MICROPYTHON_LIB_DEPLOY_TOKEN }}
+      mip-profile: pdwidgets
+      release-ref: ${{ inputs.release-ref }}
+    secrets: inherit
