@@ -78,17 +78,26 @@ app = appdev.App(display_drv)
 display = pd.Display(display_drv, app)
 screen = pd.Screen(display, bg=0x18C3)
 
-# 2. Build Widgets
-title = pd.Label(screen, value="pdwidgets Live Demo", x=16, y=16)
-status = pd.Label(screen, value="Status: Ready", x=16, y=45)
+# 2. Build Interactive Widgets
+title = pd.Label(screen, value="pdwidgets Live Demo", x=16, y=16, bg=screen.bg)
+status = pd.Label(screen, value="Status: Waiting for tap...", x=16, y=45, bg=screen.bg)
 
+count = 0
 btn = pd.Button(screen, label="Tap Me", x=16, y=80, w=130, h=38)
+
+def on_tap(sender, event):
+    global count
+    count += 1
+    status.value = f"Status: Tapped {count} time{'s' if count != 1 else ''}! 🎉"
+
+btn.add_event_cb(pd.events.MOUSEBUTTONUP, on_tap)
+btn.add_event_cb(pd.events.FINGERUP, on_tap)
+
 slider = pd.Slider(screen, value=0.5, x=16, y=140, w=200, h=24)
 
-# 3. Flush initial frame to display canvas
-pd.tick(None)
-display_drv.show()
-print("pdwidgets UI rendered successfully!")
+# 3. Start background event loop
+app.run()
+print("pdwidgets event loop running! Click 'Tap Me' on canvas.")
     </textarea>
     <div class="demo-controls">
       <button class="run-btn" disabled>▶ Run</button>
