@@ -42,7 +42,7 @@
           const resp = await fetch(bundleUrl);
           if (resp.ok) {
             const buf = await resp.arrayBuffer();
-            pyodide.unpackArchive(buf, "zip", { extractDir: "/lib/python3.12/site-packages" });
+            pyodide.unpackArchive(buf, "zip");
           } else {
             console.warn("Could not fetch local bundle, status:", resp.status);
           }
@@ -50,11 +50,30 @@
           console.warn("Could not load local pydevices_bundle.zip:", e);
         }
 
-        // Set up sys.path in Pyodide
+        // Set up sys.path and PyScript shims in Pyodide
         await pyodide.runPythonAsync(`
-import sys, os
-if "/lib/python3.12/site-packages" not in sys.path:
-    sys.path.insert(0, "/lib/python3.12/site-packages")
+import sys, os, types
+
+# Ensure working directory and site-packages are on sys.path
+for p in ["/home/pyodide", "/lib/python3.12/site-packages"]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
+# Create compatibility shim for pyscript / pyscript.ffi -> pyodide.ffi
+if "pyscript" not in sys.modules:
+    ps = types.ModuleType("pyscript")
+    ps_ffi = types.ModuleType("pyscript.ffi")
+    try:
+        import pyodide.ffi
+        ps_ffi.create_proxy = pyodide.ffi.create_proxy
+    except ImportError:
+        pass
+    from js import document, window
+    ps.document = document
+    ps.window = window
+    ps.ffi = ps_ffi
+    sys.modules["pyscript"] = ps
+    sys.modules["pyscript.ffi"] = ps_ffi
 `);
 
         pyodideInstance = pyodide;
@@ -82,7 +101,7 @@ if "/lib/python3.12/site-packages" not in sys.path:
     try {
       // Capture print output into the demo output box
       await pyodide.runPythonAsync(`
-import builtins, sys
+import builtins, sys, traceback
 from js import document
 
 class _DomOutput:
@@ -91,29 +110,33 @@ class _DomOutput:
     def write(self, s):
         el = document.getElementById(self.target_id)
         if el is not None and s:
-            el.textContent += s
+            el.textContent += str(s)
     def flush(self):
         pass
 `);
 
       const outputId = output ? output.id || (output.id = "out_" + Math.random().toString(36).substr(2, 9)) : "";
       
-      const setupCode = `
-import builtins, sys
+      const runnerCode = `
 _out = _DomOutput("${outputId}")
 sys.stdout = _out
 sys.stderr = _out
 CANVAS_ID = "${canvasId}"
+
+_code = ${JSON.stringify(code)}
+try:
+    exec(compile(_code, "<demo>", "exec"), globals())
+except Exception as _e:
+    _err = traceback.format_exc()
+    sys.stderr.write(_err)
+    raise
 `;
-      await pyodide.runPythonAsync(setupCode);
-      await pyodide.runPythonAsync(code);
+      await pyodide.runPythonAsync(runnerCode);
 
       if (status) status.textContent = "Active";
     } catch (err) {
-      if (output) {
-        output.textContent = "Error: " + (err.message || String(err));
-      }
       if (status) status.textContent = "Error";
+      console.error("Demo execution error:", err);
     } finally {
       if (runBtn) runBtn.disabled = false;
     }

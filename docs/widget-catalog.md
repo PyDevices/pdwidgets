@@ -18,36 +18,16 @@ from displaydev.psdisplay import PSDisplay
 display_drv = PSDisplay(CANVAS_ID, width=320, height=240)
 app = appdev.App(display_drv)
 display = pd.Display(display_drv, app)
-screen = pd.Screen(display, bg=0x18C3)
+screen = pd.Screen(display, bg=0x0000)
 
-# 1. Card Container
-card = pd.Card(screen, x=10, y=10, w=300, h=220, bg=0x2124, radius=8)
-pd.Label(card, value="Component Showcase", x=16, y=12)
+pd.Label(screen, value="Widget Catalog Playground", x=10, y=10)
+btn = pd.Button(screen, label="Active Button", x=10, y=40, w=120, h=32)
+sw = pd.Switch(screen, value=True, x=140, y=40)
+pb = pd.ProgressBar(screen, value=0.65, x=10, y=90, w=200, h=20)
 
-# 2. Progress Bar & Slider
-progress = pd.ProgressBar(card, value=40, max_val=100, x=16, y=42, w=268, h=14)
-slider = pd.Slider(card, value=40, min_val=0, max_val=100, x=16, y=70, w=268, h=20)
-
-def on_slide(w):
-    progress.value = w.value
-slider.set_change_cb(on_slide)
-
-# 3. Switch & Status
-status = pd.Label(card, value="Switch is OFF", x=80, y=110)
-sw = pd.Switch(card, value=False, x=16, y=105)
-
-def on_switch(w):
-    status.value = f"Switch is {'ON' if w.value else 'OFF'}"
-sw.set_change_cb(on_switch)
-
-# 4. Buttons
-btn = pd.Button(card, label="Increment", x=16, y=150, w=120, h=36, radius=4)
-def on_btn(s, e):
-    slider.value = min(100, slider.value + 10)
-    progress.value = slider.value
-btn.add_event_cb(pd.events.MOUSEBUTTONUP, on_btn)
-
-app.run()
+pd.tick(None)
+display_drv.show()
+print("Playground widgets initialized!")
     </textarea>
     <div class="demo-controls">
       <button class="run-btn" disabled>▶ Run</button>

@@ -72,7 +72,7 @@ import appdev
 import pdwidgets as pd
 from displaydev.psdisplay import PSDisplay
 
-# 1. Setup Display and App loop
+# 1. Setup Display and App
 display_drv = PSDisplay(CANVAS_ID, width=320, height=240)
 app = appdev.App(display_drv)
 display = pd.Display(display_drv, app)
@@ -80,20 +80,15 @@ screen = pd.Screen(display, bg=0x18C3)
 
 # 2. Build Widgets
 title = pd.Label(screen, value="pdwidgets Live Demo", x=16, y=16)
-status = pd.Label(screen, value="Status: Waiting for input...", x=16, y=45)
+status = pd.Label(screen, value="Status: Ready", x=16, y=45)
 
-btn = pd.Button(screen, label="Tap Me", x=16, y=80, w=130, h=38, radius=6)
-def on_tap(sender, event):
-    status.value = "Status: Button Clicked!"
-btn.add_event_cb(pd.events.MOUSEBUTTONUP, on_tap)
+btn = pd.Button(screen, label="Tap Me", x=16, y=80, w=130, h=38)
+slider = pd.Slider(screen, value=0.5, x=16, y=140, w=200, h=24)
 
-slider = pd.Slider(screen, value=50, min_val=0, max_val=100, x=16, y=140, w=200, h=24)
-def on_slide(widget):
-    status.value = f"Status: Slider set to {widget.value}"
-slider.set_change_cb(on_slide)
-
-# 3. Start Event Loop
-app.run()
+# 3. Flush initial frame to display canvas
+pd.tick(None)
+display_drv.show()
+print("pdwidgets UI rendered successfully!")
     </textarea>
     <div class="demo-controls">
       <button class="run-btn" disabled>▶ Run</button>
