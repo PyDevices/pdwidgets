@@ -100,3 +100,19 @@ chart.set_data([20, 22, 21, 24, 28, 32, 29, 31, 35, 30])
 # Summary Gauge
 gauge = pd.Gauge(screen, value=75, min_val=0, max_val=100, x=10, y=160)
 ```
+
+---
+
+## 🎮 Production Applications in `pydevices-examples`
+
+Run complete interactive UI applications directly in your browser:
+
+| Application | Description | Live PyScript Link |
+|:---|:---|:---|
+| **`calc_widgets`** | Pocket calculator with raised 3D buttons and math engine | [**▶ Launch `calc_widgets`**](https://pydevices.github.io/pydevices-examples/pyscript/pyodide.html?modules=calc_widgets,calc_engine&deps=pydevices-pdwidgets,pydevices-pygraphics) |
+| **`widgets_clinic_queue`** | Clinic check-in kiosk with tabs, forms, and dialogs | [**▶ Launch `widgets_clinic_queue`**](https://pydevices.github.io/pydevices-examples/pyscript/pyodide.html?modules=widgets_clinic_queue&deps=pydevices-pdwidgets,pydevices-pygraphics) |
+| **`widgets_energy_panel`** | Industrial telemetry monitor with dynamic graphs and gauges | [**▶ Launch `widgets_energy_panel`**](https://pydevices.github.io/pydevices-examples/pyscript/pyodide.html?modules=widgets_energy_panel&deps=pydevices-pdwidgets,pydevices-pygraphics) |
+| **`widgets_locker_kiosk`** | Smart parcel locker terminal with PIN entry pad | [**▶ Launch `widgets_locker_kiosk`**](https://pydevices.github.io/pydevices-examples/pyscript/pyodide.html?modules=widgets_locker_kiosk&deps=pydevices-pdwidgets,pydevices-pygraphics) |
+| **`paint`** | Interactive color canvas drawing and brush selector | [**▶ Launch `paint`**](https://pydevices.github.io/pydevices-examples/pyscript/pyodide.html?modules=paint&deps=pydevices-pdwidgets,pydevices-pygraphics) |
+| **`roku_remote`** | Smart TV touch remote with tactile raised button keypad | [**▶ Launch `roku_remote`**](https://pydevices.github.io/pydevices-examples/pyscript/pyodide.html?manifests=roku_remote&deps=pydevices-lvgl,pydevices-pygraphics,pydevices-pdwidgets) |
+

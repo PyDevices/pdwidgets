@@ -140,6 +140,35 @@ app.run()
 
 ---
 
+## 🎮 Featured Interactive Applications
+
+Explore full-featured GUI applications built with `pdwidgets`:
+
+<div class="grid cards">
+  <div>
+    <h3>🧮 Pocket Calculator</h3>
+    <p>Tactile raised 3D buttons with full arithmetic engine and real-time display readout.</p>
+    <p><a href="https://pydevices.github.io/pydevices-examples/pyscript/pyodide.html?modules=calc_widgets,calc_engine&deps=pydevices-pdwidgets,pydevices-pygraphics" target="_blank" rel="noopener"><strong>▶ Launch Live Demo</strong></a></p>
+  </div>
+  <div>
+    <h3>🏥 Clinic Check-In Kiosk</h3>
+    <p>Multi-tab front-desk kiosk with appointment queue, form validation, and confirm dialogs.</p>
+    <p><a href="https://pydevices.github.io/pydevices-examples/pyscript/pyodide.html?modules=widgets_clinic_queue&deps=pydevices-pdwidgets,pydevices-pygraphics" target="_blank" rel="noopener"><strong>▶ Launch Live Demo</strong></a></p>
+  </div>
+  <div>
+    <h3>⚡ Energy Telemetry Panel</h3>
+    <p>Real-time sparkline telemetry charts, analog gauges, and status monitoring dashboard.</p>
+    <p><a href="https://pydevices.github.io/pydevices-examples/pyscript/pyodide.html?modules=widgets_energy_panel&deps=pydevices-pdwidgets,pydevices-pygraphics" target="_blank" rel="noopener"><strong>▶ Launch Live Demo</strong></a></p>
+  </div>
+  <div>
+    <h3>🔐 Smart Locker Kiosk</h3>
+    <p>PIN entry keypad terminal for secure pickup with numeric buttons and card transitions.</p>
+    <p><a href="https://pydevices.github.io/pydevices-examples/pyscript/pyodide.html?modules=widgets_locker_kiosk&deps=pydevices-pdwidgets,pydevices-pygraphics" target="_blank" rel="noopener"><strong>▶ Launch Live Demo</strong></a></p>
+  </div>
+</div>
+
+---
+
 ## 📚 Documentation Map
 
 * 🏗️ [**Architecture & Lifecycle**](architecture.md) — Display hierarchy, dirty rectangle redraws, and event loop integration.
