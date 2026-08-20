@@ -2,13 +2,16 @@ site_name: pdwidgets
 site_url: https://pdwidgets.readthedocs.io
 repo_url: https://github.com/PyDevices/pdwidgets/
 edit_uri: edit/main/docs/
-copyright: "Copyright 2024, Brad Barnett"
+copyright: "Copyright 2024–2026, Brad Barnett & PyDevices Contributors"
 docs_dir: docs
 site_dir: site
 strict: true
 
 theme:
   name: material
+  font:
+    text: Inter
+    code: JetBrains Mono
   palette:
     - scheme: default
       primary: custom
@@ -23,13 +26,62 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
   features:
+    - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
+    - navigation.expand
+    - navigation.path
     - navigation.top
+    - navigation.footer
+    - navigation.instant
+    - navigation.tracking
     - search.suggest
+    - search.highlight
+    - search.share
     - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    - content.tabs.link
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.keys
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - tables
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js
+  - assets/pyscript/pydevices-runner.js
 
 extra_css:
   - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/PyDevices/pdwidgets
+    - icon: fontawesome/brands/python
+      link: https://test.pypi.org/project/pydevices-pdwidgets/
+    - icon: fontawesome/solid/globe
+      link: https://pydevices.github.io
 
 plugins:
   - search

@@ -1,119 +1,148 @@
 # pdwidgets
 
-A pure-Python PyDevices add-on for building GUIs on microcontrollers and desktop
-Python. There is no native C extension; it publishes to TestPyPI and the MIP index.
+<div class="hero-banner">
+  <h1>🎛️ pdwidgets</h1>
+  <p><strong>A fast, pure-Python UI & Widget Toolkit</strong> for microcontrollers, embedded touch displays, desktop Python, and the web. Over 50 rich components with zero native C dependencies.</p>
+  <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.75rem;">
+    <span class="badge badge-orange">📦 MIP: pdwidgets</span>
+    <span class="badge badge-orange">🐍 PyPI: pydevices-pdwidgets</span>
+    <span class="badge badge-green">⚡ 50+ Modern Widgets</span>
+    <span class="badge">🌐 MicroPython · CircuitPython · CPython · Pyodide</span>
+  </div>
+</div>
 
-pdwidgets is the UI layer used by pydevices-examples for building screen-sized apps on
-MicroPython, CircuitPython, and CPython. The public API is intentionally small:
-create a root :class:`Display`, add a :class:`Screen`, and compose widgets such
-as labels, buttons, lists, and dialogs around that tree.
+<div class="grid cards">
+  <div>
+    <h3>🌲 Declarative Hierarchy</h3>
+    <p>Build composable UI trees with <code>Display</code>, <code>Screen</code>, and nested container widgets that handle layout and clipping automatically.</p>
+  </div>
+  <div>
+    <h3>⚡ Dirty-Rect Rendering</h3>
+    <p>Efficient frame updates only repaint what changed using <code>pygraphics.Area</code> bounding boxes, maximizing frame rates on embedded SPI panels.</p>
+  </div>
+  <div>
+    <h3>👆 Touch, Keys & Encoders</h3>
+    <p>Unified input handling across touch screens, mouse pointers, rotary encoders, joysticks, and physical keyboards with focus navigation.</p>
+  </div>
+  <div>
+    <h3>🎨 Material Theming</h3>
+    <p>Built-in integration with <code>palettes</code> for Material Design color tokens, rounded corner radii, and lightweight compiled icon assets.</p>
+  </div>
+</div>
 
-## Setup
+---
 
-For a local pydevices-examples checkout, make sure the repo libraries are on the import
-path before you start:
+## 🚀 Installation
 
-```python
-import utils.path   # adds lib/, utils/, and examples/ for a pydevices-examples dev clone
-```
+=== "MicroPython (MIP)"
 
-```python
-# MicroPython — mip resolves the dependency chain from the same index
-import mip
-# pdwidgets does not pull its dependencies on MIP -- install them too.
-mip.install("pydevices", index="https://PyDevices.github.io/mip")
-mip.install("pygraphics", index="https://PyDevices.github.io/mip")
-mip.install("palettes", index="https://PyDevices.github.io/mip")
-mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
-```
+    ```python
+    import mip
+    # Install pdwidgets and its PyDevices companion packages
+    mip.install("pydevices", index="https://PyDevices.github.io/mip")
+    mip.install("pygraphics", index="https://PyDevices.github.io/mip")
+    mip.install("palettes", index="https://PyDevices.github.io/mip")
+    mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
+    ```
 
-```bash
-# CPython — the two-index pattern, since dependencies span both registries
-pip install -i https://test.pypi.org/simple/ \
-  --extra-index-url https://pypi.org/simple/ pydevices-pdwidgets
-```
+=== "CPython (TestPyPI)"
 
-pdwidgets depends on `appdev`, `pygraphics`, and `multimer`, plus `palettes`
-for theming. You also need a PyDevices-compatible `board_config` for your display
-backend — see
-[pydevices install workflows](https://github.com/PyDevices/pydevices/blob/main/docs/install-workflows.md).
+    ```bash
+    pip install -i https://test.pypi.org/simple/ \
+      --extra-index-url https://pypi.org/simple/ pydevices-pdwidgets
+    ```
 
-A PyDevices `board_config` module exports hardware endpoints such as
-`display_drv` and input-reader aliases. The application chooses its traffic
-controller; the example below uses the optional `appdev` package.
+=== "PyScript / Browser"
 
-## A practical app skeleton
+    ```python
+    # pyscript mip: pydevices, pygraphics, palettes, pdwidgets
+    # pyodide wheels: pydevices, pygraphics, palettes, pdwidgets
+    ```
 
-The most common pattern is: create the display, create a screen, build the
-widgets, then hand control to the app:
+---
+
+## 💻 Live Interactive Demo
+
+Click the interactive button and slider below to interact with `pdwidgets` live in your browser:
+
+<div class="pydevices-live-demo">
+  <div class="demo-editor-pane">
+    <textarea class="code-editor">
+import appdev
+import pdwidgets as pd
+from displaydev.psdisplay import PSDisplay
+
+# 1. Setup Display and App loop
+display_drv = PSDisplay(CANVAS_ID, width=320, height=240)
+app = appdev.App(display_drv)
+display = pd.Display(display_drv, app)
+screen = pd.Screen(display, bg=0x18C3)
+
+# 2. Build Widgets
+title = pd.Label(screen, value="pdwidgets Live Demo", x=16, y=16)
+status = pd.Label(screen, value="Status: Waiting for input...", x=16, y=45)
+
+btn = pd.Button(screen, label="Tap Me", x=16, y=80, w=130, h=38, radius=6)
+def on_tap(sender, event):
+    status.value = "Status: Button Clicked!"
+btn.add_event_cb(pd.events.MOUSEBUTTONUP, on_tap)
+
+slider = pd.Slider(screen, value=50, min_val=0, max_val=100, x=16, y=140, w=200, h=24)
+def on_slide(widget):
+    status.value = f"Status: Slider set to {widget.value}"
+slider.set_change_cb(on_slide)
+
+# 3. Start Event Loop
+app.run()
+    </textarea>
+    <div class="demo-controls">
+      <button class="run-btn" disabled>▶ Run</button>
+      <button class="reset-btn">↺ Reset</button>
+      <span class="demo-status">Initializing Python…</span>
+    </div>
+    <pre class="demo-output"></pre>
+  </div>
+  <div class="demo-canvas-pane">
+    <canvas id="canvas_pdwidgets_index" width="320" height="240" tabindex="0"></canvas>
+  </div>
+</div>
+
+---
+
+## 📖 Practical App Skeleton
+
+Every `pdwidgets` application follows a standard three-stage pattern:
 
 ```python
 import board_config
 import appdev
 import pdwidgets as pd
 
+# 1. Initialize Display and Application Controller
 app = appdev.App(board_config)
 display = pd.Display(board_config.display_drv, app)
 screen = pd.Screen(display, bg=0x0000)
 
-pd.Label(screen, value="Hello", x=8, y=8)
+# 2. Build UI Hierarchy
+label = pd.Label(screen, value="System Ready", x=10, y=10)
+button = pd.Button(screen, label="Start", x=10, y=40, radius=4)
 
-button = pd.Button(screen, label="Tap me", x=8, y=40)
-button.add_event_cb(pd.events.MOUSEBUTTONUP, lambda sender, event: setattr(sender, "value", "Tapped"))
+def on_click(sender, event):
+    label.value = "Running!"
+button.add_event_cb(pd.events.MOUSEBUTTONUP, on_click)
 
+# 3. Hand control to the event loop
 app.run()
 ```
 
-The important detail is that `Display` wires itself into the shared app at
-construction. That means input events and redraw ticks are driven by the app,
-not by a separate background loop in pdwidgets — pdwidgets owns no timer of its
-own, and frames follow whichever provider `app.timer_async` selected. During
-a setup burst *before* `app.run()`, call `pd.tick()` to flush pending draws.
+---
 
-## Layout and state updates
+## 📚 Documentation Map
 
-Use alignment instead of hard-coded absolute coordinates when possible:
-
-```python
-screen = pd.Screen(display)
-bar = pd.Widget(screen, w=screen.width, h=24, bg=0xFFFF, align=pd.ALIGN.TOP)
-label = pd.Label(screen, value="Status", align=pd.ALIGN.CENTER)
-```
-
-Widget values and callbacks are the main state hooks:
-
-```python
-label.value = "Updated"
-label.set_change_cb(lambda widget: print(widget.value))
-```
-
-If you are doing a lot of work before `app.run()`, call `pd.tick()` in a
-short loop so the display flushes intermediate updates.
-
-## Examples worth reading
-
-The best examples live in the pydevices-examples repo under `src/examples/` and show how
-real applications use the toolkit:
-
-| Script | Description |
-|--------|-------------|
-| `calc_widgets.py` | Calculator UI with nested widgets |
-| `widgets_settings.py` | Settings form with cards and controls |
-| `widgets_smartwatch.py` | Multi-page navigation and layout |
-| `joystick_list_select.py` | List navigation with input events |
-| `widgets_device_panel.py` | Composite control panel built from shared widgets |
-
-## Icons and theming
-
-Runtime widget icons live under [`lib/pdwidgets/icons/`](https://github.com/PyDevices/pdwidgets/tree/main/lib/pdwidgets/icons) as importable Python modules. Regenerate them with the Material Design export scripts and `scripts/assets_icons_to_py.py` when the icon set changes.
-
-## PyScript note
-
-The theming module has a PyScript-specific workaround for `os.sep`, so some
-browser-based demos use a slightly different import path than desktop builds.
-
-## See also
-
-- [Widget dependencies](https://github.com/PyDevices/pdwidgets/blob/main/lib/pdwidgets/widget-dependencies.md)
-- [pydevices documentation](https://github.com/PyDevices/pydevices/tree/main/docs) — the board contract and core packages
-- [Browser demos](https://pydevices.github.io/pydevices-examples/pyscript/)
+* 🏗️ [**Architecture & Lifecycle**](architecture.md) — Display hierarchy, dirty rectangle redraws, and event loop integration.
+* 📦 [**Widget Catalog**](widget-catalog.md) — Complete guide and live demos for all 50+ UI components.
+* 📐 [**Layout & Sizing**](layout-guide.md) — `ALIGN` anchors, percentage sizing (`pct`), and responsive grids.
+* 🎮 [**Input & Events**](input-and-events.md) — Touch gestures, mouse clicks, rotary encoders, and keyboard focus rings.
+* 🎨 [**Theming & Icons**](theming.md) — Palette styling, Material Design colors, corner radii, and icon modules.
+* 📱 [**App Recipes**](app-recipes.md) — Complete blueprints for Calculators, Smartwatches, and Dashboards.
+* 📚 [**API Reference**](reference/pdwidgets/index.md) — Autogenerated class and method reference.

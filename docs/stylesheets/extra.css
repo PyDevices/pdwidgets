@@ -1,5 +1,5 @@
 /*
- * PyDevices brand colors for Material for MkDocs.
+ * PyDevices brand design tokens & UI components for Material for MkDocs.
  * Tokens mirror https://pydevices.github.io/assets/css/site.css
  */
 
@@ -53,4 +53,200 @@
   --md-footer-fg-color: #f3ecdf;
   --md-footer-fg-color--light: #c9bfae;
   --md-footer-fg-color--lighter: #8f8474;
+}
+
+/* Hero & Feature Grid Cards */
+.hero-banner {
+  background: linear-gradient(135deg, rgba(245, 78, 0, 0.08) 0%, rgba(245, 78, 0, 0.02) 100%);
+  border: 1px solid rgba(245, 78, 0, 0.2);
+  border-radius: 12px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.hero-banner h1 {
+  margin-top: 0;
+  color: var(--md-primary-fg-color);
+}
+
+.grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.grid.cards > div, .grid.cards > a {
+  display: flex;
+  flex-direction: column;
+  background: var(--md-default-bg-color--light);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: var(--md-default-fg-color);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grid.cards > div:hover, .grid.cards > a:hover {
+  transform: translateY(-2px);
+  border-color: var(--md-primary-fg-color);
+  box-shadow: 0 4px 12px rgba(245, 78, 0, 0.12);
+}
+
+/* Badge and Swatch utilities */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: var(--md-default-bg-color--lighter);
+  color: var(--md-default-fg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.badge-orange {
+  background: rgba(245, 78, 0, 0.12);
+  color: var(--md-primary-fg-color);
+  border-color: rgba(245, 78, 0, 0.3);
+}
+
+.badge-green {
+  background: rgba(46, 125, 50, 0.12);
+  color: #2e7d32;
+  border-color: rgba(46, 125, 50, 0.3);
+}
+
+.color-swatch {
+  display: inline-block;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 3px;
+  vertical-align: middle;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-right: 0.4rem;
+}
+
+/* Live PyScript / Pyodide Interactive Demos */
+.pydevices-live-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  background: var(--md-code-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.demo-editor-pane {
+  flex: 1 1 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 280px;
+}
+
+.code-editor {
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 6px;
+  padding: 0.75rem;
+  height: 230px;
+  resize: vertical;
+  tab-size: 4;
+}
+
+.code-editor:focus {
+  outline: none;
+  border-color: var(--md-primary-fg-color);
+  box-shadow: 0 0 0 2px rgba(245, 78, 0, 0.2);
+}
+
+.demo-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.run-btn {
+  background: var(--md-primary-fg-color);
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.run-btn:hover:not(:disabled) {
+  background: var(--md-primary-fg-color--dark);
+}
+
+.run-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reset-btn {
+  background: var(--md-default-bg-color--lighter);
+  color: var(--md-default-fg-color);
+  border: 1px solid var(--md-default-fg-color--lighter);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.82rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  background: var(--md-default-bg-color--light);
+}
+
+.demo-status {
+  font-size: 0.78rem;
+  color: var(--md-default-fg-color--lighter);
+  margin-left: auto;
+  font-weight: 500;
+}
+
+.demo-output {
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.78rem;
+  color: #d32f2f;
+  margin: 0;
+  max-height: 80px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+.demo-canvas-pane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  border: 1px solid #241e17;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.demo-canvas-pane canvas {
+  image-rendering: pixelated;
+  border: 1px solid #333333;
+  outline: none;
+  background: #000000;
+}
+
+.demo-canvas-pane canvas:focus {
+  border-color: var(--md-primary-fg-color);
 }
