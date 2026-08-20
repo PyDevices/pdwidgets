@@ -45,15 +45,15 @@ controller; the example below uses the optional `appdev` package.
 ## A practical app skeleton
 
 The most common pattern is: create the display, create a screen, build the
-widgets, then hand control to the runtime:
+widgets, then hand control to the app:
 
 ```python
 import board_config
 import appdev
 import pdwidgets as pd
 
-runtime = appdev.App(board_config)
-display = pd.Display(board_config.display_drv, runtime)
+app = appdev.App(board_config)
+display = pd.Display(board_config.display_drv, app)
 screen = pd.Screen(display, bg=0x0000)
 
 pd.Label(screen, value="Hello", x=8, y=8)
@@ -61,14 +61,14 @@ pd.Label(screen, value="Hello", x=8, y=8)
 button = pd.Button(screen, label="Tap me", x=8, y=40)
 button.add_event_cb(pd.events.MOUSEBUTTONUP, lambda sender, event: setattr(sender, "value", "Tapped"))
 
-runtime.run_forever()
+app.run()
 ```
 
-The important detail is that `Display` wires itself into the shared runtime at
-construction. That means input events and redraw ticks are driven by the runtime,
+The important detail is that `Display` wires itself into the shared app at
+construction. That means input events and redraw ticks are driven by the app,
 not by a separate background loop in pdwidgets — pdwidgets owns no timer of its
-own, and frames follow whichever provider `runtime.timer_async` selected. During
-a setup burst *before* `run_forever()`, call `pd.tick()` to flush pending draws.
+own, and frames follow whichever provider `app.timer_async` selected. During
+a setup burst *before* `app.run()`, call `pd.tick()` to flush pending draws.
 
 ## Layout and state updates
 
@@ -87,7 +87,7 @@ label.value = "Updated"
 label.set_change_cb(lambda widget: print(widget.value))
 ```
 
-If you are doing a lot of work before `run_forever()`, call `pd.tick()` in a
+If you are doing a lot of work before `app.run()`, call `pd.tick()` in a
 short loop so the display flushes intermediate updates.
 
 ## Examples worth reading

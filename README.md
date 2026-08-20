@@ -19,9 +19,9 @@ import appdev
 import pdwidgets as pd
 from pdwidgets.icons import touch_app  # Pure-Python icon bytecode
 
-# 1. Initialize display and event runtime
-runtime = appdev.App(board_config)
-display = pd.Display(board_config.display_drv, runtime)
+# 1. Initialize display and the event app
+app = appdev.App(board_config)
+display = pd.Display(board_config.display_drv, app)
 screen = pd.Screen(display)
 
 _taps = 0
@@ -47,7 +47,7 @@ btn.on_click(on_button_click)
 
 # 3. Draw initial screen and start event loop
 display.show(screen)
-runtime.run_forever()
+app.run()
 ```
 
 ---

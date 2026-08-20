@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2024 Brad Barnett
 #
 # SPDX-License-Identifier: MIT
-"""Display framebuffer, rendering, and runtime integration."""
+"""Display framebuffer, rendering, and app integration."""
 
 from random import getrandbits
 
@@ -94,7 +94,6 @@ class Display(Widget):
         display_drv.set_vscroll(tfa, bfa)
         display_drv.vscroll = 0
         self.app = app
-        self.runtime = app
         self._buffer = memoryview(
             bytearray(display_drv.width * display_drv.height * display_drv.color_depth // 8)
         )
@@ -328,8 +327,8 @@ class Display(Widget):
         Render one widget frame.
 
         Flushes dirty areas to the display, otherwise runs scheduled tasks and
-        re-renders invalidated widgets. Driven automatically by the runtime's
-        shared timer (see :meth:`_attach_to_runtime`); may also be called
+        re-renders invalidated widgets. Driven automatically by the app's
+        shared timer (see :meth:`_attach_to_app`); may also be called
         manually (e.g. :func:`tick`) to force a frame.
         """
         if self._tick_busy:

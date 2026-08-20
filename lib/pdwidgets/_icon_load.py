@@ -40,7 +40,7 @@ def load_framebuffer(value):
         try:
             import importlib.util
         except ImportError as exc:  # pragma: no cover — CPython authoring helper
-            raise ValueError(f"Cannot load .py icon on this runtime: {value}") from exc
+            raise ValueError(f"Cannot load .py icon on this interpreter: {value}") from exc
         stem = value.rsplit("/", 1)[-1].rsplit("\\", 1)[-1][:-3]
         spec = importlib.util.spec_from_file_location(stem, value)
         if spec is None or spec.loader is None:

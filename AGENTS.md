@@ -73,4 +73,4 @@ builds after checking the siblings out.
 
 The pydevices-examples repo's `.venv` also gets a `pydevices_siblings.pth` (added by the
 update script) listing `palettes/lib`, `pdwidgets/lib`, and `pygraphics/lib`, so
-pydevices-examples applications that import them run in the cross-runtime matrix.
+pydevices-examples applications that import them run in the cross-interpreter matrix.

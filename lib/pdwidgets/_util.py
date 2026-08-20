@@ -26,7 +26,7 @@ def _cond_always(child, event, point):
 
 
 # Input event types delivered to the widget tree (QUIT is handled by the
-# runtime itself, so it is intentionally excluded).
+# app itself, so it is intentionally excluded).
 _WIDGET_EVENTS = (
     events.KEYDOWN,
     events.KEYUP,

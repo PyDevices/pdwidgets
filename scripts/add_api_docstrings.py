@@ -67,7 +67,7 @@ CLASS_DOCS = {
 
 MODULE_DOCS = {
     "widget.py": "Base widget class and geometry/event primitives.",
-    "display.py": "Display framebuffer, rendering, and runtime integration.",
+    "display.py": "Display framebuffer, rendering, and app integration.",
     "screen.py": "Full-screen widget container.",
     "task.py": "Scheduled repeating tasks for :class:`Display`.",
     "console.py": "Framebuffer text console widget.",

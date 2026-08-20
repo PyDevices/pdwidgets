@@ -28,7 +28,7 @@ class Screen(Widget):
             visible (bool): Whether the page is shown immediately.
 
         Example:
-            display = Display(display_drv, runtime)
+            display = Display(display_drv, app)
             screen = Screen(display, bg=theme.background)
             Label(screen, value="Home")
         """

@@ -181,7 +181,7 @@ st = {"shown": 0, "phase": "show", "pos": None, "files": iter(png_files(png_path
 
 
 def _show_next(_=None):
-    if runtime.quit_requested if runtime else False:
+    if app.quit_requested if app else False:
         return
     if _max_pngs is not None and st["shown"] >= _max_pngs:
         return
