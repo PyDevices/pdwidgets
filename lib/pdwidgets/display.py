@@ -115,6 +115,15 @@ class Display(Widget):
         self._color_theme = ColorTheme(self.pal)
         self._tick_sub = None
         self._refresh_claim = None
+
+        # Clean up any existing Display bound to this driver or app
+        for old in list(Display.displays):
+            if old.display_drv is display_drv or (app is not None and old.app is app):
+                try:
+                    old.deinit()
+                except Exception:
+                    pass
+
         Display.displays.append(self)
         self._attach_to_app()
 
@@ -319,8 +328,26 @@ class Display(Widget):
 
     def quit(self):
         """Remove this display from the active list (called on QUIT)."""
+        self.deinit()
+
+    def deinit(self):
+        """Detach display from active list, cancel timers, and unsubscribe events."""
         if self in Display.displays:
             Display.displays.remove(self)
+        if self._tick_sub is not None:
+            if hasattr(self._tick_sub, "cancel"):
+                self._tick_sub.cancel()
+            self._tick_sub = None
+        if self._refresh_claim is not None:
+            if hasattr(self._refresh_claim, "release"):
+                self._refresh_claim.release()
+            self._refresh_claim = None
+        if self.app is not None and hasattr(self.app, "off"):
+            for et in _WIDGET_EVENTS:
+                try:
+                    self.app.off(et, self.handle_event)
+                except Exception:
+                    pass
 
     def tick(self):
         """
