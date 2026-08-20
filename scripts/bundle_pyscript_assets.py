@@ -6,8 +6,8 @@ Packages lib/ from the current repository and sibling PyDevices repositories
 into docs/assets/pyscript/pydevices_bundle.zip for zero-network execution on ReadTheDocs.
 """
 
-from pathlib import Path
 import zipfile
+from pathlib import Path
 
 
 def bundle_assets(repo_root: Path) -> Path:
