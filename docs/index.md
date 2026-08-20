@@ -20,6 +20,10 @@ import utils.path   # adds lib/, utils/, and examples/ for a pydevices-examples 
 ```python
 # MicroPython — mip resolves the dependency chain from the same index
 import mip
+# pdwidgets does not pull its dependencies on MIP -- install them too.
+mip.install("pydevices", index="https://PyDevices.github.io/mip")
+mip.install("pygraphics", index="https://PyDevices.github.io/mip")
+mip.install("palettes", index="https://PyDevices.github.io/mip")
 mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
 ```
 

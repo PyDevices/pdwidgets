@@ -69,6 +69,10 @@ runtime.run_forever()
 
 ```python
 import mip
+# pdwidgets does not pull its dependencies on MIP -- install them too.
+mip.install("pydevices", index="https://PyDevices.github.io/mip")
+mip.install("pygraphics", index="https://PyDevices.github.io/mip")
+mip.install("palettes", index="https://PyDevices.github.io/mip")
 mip.install("pdwidgets", index="https://PyDevices.github.io/mip")
 ```
 
