@@ -10,12 +10,10 @@
   let pyodideInstance = null;
 
   function findBundleUrl() {
-    // Resolve relative path to assets/pyscript/pydevices_bundle.zip based on page depth
-    const scripts = document.getElementsByTagName("script");
-    for (let s of scripts) {
-      if (s.src && s.src.includes("pydevices-runner.js")) {
-        return s.src.replace("pydevices-runner.js", "pydevices_bundle.zip");
-      }
+    const scripts = document.querySelectorAll("script[src*='pydevices-runner.js']");
+    if (scripts.length > 0) {
+      const src = scripts[scripts.length - 1].src;
+      return src.replace("pydevices-runner.js", "pydevices_bundle.zip");
     }
     return "assets/pyscript/pydevices_bundle.zip";
   }
@@ -34,15 +32,27 @@
         });
 
         if (updateStatus) updateStatus("Loading package tools…");
-        await pyodide.loadPackage("micropip");
+        try {
+          await pyodide.loadPackage("micropip");
+        } catch (e) {
+          console.warn("micropip load warning:", e);
+        }
 
         if (updateStatus) updateStatus("Unpacking PyDevices libraries…");
         const bundleUrl = findBundleUrl();
         try {
-          const resp = await fetch(bundleUrl);
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 10000);
+          const resp = await fetch(bundleUrl, {
+            signal: controller.signal,
+            cache: "no-cache"
+          });
+          clearTimeout(timeoutId);
           if (resp.ok) {
             const buf = await resp.arrayBuffer();
-            pyodide.unpackArchive(buf, "zip");
+            if (buf && buf.byteLength > 0) {
+              pyodide.unpackArchive(new Uint8Array(buf), "zip");
+            }
           } else {
             console.warn("Could not fetch local bundle, status:", resp.status);
           }
@@ -50,6 +60,7 @@
           console.warn("Could not load local pydevices_bundle.zip:", e);
         }
 
+        if (updateStatus) updateStatus("Initializing Python environment…");
         // Set up sys.path and PyScript shims in Pyodide
         await pyodide.runPythonAsync(`
 import sys, os, types

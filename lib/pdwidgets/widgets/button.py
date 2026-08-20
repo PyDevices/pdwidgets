@@ -189,7 +189,18 @@ class Button(Widget):
                 pal=pal,
             )
             return
-        self.display.framebuf.round_rect(*pa, self.radius, self.bg, f=True)
+        if pressed and self.pressed_offset:
+            self.display.framebuf.round_rect(
+                pa.x + self.pressed_offset,
+                pa.y + self.pressed_offset,
+                pa.w,
+                pa.h,
+                self.radius,
+                self.bg,
+                f=True,
+            )
+        else:
+            self.display.framebuf.round_rect(*pa, self.radius, self.bg, f=True)
 
     def _redraw_content(self):
         """Repaint face and visible children into the framebuffer (no flush)."""
@@ -225,7 +236,7 @@ class Button(Widget):
         else:
             self.parent.draw(self.area)
         pa = self.padded_area
-        if self.shadow:
+        if self.shadow and not self._pressed:
             # Cheap fake drop shadow: a shape-colored round_rect offset behind
             # the button. Two fills, no alpha blending.
             self.display.framebuf.round_rect(
@@ -237,7 +248,7 @@ class Button(Widget):
                 self.color_theme.shadow,
                 f=True,
             )
-        self._draw_face(pressed=self._pressed and self._style == "raised")
+        self._draw_face(pressed=self._pressed)
 
     def press(self, data=None, event=None):
         """Mark pressed and dirty; flush via the display tick (not inline I80)."""
