@@ -52,8 +52,8 @@ sequenceDiagram
 
 ### Lifecycle Rules:
 * **Modifying State**: When you change a property (e.g. `widget.value = "..."` or `widget.bg = 0xF800`), the widget computes its bounding `Area` and schedules a redraw.
-* **Flushing Draws**: In an asynchronous application (`app.run()`), redraws happen automatically on each frame tick.
-* **Pre-run Setup**: If you configure widgets in a loop *before* calling `app.run()`, call `pd.tick()` to force-render intermediate states.
+* **Flushing Draws**: Once the app's loop is running, redraws happen automatically on each frame tick.
+* **Pre-run Setup**: If you configure widgets in a loop *before* the app's loop starts, call `pd.tick()` to force-render intermediate states.
 
 ---
 

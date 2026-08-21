@@ -28,8 +28,8 @@ Proportional fonts:
 
 Timer architecture:
     pdwidgets owns **no** timer of its own. Each :class:`Display` wires itself
-    into the shared ``appdev.App`` at construction. Apps build the UI,
-    then ``app.run()``.
+    into the shared ``appdev.App`` at construction. Apps just build the UI;
+    the app keeps itself alive past the end of the script.
 """
 
 import events
