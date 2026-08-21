@@ -54,10 +54,21 @@
 
 === "PyScript / Browser"
 
+    The wheel is named `pydevices-pdwidgets`; the module you import is
+    `pdwidgets`. micropip resolves the rest (`pydevices`,
+    `pydevices-pygraphics`, `pydevices-palettes`) from the wheel metadata.
+
     ```python
-    # pyscript mip: pydevices, pygraphics, palettes, pdwidgets
-    # pyodide wheels: pydevices, pygraphics, palettes, pdwidgets
+    import micropip
+    await micropip.install(
+        "pydevices-pdwidgets", index_urls="https://test.pypi.org/simple/"
+    )
+
+    import pdwidgets as pd
     ```
+
+    On MicroPython the MIP package names are unprefixed
+    (`mip.install("pdwidgets", index="https://PyDevices.github.io/mip")`).
 
 ---
 
