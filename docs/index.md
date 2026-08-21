@@ -105,8 +105,7 @@ btn.add_event_cb(pd.events.MOUSEBUTTONUP, on_tap)
 
 slider = pd.Slider(screen, value=0.5, x=16, y=140, w=200, h=24)
 
-# 3. Start background event loop
-app.run()
+# 3. That's it -- the app runs itself.
 print("pdwidgets event loop running! Click 'Tap Me' on canvas.")
     </textarea>
     <div class="demo-controls">
@@ -145,8 +144,7 @@ def on_click(sender, event):
     label.value = "Running!"
 button.add_event_cb(pd.events.MOUSEBUTTONUP, on_click)
 
-# 3. Hand control to the event loop
-app.run()
+# 3. That's it -- the app keeps itself alive and handles input from here.
 ```
 
 ---

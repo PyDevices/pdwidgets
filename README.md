@@ -45,9 +45,9 @@ def on_button_click(event):
 
 btn.on_click(on_button_click)
 
-# 3. Draw initial screen and start event loop
+# 3. Draw the initial screen. The app runs itself from here -- no app.run()
+# is needed; call it only to block at this point or to get an exit code.
 display.show(screen)
-app.run()
 ```
 
 ---

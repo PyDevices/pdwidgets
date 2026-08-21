@@ -47,8 +47,8 @@ class Display(Widget):
 
     - build a :class:`Screen` for the active page
     - add child widgets with relative geometry and alignment
-    - call :meth:`app.run() <appdev.App.run>` after
-      construction to start input handling and rendering
+    - nothing else: the app drives input handling and rendering itself
+      once construction is done
     """
     displays = []
     timer = None  # pdwidgets owns no timer; kept as None for API/back-compat.

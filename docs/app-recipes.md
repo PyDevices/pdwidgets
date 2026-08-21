@@ -35,8 +35,6 @@ save_btn = pd.Button(card, label="Save Changes", x=16, y=160, w=268, h=36, radiu
 def on_save(s, e):
     print(f"Saved: WiFi={wifi_sw.value}, Brightness={bright_slider.value}")
 save_btn.add_event_cb(pd.events.MOUSEBUTTONUP, on_save)
-
-app.run()
 ```
 
 ---
@@ -71,8 +69,6 @@ for row_idx, row in enumerate(buttons):
         def make_handler(k):
             return lambda s, e: setattr(display_label, "value", k)
         btn.add_event_cb(pd.events.MOUSEBUTTONUP, make_handler(key))
-
-app.run()
 ```
 
 ---
