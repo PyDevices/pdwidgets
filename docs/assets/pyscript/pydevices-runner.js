@@ -1,63 +1,59 @@
 /**
  * pydevices-runner.js — Client-side Pyodide manager for PyDevices documentation.
  *
- * Automatically bootstraps Pyodide in the background, unpacks the local zero-network
- * package bundle, and connects interactive code editors to live HTML5 <canvas> targets.
+ * Automatically bootstraps Pyodide in the background, installs the PyDevices
+ * packages with micropip, and connects interactive code editors to live HTML5
+ * <canvas> targets.
+ *
+ * Packages come from TestPyPI via micropip -- the same path the PyScript gallery
+ * uses -- so these demos run the published wheels, including the compiled wasm
+ * build of pygraphics. Set window.PYDEVICES_PACKAGES before this script to
+ * override the list.
  */
 
 (function () {
   let pyodidePromise = null;
   let pyodideInstance = null;
 
-  function findBundleUrl() {
-    const scripts = document.querySelectorAll("script[src*='pydevices-runner.js']");
-    if (scripts.length > 0) {
-      const src = scripts[scripts.length - 1].src;
-      return src.replace("pydevices-runner.js", "pydevices_bundle.zip");
-    }
-    return "assets/pyscript/pydevices_bundle.zip";
+  // Pyodide must be a Python 3.14 build: the pygraphics wasm wheels are
+  // cp313/cp314 pyemscripten only, so an older Pyodide cannot install them.
+  const PYODIDE_URL = "https://cdn.jsdelivr.net/pyodide/v314.0.5/full/";
+  const INDEX_URLS = [
+    "https://test.pypi.org/simple/{package_name}/",
+    "https://pypi.org/simple/{package_name}/"
+  ];
+  const DEFAULT_PACKAGES = ["pydevices", "pydevices-pdwidgets"];
+
+  function packageList() {
+    const custom = window.PYDEVICES_PACKAGES;
+    return Array.isArray(custom) && custom.length ? custom : DEFAULT_PACKAGES;
   }
 
   async function getPyodide(updateStatus) {
     if (pyodideInstance) return pyodideInstance;
     if (!pyodidePromise) {
       pyodidePromise = (async () => {
-        if (typeof loadPyodide === "undefined") {
-          throw new Error("Pyodide script library not loaded. Check CDN link.");
-        }
-
         if (updateStatus) updateStatus("Downloading Python engine…");
-        const pyodide = await loadPyodide({
-          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.4/full/"
-        });
+        // Pyodide 314.x ships ESM only (pyodide.asm.mjs); the classic
+        // pyodide.js loader 404s, so import the module build directly. Doing it
+        // here also keeps the version in one place instead of in mkdocs.yml.
+        const { loadPyodide } = await import(PYODIDE_URL + "pyodide.mjs");
+        const pyodide = await loadPyodide({ indexURL: PYODIDE_URL });
 
         if (updateStatus) updateStatus("Loading package tools…");
-        try {
-          await pyodide.loadPackage("micropip");
-        } catch (e) {
-          console.warn("micropip load warning:", e);
-        }
+        await pyodide.loadPackage("micropip");
 
-        if (updateStatus) updateStatus("Unpacking PyDevices libraries…");
-        const bundleUrl = findBundleUrl();
-        try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 10000);
-          const resp = await fetch(bundleUrl, {
-            signal: controller.signal,
-            cache: "no-cache"
-          });
-          clearTimeout(timeoutId);
-          if (resp.ok) {
-            const buf = await resp.arrayBuffer();
-            if (buf && buf.byteLength > 0) {
-              pyodide.unpackArchive(new Uint8Array(buf), "zip");
-            }
-          } else {
-            console.warn("Could not fetch local bundle, status:", resp.status);
+        if (updateStatus) updateStatus("Installing PyDevices packages…");
+        const micropip = pyodide.pyimport("micropip");
+        micropip.set_index_urls(INDEX_URLS);
+        for (const pkg of packageList()) {
+          try {
+            await micropip.install(pkg);
+          } catch (e) {
+            console.error("micropip could not install " + pkg + ":", e);
+            throw new Error("Could not install " + pkg +
+              " -- these demos need network access to TestPyPI.");
           }
-        } catch (e) {
-          console.warn("Could not load local pydevices_bundle.zip:", e);
         }
 
         if (updateStatus) updateStatus("Initializing Python environment…");
@@ -65,10 +61,10 @@
         await pyodide.runPythonAsync(`
 import sys, os, types
 
-# Ensure working directory and site-packages are on sys.path
-for p in ["/home/pyodide", "/lib/python3.12/site-packages"]:
-    if p not in sys.path:
-        sys.path.insert(0, p)
+# Ensure the working directory is on sys.path. site-packages is already there
+# and is version-specific, so let Pyodide own it rather than hardcoding it.
+if "/home/pyodide" not in sys.path:
+    sys.path.insert(0, "/home/pyodide")
 
 # Create compatibility shim for pyscript / pyscript.ffi -> pyodide.ffi
 if "pyscript" not in sys.modules:

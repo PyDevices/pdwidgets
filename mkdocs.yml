@@ -68,7 +68,6 @@ markdown_extensions:
   - tables
 
 extra_javascript:
-  - https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js
   - assets/pyscript/pydevices-runner.js
 
 extra_css:
