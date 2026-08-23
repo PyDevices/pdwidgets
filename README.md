@@ -88,7 +88,7 @@ Full dependency chain and `board_config` requirements:
 
 - [Documentation](https://pdwidgets.readthedocs.io)
 - [Source Code](https://github.com/PyDevices/pdwidgets)
-- [PyScript Live Demos](https://pydevices.github.io/pydevices-examples/gallery/)
+- [PyScript Live Demos](https://pydevices.github.io/pydevices-examples/pyscript/)
 - Related: [pydevices](https://github.com/PyDevices/pydevices), [palettes](https://github.com/PyDevices/palettes), [pydevices-examples](https://github.com/PyDevices/pydevices-examples)
 
 ## License
