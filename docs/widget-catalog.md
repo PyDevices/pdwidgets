@@ -13,9 +13,9 @@ Interact with buttons, sliders, progress bars, and switches live in your browser
     <textarea class="code-editor">
 import appdev
 import pdwidgets as pd
-from displaydev.psdisplay import PSDisplay
+from displaydev.auto import AutoDisplay
 
-display_drv = PSDisplay(CANVAS_ID, width=320, height=240)
+display_drv = AutoDisplay(width=320, height=240, canvas_id=CANVAS_ID)
 app = appdev.App(display_drv)
 display = pd.Display(display_drv, app)
 screen = pd.Screen(display, bg=0x0000)

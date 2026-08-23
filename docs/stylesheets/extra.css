@@ -130,7 +130,7 @@
   margin-right: 0.4rem;
 }
 
-/* Live PyScript / Pyodide Interactive Demos */
+/* Live direct MicroPython WebAssembly demos */
 .pydevices-live-demo {
   display: flex;
   flex-wrap: wrap;
