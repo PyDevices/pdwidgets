@@ -22,29 +22,29 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7
         with:
           repository: PyDevices/pydevices
           path: pydevices
           sparse-checkout: |
             lib
           sparse-checkout-cone-mode: false
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: PyDevices/pygraphics
           path: pygraphics
           sparse-checkout: |
             lib/pygraphics
           sparse-checkout-cone-mode: false
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: PyDevices/palettes
           path: palettes
           sparse-checkout: |
             lib/palettes
           sparse-checkout-cone-mode: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.13'
       - name: Install ruff
