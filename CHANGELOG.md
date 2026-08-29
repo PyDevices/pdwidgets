@@ -1,3 +1,8 @@
+## v0.0.23 (2026-08-29)
+
+- Adopt publishing-v6 (MIP second-publication race fix)
+- Fix documentation defects found by API audit
+
 ## v0.0.23.dev1 (2026-08-29)
 
 - Grant publishing-v5's permission ceiling (assets + OIDC)
