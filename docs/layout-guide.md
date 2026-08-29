@@ -56,11 +56,11 @@ btn2 = pd.Button(card, label="OK", w=pct.w(45), h=36)
 
 ```python
 # Vertical layout column with 10px gap between children
-col = pd.Column(card, x=10, y=10, gap=10)
+col = pd.Column(card, x=10, y=10, spacing=10)
 
 pd.Label(col, value="Enter Details:")
-pd.TextInput(col, placeholder="Name", w=180)
-pd.TextInput(col, placeholder="Email", w=180)
+pd.TextInput(col, hint="Name", w=180)
+pd.TextInput(col, hint="Email", w=180)
 pd.Button(col, label="Submit", w=180)
 ```
 

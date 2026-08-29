@@ -45,15 +45,14 @@ pill_btn = pd.Button(screen, label="Active", w=80, h=30, radius=15)
 
 ## 3. Built-in Icon Modules
 
-`pdwidgets` includes pre-compiled Material Design icon modules under `lib/pdwidgets/icons/` (e.g. `wifi.py`, `bluetooth.py`, `settings.py`, `battery.py`):
+`pdwidgets` includes pre-compiled Material Design icon modules under `lib/pdwidgets/icons/` (e.g. `bluetooth_color_24dp.py`, `battery_full_color_24dp.py`, `menu_24dp.py`, `home_filled_24dp.py`):
 
 ```python
 from pdwidgets.widgets.icon import Icon
-from pdwidgets.icons import settings, wifi
 
-# Render icons onto screen or container
-wifi_icon = Icon(screen, icon_mod=wifi, x=10, y=10, fg=0x07E0)
-settings_icon = Icon(screen, icon_mod=settings, x=35, y=10, fg=0xFFFF)
+# `value` is the dotted import path of the generated icon module.
+bt_icon = Icon(screen, value="pdwidgets.icons.bluetooth_color_24dp", x=10, y=10)
+menu_icon = Icon(screen, value="pdwidgets.icons.menu_24dp", x=35, y=10, fg=0xFFFF)
 ```
 
 ---

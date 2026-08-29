@@ -50,7 +50,7 @@ button.add_event_cb(events.MOUSEBUTTONUP, handle_click)
 Many controls (such as `Slider`, `Switch`, `NumberStepper`, `CheckBox`) also support simplified value change callbacks:
 
 ```python
-slider = pd.Slider(screen, min_val=0, max_val=100, x=10, y=60)
+slider = pd.Slider(screen, value=0.0, x=10, y=60)  # value is normalized to [0, 1]
 
 def on_change(widget):
     print(f"New slider value: {widget.value}")

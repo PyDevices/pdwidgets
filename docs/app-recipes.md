@@ -25,9 +25,9 @@ pd.Label(card, value="Settings", x=16, y=14)
 pd.Label(card, value="WiFi Enabled", x=16, y=50)
 wifi_sw = pd.Switch(card, value=True, x=220, y=45)
 
-# Brightness Slider
+# Brightness Slider (value is normalized to [0, 1])
 pd.Label(card, value="Brightness", x=16, y=90)
-bright_slider = pd.Slider(card, value=80, min_val=10, max_val=100, x=16, y=115, w=268)
+bright_slider = pd.Slider(card, value=0.8, x=16, y=115, w=268)
 
 # Save Button
 save_btn = pd.Button(card, label="Save Changes", x=16, y=160, w=268, h=36, radius=4)
@@ -86,15 +86,18 @@ app = appdev.App(board_config)
 display = pd.Display(board_config.display_drv, app)
 screen = pd.Screen(display, bg=0x1082)
 
-# Top Bar
-bar = pd.AppBar(screen, title="Node #42", status="Online")
+# Top Bar with a status badge
+bar = pd.AppBar(screen, title="Node #42")
+status = pd.Badge(screen, value="Online", align=pd.ALIGN.OUTER_RIGHT, align_to=bar)
 
-# Telemetry Chart
-chart = pd.Chart(screen, x=10, y=50, w=300, h=100, color=0x07E0)
-chart.set_data([20, 22, 21, 24, 28, 32, 29, 31, 35, 30])
+# Telemetry Chart (value is the data series; fg sets the line color)
+chart = pd.Chart(
+    screen, x=10, y=50, w=300, h=100, fg=0x07E0,
+    value=[20, 22, 21, 24, 28, 32, 29, 31, 35, 30],
+)
 
-# Summary Gauge
-gauge = pd.Gauge(screen, value=75, min_val=0, max_val=100, x=10, y=160)
+# Summary Gauge (value is normalized to [0, 1])
+gauge = pd.Gauge(screen, value=0.75, x=10, y=160)
 ```
 
 ---

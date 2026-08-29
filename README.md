@@ -13,41 +13,39 @@ PyDevices offers several GUI approaches; `pdwidgets` is the pure-Python one. See
 
 ## Quick Start: Interactive Button & Screen
 
+> **Note:** `import board_config` isn't satisfied by the install commands
+> below. On desktop, `board_config` ships with `pydevices-desktop`
+> (`pip install -i https://test.pypi.org/simple/ pydevices-desktop`). On a
+> board, it comes from a `PyDevices/pydevices` board config, installed with
+> `mip.install("github:PyDevices/pydevices/board_configs/<path-to-board>",
+> index="https://PyDevices.github.io/mip")`.
+
 ```python
 import board_config
 import appdev
 import pdwidgets as pd
-from pdwidgets.icons import touch_app  # Pure-Python icon bytecode
 
 # 1. Initialize display and the event app
 app = appdev.App(board_config)
 display = pd.Display(board_config.display_drv, app)
-screen = pd.Screen(display)
+screen = pd.Screen(display, bg=0x0000)
+
+# 2. Add a label and an interactive button with a click handler
+label = pd.Label(screen, value="Taps: 0", x=40, y=30)
+btn = pd.Button(screen, label="Tap me", x=40, y=60, w=160, h=50)
 
 _taps = 0
 
-# 2. Add an interactive button with a click handler
-btn = pd.Button(
-    screen,
-    x=40,
-    y=60,
-    w=160,
-    h=50,
-    label="Tap me (0)",
-    icon=touch_app,
-)
-
-def on_button_click(event):
+def on_button_click(sender, event):
     global _taps
     _taps += 1
-    btn.set_label(f"Tap me ({_taps})")
-    display.refresh()
+    label.value = f"Taps: {_taps}"
 
-btn.on_click(on_button_click)
+btn.add_event_cb(pd.events.MOUSEBUTTONUP, on_button_click)
 
-# 3. Draw the initial screen. The app runs itself from here -- no app.run()
-# is needed; call it only to block at this point or to get an exit code.
-display.show(screen)
+# 3. That's it -- the app keeps itself alive and handles input from here.
+# No app.run() is needed; call it only to block at this point or to get an
+# exit code.
 ```
 
 ---
@@ -59,7 +57,7 @@ display.show(screen)
 - **MCU Memory-Friendly (Lean Imports)**: Import individual widgets to minimize RAM footprint on microcontrollers:
   ```python
   from pdwidgets.widgets.button import Button
-  from pdwidgets.widgets.screen import Screen
+  from pdwidgets.screen import Screen
   ```
 - **Integrated Theming**: Customizable color schemes, border radii, and visual states using [`palettes`](https://github.com/PyDevices/palettes).
 
@@ -83,6 +81,15 @@ pip install -i https://test.pypi.org/simple/ \
 
 Full dependency chain and `board_config` requirements:
 [docs/index.md](docs/index.md).
+
+## Support and platforms
+
+`pdwidgets` runs on **MicroPython**, **CircuitPython**, **CPython desktop**,
+and **PyScript** (browser). The CPython desktop and PyScript paths depend on
+`pydevices-pygraphics` wheels, which currently cover manylinux x86_64,
+Windows amd64, Android, and Emscripten (Pyodide/PyScript) — there are no
+macOS or ARM-Linux wheels yet. Publication to TestPyPI only (rather than
+PyPI) is deliberate.
 
 ## Links & Demos
 

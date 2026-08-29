@@ -73,7 +73,7 @@ badge = pd.Badge(parent, value="NEW", x=120, y=10, bg=0xF800)
 
 ```python
 label = pd.Label(parent, value="Sensor: 24.5 C", x=10, y=10)
-stepper = pd.NumberStepper(parent, value=1, min_val=0, max_val=10, x=10, y=40)
+stepper = pd.NumberStepper(parent, value=1, minimum=0, maximum=10, x=10, y=40)
 ```
 
 ---
@@ -91,7 +91,7 @@ stepper = pd.NumberStepper(parent, value=1, min_val=0, max_val=10, x=10, y=40)
 
 ```python
 switch = pd.Switch(parent, value=True, x=10, y=10)
-segments = pd.SegmentedControl(parent, options=["Day", "Week", "Month"], x=10, y=50)
+segments = pd.SegmentedControl(parent, labels=["Day", "Week", "Month"], x=10, y=50)
 ```
 
 ---
@@ -110,7 +110,7 @@ segments = pd.SegmentedControl(parent, options=["Day", "Week", "Month"], x=10, y
 
 ```python
 card = pd.Card(screen, x=10, y=10, w=200, h=150, radius=6)
-col = pd.Column(card, gap=8, align=pd.ALIGN.CENTER)
+col = pd.Column(card, spacing=8, align=pd.ALIGN.CENTER)
 ```
 
 ---
