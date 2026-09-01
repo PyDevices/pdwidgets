@@ -1,19 +1,54 @@
 /*
  * PyDevices brand design tokens & UI components for Material for MkDocs.
  * Tokens mirror https://pydevices.github.io/assets/css/site.css
+ *
+ * EVERY color in this file is defined in one of the three token blocks
+ * below. The component rules further down reference tokens only — never a
+ * literal — so a palette change is a single edit to this token area.
+ *
+ * Channel tokens follow the website convention: `--<name>-rgb: R G B;`
+ * (space-separated channels), consumed as `rgb(var(--name-rgb))` for the
+ * solid color and `rgb(var(--name-rgb) / 0.12)` for an alpha variant. A
+ * color gets an `-rgb` token only when something actually composes alpha
+ * over it; opaque-only colors are plain hex.
  */
 
 :root > * {
-  --md-primary-fg-color: #f54e00;
+  /* Brand channels — the source of every orange in this file. */
+  --doc-brand-rgb: 245 78 0;
+  --doc-primary-bg-rgb: 255 247 241;
+  --doc-accent-bg-rgb: 26 13 5;
+
+  --md-primary-fg-color: rgb(var(--doc-brand-rgb));
   --md-primary-fg-color--light: #ff7a3d;
   --md-primary-fg-color--dark: #c33f00;
-  --md-primary-bg-color: #fff7f1;
-  --md-primary-bg-color--light: rgba(255, 247, 241, 0.7);
+  --md-primary-bg-color: rgb(var(--doc-primary-bg-rgb));
+  --md-primary-bg-color--light: rgb(var(--doc-primary-bg-rgb) / 0.7);
 
   --md-accent-fg-color: #ff7a3d;
-  --md-accent-fg-color--transparent: rgba(245, 78, 0, 0.1);
-  --md-accent-bg-color: #1a0d05;
-  --md-accent-bg-color--light: rgba(26, 13, 5, 0.7);
+  --md-accent-fg-color--transparent: rgb(var(--doc-brand-rgb) / 0.1);
+  --md-accent-bg-color: rgb(var(--doc-accent-bg-rgb));
+  --md-accent-bg-color--light: rgb(var(--doc-accent-bg-rgb) / 0.7);
+
+  /* Semantic status colors. Scheme-independent by design: the badges read
+     the same in light and dark. */
+  --doc-success-rgb: 46 125 50;
+  --doc-success: rgb(var(--doc-success-rgb));
+  --doc-error: #d32f2f;
+
+  /* Neutral black used only at low alpha, for drop shadows and the hairline
+     outline on a color swatch. */
+  --doc-shade-rgb: 0 0 0;
+
+  /* Label color on a filled brand-colored button. */
+  --doc-on-primary: #fff;
+
+  /* Live WebAssembly demo canvas. These describe the emulated device screen
+     rather than the site chrome, so they stay fixed across schemes and need
+     not follow a brand palette change. */
+  --demo-canvas-bg: #000000;
+  --demo-canvas-frame: #241e17;
+  --demo-canvas-border: #333333;
 }
 
 [data-md-color-scheme="default"] {
@@ -57,8 +92,8 @@
 
 /* Hero & Feature Grid Cards */
 .hero-banner {
-  background: linear-gradient(135deg, rgba(245, 78, 0, 0.08) 0%, rgba(245, 78, 0, 0.02) 100%);
-  border: 1px solid rgba(245, 78, 0, 0.2);
+  background: linear-gradient(135deg, rgb(var(--doc-brand-rgb) / 0.08) 0%, rgb(var(--doc-brand-rgb) / 0.02) 100%);
+  border: 1px solid rgb(var(--doc-brand-rgb) / 0.2);
   border-radius: 12px;
   padding: 1.75rem;
   margin-bottom: 2rem;
@@ -91,7 +126,7 @@
 .grid.cards > div:hover, .grid.cards > a:hover {
   transform: translateY(-2px);
   border-color: var(--md-primary-fg-color);
-  box-shadow: 0 4px 12px rgba(245, 78, 0, 0.12);
+  box-shadow: 0 4px 12px rgb(var(--doc-brand-rgb) / 0.12);
 }
 
 /* Badge and Swatch utilities */
@@ -109,15 +144,15 @@
 }
 
 .badge-orange {
-  background: rgba(245, 78, 0, 0.12);
+  background: rgb(var(--doc-brand-rgb) / 0.12);
   color: var(--md-primary-fg-color);
-  border-color: rgba(245, 78, 0, 0.3);
+  border-color: rgb(var(--doc-brand-rgb) / 0.3);
 }
 
 .badge-green {
-  background: rgba(46, 125, 50, 0.12);
-  color: #2e7d32;
-  border-color: rgba(46, 125, 50, 0.3);
+  background: rgb(var(--doc-success-rgb) / 0.12);
+  color: var(--doc-success);
+  border-color: rgb(var(--doc-success-rgb) / 0.3);
 }
 
 .color-swatch {
@@ -126,7 +161,7 @@
   height: 1.2rem;
   border-radius: 3px;
   vertical-align: middle;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgb(var(--doc-shade-rgb) / 0.2);
   margin-right: 0.4rem;
 }
 
@@ -140,7 +175,7 @@
   border-radius: 10px;
   padding: 1.25rem;
   margin: 1.5rem 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgb(var(--doc-shade-rgb) / 0.05);
 }
 
 .demo-editor-pane {
@@ -168,7 +203,7 @@
 .code-editor:focus {
   outline: none;
   border-color: var(--md-primary-fg-color);
-  box-shadow: 0 0 0 2px rgba(245, 78, 0, 0.2);
+  box-shadow: 0 0 0 2px rgb(var(--doc-brand-rgb) / 0.2);
 }
 
 .demo-controls {
@@ -179,7 +214,7 @@
 
 .run-btn {
   background: var(--md-primary-fg-color);
-  color: #fff;
+  color: var(--doc-on-primary);
   border: none;
   padding: 0.35rem 0.9rem;
   font-size: 0.82rem;
@@ -222,7 +257,7 @@
 .demo-output {
   font-family: var(--md-code-font-family, monospace);
   font-size: 0.78rem;
-  color: #d32f2f;
+  color: var(--doc-error);
   margin: 0;
   max-height: 80px;
   overflow-y: auto;
@@ -234,17 +269,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #000000;
-  border: 1px solid #241e17;
+  background: var(--demo-canvas-bg);
+  border: 1px solid var(--demo-canvas-frame);
   border-radius: 8px;
   padding: 0.75rem;
 }
 
 .demo-canvas-pane canvas {
   image-rendering: pixelated;
-  border: 1px solid #333333;
+  border: 1px solid var(--demo-canvas-border);
   outline: none;
-  background: #000000;
+  background: var(--demo-canvas-bg);
 }
 
 .demo-canvas-pane canvas:focus {
