@@ -1,6 +1,18 @@
 /*
  * PyDevices brand design tokens & UI components for Material for MkDocs.
- * Tokens mirror https://pydevices.github.io/assets/css/site.css
+ *
+ * MASTER COPY. This file is the source of truth for the documentation
+ * theme; scripts/generate_sites.py copies it verbatim into every repo that
+ * publishes a docs site (pygraphics, pdwidgets, palettes) as
+ * docs/stylesheets/extra.css. Edit it here, run the generator, and commit
+ * the synced copies -- a fix made in a repo's copy is silently reverted on
+ * the next run.
+ *
+ * Its palette deliberately mirrors the website chrome's, assets/css/site.css
+ * (deployed as PyDevices.github.io/assets/chrome/site.css). The two files
+ * use different token *names* because Material for MkDocs dictates its own
+ * (--md-*); the underlying colour values are meant to match. Change one,
+ * change the other.
  *
  * EVERY color in this file is defined in one of the three token blocks
  * below. The component rules further down reference tokens only — never a
