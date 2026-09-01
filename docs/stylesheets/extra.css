@@ -155,16 +155,6 @@
   border-color: rgb(var(--doc-success-rgb) / 0.3);
 }
 
-.color-swatch {
-  display: inline-block;
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 3px;
-  vertical-align: middle;
-  border: 1px solid rgb(var(--doc-shade-rgb) / 0.2);
-  margin-right: 0.4rem;
-}
-
 /* Live direct MicroPython WebAssembly demos */
 .pydevices-live-demo {
   display: flex;
