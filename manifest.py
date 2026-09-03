@@ -1,8 +1,8 @@
 """Freeze the pdwidgets package from its canonical source tree.
 
-Discovered automatically by the cmods aggregator manifests
+Discovered automatically by a workspace's aggregator manifests
 (``manifest-micropython.py`` / ``manifest-circuitpython.py``), which include
-``<repo>/manifest.py`` for every sibling checked out under ``cmods/``.
+``<repo>/manifest.py`` for every sibling checked out beside it.
 """
 
 if 0:
