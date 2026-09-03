@@ -26,8 +26,8 @@ from pathlib import Path
 import subprocess
 import sys
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-ICONS_DIR = REPO_ROOT / "src" / "pdwidgets" / "icons"
+from _repo_paths import ICONS_DIR, REPO_ROOT
+
 BINARY_SUFFIXES = {".pbm", ".bmp"}
 PYGRAPHICS_LIB = REPO_ROOT.parent / "pygraphics" / "lib"
 

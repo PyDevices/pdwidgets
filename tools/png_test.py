@@ -12,10 +12,10 @@ Run from the pdwidgets repo root (or with ``PYDEVICES_EXAMPLES_ROOT`` set)::
 
 from __future__ import annotations
 
-import os
-import sys
 from collections import namedtuple
+import os
 from pathlib import Path
+import sys
 
 _ROOT = Path(__file__).resolve().parents[1]
 
@@ -25,26 +25,23 @@ def _resolve_pydevices_examples_root() -> Path:
     candidates = []
     if env_root:
         candidates.append(Path(env_root))
-    candidates.extend(
-        (
-            _ROOT.parent / "pydevices-examples",
-            Path.home() / "gh" / "pydevices" / "pydevices-examples",
-        )
-    )
+    candidates.append(_ROOT.parent / "pydevices-examples")
     for root in candidates:
-        if (root / "src" / "lib").is_dir() and (root / "src" / "utils").is_dir():
+        if (root / "lib" / "utils").is_dir():
             return root.resolve()
     tried = ", ".join(str(p) for p in candidates)
     raise SystemExit(
         "pydevices-examples checkout not found (needed for board_config / png). "
-        f"Set PYDEVICES_EXAMPLES_ROOT. Tried: {tried}"
+        f"Set PYDEVICES_EXAMPLES_ROOT or clone sibling pydevices-examples. Tried: {tried}"
     )
 
 
 _pydevices_examples = _resolve_pydevices_examples_root()
-_src = str(_pydevices_examples / "src")
-if _src not in sys.path:
-    sys.path.insert(0, _src)
+# lib/ holds the utils package (utils.path); lib/utils/ holds its flat modules
+# (png, color_setup, displaybuf).
+for _entry in (_pydevices_examples / "lib" / "utils", _pydevices_examples / "lib"):
+    if str(_entry) not in sys.path:
+        sys.path.insert(0, str(_entry))
 
 import utils.path  # noqa: E402, F401, I001
 import board_config  # noqa: E402

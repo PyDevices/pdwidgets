@@ -27,9 +27,8 @@ import os
 from pathlib import Path
 import sys
 
+from _repo_paths import ICONS_DIR, REPO_ROOT
 from PIL import Image
-
-REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def resolve_pygraphics_root(explicit: str | None = None) -> Path:
@@ -40,19 +39,14 @@ def resolve_pygraphics_root(explicit: str | None = None) -> Path:
     env_root = os.environ.get("PYGRAPHICS_ROOT")
     if env_root:
         candidates.append(Path(env_root))
-    candidates.extend(
-        (
-            REPO_ROOT.parent / "pygraphics",
-            Path.home() / "gh" / "pydevices" / "pygraphics",
-        )
-    )
+    candidates.append(REPO_ROOT.parent / "pygraphics")
     for root in candidates:
         if (root / "lib" / "pygraphics").is_dir():
             return root.resolve()
     tried = ", ".join(str(p) for p in candidates)
     raise SystemExit(
         "pygraphics checkout not found. Clone https://github.com/PyDevices/pygraphics "
-        f"or pass --pygraphics-root. Tried: {tried}"
+        f"as a sibling, set PYGRAPHICS_ROOT, or pass --pygraphics-root. Tried: {tried}"
     )
 
 
@@ -126,7 +120,7 @@ def main() -> int:
     parser.add_argument(
         "--pygraphics-root",
         default=None,
-        help="Local checkout of PyDevices/pygraphics (default: PYGRAPHICS_ROOT, ../pygraphics, …)",
+        help="Local checkout of PyDevices/pygraphics (default: PYGRAPHICS_ROOT, then sibling ../pygraphics)",
     )
     parser.add_argument("--force", action="store_true", help="Regenerate files that already exist")
     args = parser.parse_args()
@@ -134,7 +128,7 @@ def main() -> int:
     pygraphics_root = resolve_pygraphics_root(args.pygraphics_root)
     sys.path.insert(0, str(pygraphics_root / "lib"))
 
-    dest = REPO_ROOT / "src" / "pdwidgets" / "icons"
+    dest = ICONS_DIR
 
     md_root = Path(args.material_icons_root)
     if not (md_root / "png").is_dir():

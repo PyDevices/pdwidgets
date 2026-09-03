@@ -30,14 +30,9 @@ def resolve_pydevices_examples_root() -> Path:
     candidates = []
     if env_root:
         candidates.append(Path(env_root))
-    candidates.extend(
-        (
-            REPO_ROOT.parent / "pydevices-examples",
-            Path.home() / "gh" / "pydevices" / "pydevices-examples",
-        )
-    )
+    candidates.append(REPO_ROOT.parent / "pydevices-examples")
     for root in candidates:
-        if (root / "src" / "utils").is_dir():
+        if (root / "lib" / "utils").is_dir():
             return root.resolve()
     tried = ", ".join(str(p) for p in candidates)
     raise SystemExit(
@@ -47,7 +42,9 @@ def resolve_pydevices_examples_root() -> Path:
 
 
 _pydevices_examples = resolve_pydevices_examples_root()
-sys.path.insert(0, str(_pydevices_examples / "src"))
+# lib/ holds the utils package (utils.path); lib/utils/ holds its flat modules (png).
+sys.path.insert(0, str(_pydevices_examples / "lib" / "utils"))
+sys.path.insert(0, str(_pydevices_examples / "lib"))
 sys.path.insert(0, str(REPO_ROOT.parent / "pygraphics" / "lib"))
 from png import Reader  # noqa: E402
 from pygraphics import MONO_HLSB, FrameBuffer  # noqa: E402

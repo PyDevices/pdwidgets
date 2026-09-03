@@ -6,7 +6,9 @@ import ast
 import pathlib
 import textwrap
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent / "src" / "pdwidgets"
+from _repo_paths import PDWIDGETS_DIR
+
+ROOT = PDWIDGETS_DIR
 
 CLASS_DOCS = {
     "Widget": "Base class for all pdwidgets UI elements.",

@@ -21,16 +21,19 @@ It builds a representative screen (a handful of each widget type) and times:
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+# The package root (lib/) comes from pyproject.toml via scripts/_repo_paths.py.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "scripts"))
+from _repo_paths import PACKAGE_ROOT
+
+sys.path.insert(0, str(PACKAGE_ROOT))
 
 os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
 os.environ.setdefault("SDL_AUDIODRIVER", "dummy")
 
 from time import perf_counter
 
-import board_config
 import appdev
-
+import board_config
 import pdwidgets as pd
 from pdwidgets import pct
 
