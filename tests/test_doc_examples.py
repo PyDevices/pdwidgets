@@ -18,10 +18,10 @@ its claims against the real ``pdwidgets`` package:
 import ast
 import importlib
 import inspect
+from pathlib import Path
 import re
 import textwrap
 import unittest
-from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DOC_FILES = [ROOT / "README.md", *sorted((ROOT / "docs").glob("*.md"))]
