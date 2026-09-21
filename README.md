@@ -2,7 +2,7 @@
 
 **Pure-Python, portable widget toolkit for [PyDevices](https://github.com/PyDevices/pydevices)**
 
-`pdwidgets` provides a complete, 100% pure-Python GUI toolkit for building touchscreen and desktop interfaces without requiring native C bindings or complex build toolchains. It runs seamlessly on **MicroPython**, **CircuitPython**, **CPython desktop**, and **PyScript (Web)**.
+`pdwidgets` provides a complete, 100% pure-Python GUI toolkit for building touchscreen and desktop interfaces without requiring native C bindings or complex build toolchains. It runs on **MicroPython**, **CPython desktop** and **PyScript (Web)** — see [Support and platforms](#support-and-platforms) for what each claim is worth, and where CircuitPython stands.
 
 ### Where pdwidgets fits
 
@@ -79,17 +79,54 @@ pip install -i https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ pydevices-pdwidgets
 ```
 
-Full dependency chain and `board_config` requirements:
-[docs/index.md](docs/index.md).
+On desktop you also need SDL2 itself. `board_config` loads it by `ctypes` at
+import, so without it the quickstart's very first line fails:
+
+```bash
+sudo apt install libsdl2-2.0-0      # Debian/Ubuntu
+brew install sdl2                   # macOS
+```
+
+Windows wheels carry `SDL2.dll`, so nothing extra is needed there.
+
+`board_config` itself comes from `pydevices-desktop` or a board config — see
+the note under [Quick Start](#quick-start-interactive-button--screen) above.
 
 ## Support and platforms
 
-`pdwidgets` runs on **MicroPython**, **CircuitPython**, **CPython desktop**,
-and **PyScript** (browser). The CPython desktop and PyScript paths depend on
-`pydevices-pygraphics` wheels, which currently cover manylinux x86_64,
-Windows amd64, Android, and Emscripten (Pyodide/PyScript) — there are no
-macOS or ARM-Linux wheels yet. Publication to TestPyPI only (rather than
-PyPI) is deliberate.
+Every claim below carries its tier, in the vocabulary of the org's
+[platform support tiers](https://github.com/PyDevices/.github/blob/main/docs/platform-support-tiers.md).
+
+| Runtime | Tier | What backs it |
+|---|---|---|
+| MicroPython on wasm (browser) | bench-proven | The [live demo gallery](https://pydevices.github.io/pydevices-examples/pyscript/) — a stranger can watch it run right now |
+| MicroPython on MCU (ESP32 family, RP2) | bench-proven | The widget examples in [pydevices-examples](https://github.com/PyDevices/pydevices-examples) target the touch boards and are run on them; installs via MIP. Nothing automated covers this — there is no hardware job in CI |
+| CPython desktop (Linux x86-64, Windows amd64) | CI-proven | `ruff` and the unit tests run on ubuntu CPython 3.13 on every push; the quickstart above runs on any desktop with SDL2 |
+| CircuitPython | **not proven — no route** | See below |
+
+**CircuitPython has no install route and nothing has run.** `manifest.py` is
+runtime-agnostic, so a `cmods` aggregator build *can* freeze `pdwidgets` into
+a CircuitPython image — but nobody has built one, there is no CI job, and
+there is no `circup` or bundle path for a user. The cause is plain: nobody has
+needed it yet. Treat CircuitPython as unsupported until that changes.
+
+**No macOS or ARM-Linux wheels.** The desktop and PyScript paths need
+`pydevices-pygraphics`, which publishes cp310–cp314 wheels for manylinux
+x86-64, Windows amd64, Android and Emscripten — and no sdist. The cause is
+runners: there is no Mac on the bench and no ARM-Linux runner in the release
+matrix, so there is nothing to build or prove those wheels on.
+
+**Which index to install from.** TestPyPI is the current release channel and
+carries the newest version. The production PyPI names are *mirror-parked* and
+trail it — they exist and they work, they are simply older:
+
+| Index | Command | Serves today |
+|---|---|---|
+| TestPyPI (current) | `pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ pydevices-pdwidgets` | 0.0.23 |
+| PyPI (mirror-parked) | `pip install pydevices-pdwidgets` | 0.0.22 |
+
+A stranger's reflex `pip install pydevices-pdwidgets` therefore works, and
+gives a slightly older release than the command above it.
 
 ## Links & Demos
 
@@ -105,6 +142,26 @@ MIT — see [LICENSE](LICENSE).
 
 ---
 
+## Development (maintainers)
+
+`pdwidgets` is pure Python and imports its three siblings from source. Clone
+them beside this repo — [pydevices](https://github.com/PyDevices/pydevices),
+[pygraphics](https://github.com/PyDevices/pygraphics) and
+[palettes](https://github.com/PyDevices/palettes) — then:
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install ruff
+# tests and lint: the same two commands CI runs, so they cannot drift silently
+PYTHONPATH="lib:tests/stubs:../pydevices/lib:../pygraphics/lib:../palettes/lib" \
+  .venv/bin/python -m unittest discover -s tests
+.venv/bin/ruff check lib tests scripts
+```
+
+The `.venv` the icon recipe below invokes is this one.
+
+---
+
 ## Icon assets (maintainers)
 
 Runtime icons are **importable Python modules** under [`lib/pdwidgets/icons/`](lib/pdwidgets/icons/)
@@ -114,7 +171,9 @@ Runtime icons are **importable Python modules** under [`lib/pdwidgets/icons/`](l
 # 1) Optional: regenerate mono .pbm / color .bmp from Material Design
 .venv/bin/python scripts/assets_generate_pdwidgets_icons.py
 .venv/bin/python scripts/assets_make_color_icons.py
-# 2) Convert binaries → .py modules (BITMAP = bytearray; uses sibling or TestPyPI pygraphics)
+# 2) Convert binaries → .py modules (BITMAP = bytearray).
+#    Needs a sibling ../pygraphics checkout: FrameBuffer.export is pure-Python
+#    only and is not in the published pygraphics wheel.
 .venv/bin/python scripts/assets_icons_to_py.py --delete-binaries
 # Optional bulk dump into assets/icons/
 .venv/bin/python scripts/assets_convert_md_png_to_pbm.py

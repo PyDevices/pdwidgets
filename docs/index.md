@@ -7,7 +7,7 @@
     <span class="badge badge-orange">MIP: pdwidgets</span>
     <span class="badge badge-orange">PyPI: pydevices-pdwidgets</span>
     <span class="badge badge-green">50+ Modern Widgets</span>
-    <span class="badge">MicroPython · CircuitPython · CPython · Direct WebAssembly · Pyodide</span>
+    <span class="badge">MicroPython · CPython · Direct WebAssembly · Pyodide</span>
   </div>
 </div>
 

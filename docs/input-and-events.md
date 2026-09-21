@@ -41,7 +41,7 @@ import events
 button = pd.Button(screen, label="Click Me", x=10, y=10)
 
 def handle_click(sender, event):
-    print(f"Button '{sender.label}' clicked at coordinates: {event.pos}")
+    print(f"Button '{sender.label.value}' clicked at coordinates: {event.pos}")
 
 button.add_event_cb(events.MOUSEBUTTONUP, handle_click)
 ```
@@ -71,5 +71,5 @@ For devices without touchscreens (e.g. rotary encoder or directional button setu
 
 ```python
 # Programmatically set focus
-display.focus_manager.set_focus(button)
+display.focus_manager.focus(button)
 ```
