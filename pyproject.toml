@@ -8,9 +8,10 @@ dynamic = ["version"]
 description = "Cross-platform widget toolkit for PyDevices"
 readme = "README.md"
 license = "MIT"
-# The dependency floor, not an aspiration: pydevices-pygraphics publishes
-# cp310-cp314 wheels and no sdist, so nothing below 3.10 can resolve.
-requires-python = ">=3.10"
+# The dependency floor, not an aspiration: pydevices-pygraphics declares
+# >=3.11 (org-wide Drop Python 3.10, 2026-09-10) and publishes no sdist, so
+# a 3.10 resolve breaks as soon as it releases again.
+requires-python = ">=3.11"
 authors = [{ name = "Brad Barnett" }]
 dependencies = [
   # appdev and multimer both come from "pydevices": all of pydevices/lib ships
