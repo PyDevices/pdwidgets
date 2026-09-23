@@ -1,4 +1,5 @@
 * [Home](index.md)
+* [Newcomer's Guide](newcomers.md)
 * [Architecture & Lifecycle](architecture.md)
 * [Widget Catalog](widget-catalog.md)
 * [Layout & Sizing](layout-guide.md)

@@ -4,6 +4,9 @@
 
 `pdwidgets` provides a complete, 100% pure-Python GUI toolkit for building touchscreen and desktop interfaces without requiring native C bindings or complex build toolchains. It runs on **MicroPython**, **CPython desktop** and **PyScript (Web)** — see [Support and platforms](#support-and-platforms) for what each claim is worth, and where CircuitPython stands.
 
+New here? Read the [newcomer's guide](docs/newcomers.md) for the widget tree,
+event/rendering flow, and contributor boundary.
+
 ### Where pdwidgets fits
 
 PyDevices offers several GUI approaches; `pdwidgets` is the pure-Python one. See
