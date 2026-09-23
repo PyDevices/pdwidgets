@@ -11,22 +11,8 @@ The normal application path is `appdev.App` → `Display` → `Screen` → widge
 the app owns input and periodic rendering; most applications do not call
 `app.run()` themselves.
 
-```python
-import appdev
-import board_config
-import pdwidgets as pd
-
-app = appdev.App(board_config)
-display = pd.Display(board_config.display_drv, app)
-screen = pd.Screen(display, bg=0x0000)
-label = pd.Label(screen, value="Taps: 0", x=40, y=30)
-
-def tapped(sender, event):
-    label.value = "Tapped!"
-
-button = pd.Button(screen, label="Tap me", x=40, y=60, w=160, h=50)
-button.add_event_cb(pd.events.MOUSEBUTTONUP, tapped)
-```
+The README's [Quick Start](https://github.com/PyDevices/pdwidgets#quick-start-interactive-button--screen)
+builds a screen with a label and a button on that path.
 
 Labels use `value=` and buttons use `label=`; there is no `text=` keyword.
 Callbacks receive `(sender_or_data, event)` in that order.
@@ -87,7 +73,7 @@ invalidation behavior. See [the layout guide](layout-guide.md),
 
 The package is source-only and development imports sibling `pydevices`,
 `pygraphics`, and `palettes` checkouts. Follow the `PYTHONPATH` test command
-in [AGENTS.md](../AGENTS.md); bare unit-test discovery cannot resolve those
+in [AGENTS.md](https://github.com/PyDevices/pdwidgets/blob/main/AGENTS.md); bare unit-test discovery cannot resolve those
 dependencies. Regenerate the widget dependency graph after widget edits with
 `scripts/pdwidgets_widget_deps.py`.
 
