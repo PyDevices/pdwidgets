@@ -105,8 +105,8 @@ Every claim below carries its tier, in the vocabulary of the org's
 | CircuitPython | **not proven — no route** | See below |
 
 **CircuitPython has no install route and nothing has run.** `manifest.py` is
-runtime-agnostic, so a `cmods` aggregator build *can* freeze `pdwidgets` into
-a CircuitPython image — but nobody has built one, there is no CI job, and
+runtime-agnostic, so a CircuitPython build whose freeze manifest includes it
+*can* carry `pdwidgets` in the image — but nobody has built one, there is no CI job, and
 there is no `circup` or bundle path for a user. The cause is plain: nobody has
 needed it yet. Treat CircuitPython as unsupported until that changes.
 
