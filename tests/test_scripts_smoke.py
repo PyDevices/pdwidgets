@@ -36,6 +36,11 @@ IMPORT_EXEMPT = {"mkdocs_gen_ref_pages"}
 # those still fail.
 OPTIONAL_DEPS = {"PIL"}
 
+# Sibling checkouts an authoring script reads at import. CI clones only
+# pydevices, pygraphics and palettes, so a script that exits naming one of
+# these is skipped; any other SystemExit still fails.
+OPTIONAL_CHECKOUTS = ("pydevices-examples checkout not found",)
+
 
 class TestRepoPaths(unittest.TestCase):
     """The derived package root has to match the tree the wheel is built from."""
@@ -85,6 +90,10 @@ class TestScriptsImport(unittest.TestCase):
                     root = (exc.name or "").split(".")[0]
                     if root in OPTIONAL_DEPS:
                         self.skipTest(f"{name} needs {root}, not installed here")
+                    raise
+                except SystemExit as exc:
+                    if str(exc).startswith(OPTIONAL_CHECKOUTS):
+                        self.skipTest(f"{name} needs a sibling checkout: {exc}")
                     raise
 
 
