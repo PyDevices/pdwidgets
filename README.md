@@ -119,17 +119,18 @@ x86-64, Windows amd64, Android and Emscripten — and no sdist. The cause is
 runners: there is no Mac on the bench and no ARM-Linux runner in the release
 matrix, so there is nothing to build or prove those wheels on.
 
-**Which index to install from.** TestPyPI is the current release channel and
-carries the newest version. The production PyPI names are *mirror-parked* and
-trail it — they exist and they work, they are simply older:
+**Which index to install from.** Current releases go to TestPyPI; install
+from there with the command above. Production PyPI holds one older release,
+parked there to reserve the name. It installs and works, it is just behind:
 
 | Index | Command | Serves today |
 |---|---|---|
 | TestPyPI (current) | `pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ pydevices-pdwidgets` | 0.0.23 |
-| PyPI (mirror-parked) | `pip install pydevices-pdwidgets` | 0.0.22 |
+| PyPI (parked, reserves the name) | `pip install pydevices-pdwidgets` | 0.0.22 |
 
-A stranger's reflex `pip install pydevices-pdwidgets` therefore works, and
-gives a slightly older release than the command above it.
+So a plain `pip install pydevices-pdwidgets` works, and gives you the older
+release. The TestPyPI command also lists PyPI as `--extra-index-url`, and pip
+takes whichever index has the higher version, which today is TestPyPI.
 
 ## Links & Demos
 
