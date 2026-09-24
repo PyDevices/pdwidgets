@@ -5,7 +5,7 @@
   <p><strong>A fast, pure-Python UI & Widget Toolkit</strong> for microcontrollers, embedded touch displays, desktop Python, and the web. Over 50 rich components with zero native C dependencies.</p>
   <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.75rem;">
     <span class="badge badge-orange">MIP: pdwidgets</span>
-    <span class="badge badge-orange">PyPI: pydevices-pdwidgets</span>
+    <span class="badge badge-orange">TestPyPI: pydevices-pdwidgets</span>
     <span class="badge badge-green">50+ Modern Widgets</span>
     <span class="badge">MicroPython · CPython · Direct WebAssembly · Pyodide</span>
   </div>
@@ -51,6 +51,10 @@
     pip install -i https://test.pypi.org/simple/ \
       --extra-index-url https://pypi.org/simple/ pydevices-pdwidgets
     ```
+
+    Current releases are on TestPyPI. Production PyPI holds one older
+    release, parked to reserve the name, so a plain
+    `pip install pydevices-pdwidgets` works but gives you that older one.
 
 === "PyScript / Browser"
 
