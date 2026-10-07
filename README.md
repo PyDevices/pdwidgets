@@ -132,6 +132,8 @@ So a plain `pip install pydevices-pdwidgets` works, and gives you the older
 release. The TestPyPI command also lists PyPI as `--extra-index-url`, and pip
 takes whichever index has the higher version, which today is TestPyPI.
 
+What's planned next is in [ROADMAP.md](ROADMAP.md).
+
 ## Links & Demos
 
 - [Documentation](https://pdwidgets.readthedocs.io)
